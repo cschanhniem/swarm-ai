@@ -36,7 +36,7 @@ except ImportError:
 
 SCRIPT_DIR = Path(__file__).parent
 SYSTEM_DIR = SCRIPT_DIR.parent
-DB_PATH = SYSTEM_DIR / "data" / "bach.db"
+DB_PATH = Path(os.getenv("SWARM_DB_PATH", str(SYSTEM_DIR / "data" / "swarm.db")))
 
 MODELS = {
     "haiku": "claude-haiku-4-5-20251001",
@@ -67,23 +67,7 @@ SYSTEM_PROMPT = (
 
 
 def get_api_key() -> str:
-    """API-Key laden: 1. BACH Secrets, 2. Env-Variable."""
-    # 1. BACH Secrets
-    try:
-        sys.path.insert(0, str(Path(__file__).parent.parent / "hub" / "_services"))
-        from secrets_service import SecretsService
-
-        secrets_file = Path.home() / ".bach" / "bach_secrets.json"
-        if secrets_file.exists():
-            service = SecretsService(str(secrets_file))
-            api_key = service.get_secret("ANTHROPIC_API_KEY")
-            if api_key:
-                print("[INFO] API-Key aus BACH Secrets-System geladen")
-                return api_key
-    except (ImportError, FileNotFoundError, KeyError):
-        pass
-
-    # 2. Env
+    """API-Key aus Umgebungsvariable laden."""
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if api_key:
         print("[INFO] API-Key aus Umgebungsvariable geladen")
@@ -91,9 +75,7 @@ def get_api_key() -> str:
 
     raise ValueError(
         "ANTHROPIC_API_KEY nicht konfiguriert!\n\n"
-        "Methode 1 (EMPFOHLEN): BACH Secrets-System\n"
-        "  bach secrets set ANTHROPIC_API_KEY sk-ant-api03-...\n\n"
-        "Methode 2: Umgebungsvariable\n"
+        "Setze die Umgebungsvariable:\n"
         "  export ANTHROPIC_API_KEY=sk-ant-api03-..."
     )
 
@@ -107,7 +89,7 @@ class ChunkSummarizer:
 
         Args:
             model: LLM-Modell ("haiku" oder "sonnet")
-            db_path: Pfad zur bach.db
+            db_path: Pfad zur Datenbank
         """
         self.model = model
         self.model_id = MODELS.get(model, MODELS["haiku"])

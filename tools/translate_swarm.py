@@ -68,23 +68,7 @@ SYSTEM_PROMPT = (
 
 
 def get_api_key():
-    """API-Key laden: 1. BACH Secrets, 2. Env-Variable."""
-    # 1. BACH Secrets
-    try:
-        sys.path.insert(0, str(Path(__file__).parent.parent / "hub" / "_services"))
-        from secrets_service import SecretsService
-
-        secrets_file = Path.home() / ".bach" / "bach_secrets.json"
-        if secrets_file.exists():
-            service = SecretsService(str(secrets_file))
-            api_key = service.get_secret("ANTHROPIC_API_KEY")
-            if api_key:
-                print("[INFO] API-Key aus BACH Secrets-System geladen")
-                return api_key
-    except (ImportError, FileNotFoundError, KeyError):
-        pass
-
-    # 2. Env
+    """API-Key aus Umgebungsvariable laden."""
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if api_key:
         print("[INFO] API-Key aus Umgebungsvariable geladen")
@@ -92,19 +76,21 @@ def get_api_key():
 
     raise ValueError(
         "ANTHROPIC_API_KEY nicht konfiguriert!\n\n"
-        "Methode 1 (EMPFOHLEN): BACH Secrets-System\n"
-        "  bach secrets set ANTHROPIC_API_KEY sk-ant-api03-...\n\n"
-        "Methode 2: Umgebungsvariable\n"
-        "  export ANTHROPIC_API_KEY=sk-ant-api03-...\n\n"
-        "Weitere Infos: BACH_Dev/docs/SQ062_API_KEY_KONFIGURATION.md"
+        "Setze die Umgebungsvariable:\n"
+        "  export ANTHROPIC_API_KEY=sk-ant-api03-..."
     )
 
 
 def get_db_path():
-    """Ermittelt bach.db Pfad relativ zum Script."""
-    db_path = Path(__file__).parent.parent / "data" / "bach.db"
+    """Ermittelt DB-Pfad: SWARM_DB_PATH env oder data/swarm.db relativ zum Script."""
+    env_path = os.getenv("SWARM_DB_PATH")
+    if env_path:
+        db_path = Path(env_path)
+    else:
+        db_path = Path(__file__).parent.parent / "data" / "swarm.db"
     if not db_path.exists():
-        print(f"[FEHLER] bach.db nicht gefunden: {db_path}")
+        print(f"[FEHLER] Datenbank nicht gefunden: {db_path}")
+        print("         Setze SWARM_DB_PATH oder lege data/swarm.db an.")
         sys.exit(1)
     return db_path
 

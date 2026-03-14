@@ -4,7 +4,7 @@ stigmergy_api.py — Pheromon-basierte Schwarm-Koordination
 Stigmergy: Agenten kommunizieren indirekt ueber Markierungen in der Umgebung,
 aehnlich wie Ameisen Pheromone hinterlassen.
 
-BACH-Implementierung: shared_memory_working als Pheromon-Traeger
+Implementierung: SQLite-basierte shared_memory_working Tabelle als Pheromon-Traeger
 Namespace: 'stigmergy' (gespeichert via tags + related_to)
 
 Mapping auf shared_memory_working Spalten:
@@ -15,7 +15,6 @@ Mapping auf shared_memory_working Spalten:
     priority  = int(strength * 10)  (0-10 Skala)
     agent_id  = Agent der das Pheromon hinterlassen hat
 
-Stand: 2026-02-22 | Bezug: MASTERPLAN SQ051
 Implementierung: 2026-03-01
 """
 from __future__ import annotations
@@ -27,13 +26,12 @@ from datetime import datetime
 
 class StigmergyAPI:
     """
-    Pheromon-basierte Koordination fuer BACH-Schwarm-Agenten.
+    Pheromon-basierte Koordination fuer Schwarm-Agenten.
 
     Agenten hinterlassen 'Pheromone' (Markierungen) in shared_memory_working.
     Andere Agenten lesen diese und waehlen vielversprechende Pfade.
 
-    Konzept aus vernunft_kantian.txt (V009: Self-Extension, Autonomie):
-    Ein System das sich selbst koordinieren kann, braucht keine zentrale Steuerung.
+    Konzept: Ein System das sich selbst koordinieren kann, braucht keine zentrale Steuerung.
 
     Tabellen-Mapping (shared_memory_working):
         type       = 'note'
@@ -314,7 +312,7 @@ def deposit_pheromone(
     Kurz-API: Pheromon hinterlassen ohne Instanz zu erstellen.
 
     Beispiel:
-        deposit_pheromone('data/bach.db', 'agent_A', 'approach_refactor', 0.9,
+        deposit_pheromone('data/swarm.db', 'agent_A', 'approach_refactor', 0.9,
                           {'result': 'success', 'time_ms': 450})
     """
     api = StigmergyAPI(db_path, agent_id)
@@ -326,7 +324,7 @@ def sense_pheromones(db_path: str, path_prefix: str = '') -> list[dict]:
     Kurz-API: Alle Pheromone lesen ohne Instanz zu erstellen.
 
     Beispiel:
-        paths = sense_pheromones('data/bach.db', 'approach_')
+        paths = sense_pheromones('data/swarm.db', 'approach_')
         best = paths[0] if paths else None
     """
     api = StigmergyAPI(db_path)

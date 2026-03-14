@@ -24,7 +24,7 @@ swarm-ai implements five swarm intelligence patterns for parallel LLM execution.
 ## Installation
 
 ```bash
-git clone https://github.com/lukisch/swarm-ai.git
+git clone https://github.com/ellmos-ai/swarm-ai.git
 cd swarm-ai
 pip install -r requirements.txt
 ```
