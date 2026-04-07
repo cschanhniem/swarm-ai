@@ -1,5 +1,8 @@
 # swarm-ai
 
+**🇩🇪 [Deutsche Version](README_de.md)**
+
+
 **LLM swarm intelligence toolkit** — 5 parallel execution patterns for orchestrating multiple LLM instances.
 
 ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
