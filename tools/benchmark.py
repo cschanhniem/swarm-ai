@@ -28,7 +28,7 @@ _parent = str(PACKAGE_DIR.parent)
 if _parent not in sys.path:
     sys.path.insert(0, _parent)
 
-from llmauto.core.runner import ClaudeRunner
+from tools.runner import ClaudeRunner
 
 
 # ============================================================
