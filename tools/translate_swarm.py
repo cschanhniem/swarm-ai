@@ -17,7 +17,7 @@ Usage:
     python translate_swarm.py --limit 20              # Max. Texte uebersetzen
     python translate_swarm.py --inventory             # Status-Uebersicht
 
-Author: BACH Development Team (SQ062)
+Author: Lukas Geiger (ellmos-ai)
 Created: 2026-02-22
 """
 
@@ -50,12 +50,12 @@ TABLE = "languages_translations"
 SOURCE_TAG = "llm_auto_swarm"
 
 SYSTEM_PROMPT = (
-    "You are a professional translator for BACH, a text-based operating "
-    "system for LLMs. Translate German UI/help texts to English.\n\n"
+    "You are a professional translator. Translate German UI/help texts "
+    "to English.\n\n"
     "RULES:\n"
     "- Keep markdown formatting, code blocks, headings (===, ---) unchanged\n"
     "- Keep placeholders like {variable}, {count}, {name} unchanged\n"
-    "- Keep CLI commands (bach ..., python ..., --flags) unchanged\n"
+    "- Keep CLI commands (python ..., npm ..., --flags) unchanged\n"
     "- Keep technical terms: Skill, Agent, Handler, Hub, Kernel, Daemon, Workflow, Task, Wiki, Memory\n"
     "- Keep SQL statements unchanged\n"
     "- Maintain the same tone (professional but friendly)\n"

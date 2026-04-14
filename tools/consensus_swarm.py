@@ -19,7 +19,7 @@ Usage:
     python consensus_swarm.py --mode classify --categories "positiv,negativ,neutral" --question "Der Film war okay."
     python consensus_swarm.py --dry-run --question "Testfrage"
 
-Author: BACH Development Team
+Author: Lukas Geiger (ellmos-ai)
 """
 
 import argparse
@@ -53,20 +53,7 @@ COST_PER_1M = {"input": 1.00, "output": 5.00}  # Haiku-Preise
 
 
 def get_api_key() -> str:
-    """API-Key laden: 1. BACH Secrets, 2. Env-Variable."""
-    try:
-        sys.path.insert(0, str(Path(__file__).parent.parent / "hub" / "_services"))
-        from secrets_service import SecretsService
-
-        secrets_file = Path.home() / ".bach" / "bach_secrets.json"
-        if secrets_file.exists():
-            service = SecretsService(str(secrets_file))
-            api_key = service.get_secret("ANTHROPIC_API_KEY")
-            if api_key:
-                return api_key
-    except (ImportError, FileNotFoundError, KeyError):
-        pass
-
+    """API-Key aus Env-Variable ANTHROPIC_API_KEY laden."""
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if api_key:
         return api_key

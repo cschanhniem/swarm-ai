@@ -1,3 +1,3 @@
 # stigmergy/__init__.py
-# Pheromon-basierte Schwarm-Koordination fuer BACH
-# Stand: 2026-02-22 | Bezug: MASTERPLAN SQ051
+# Pheromon-basierte Schwarm-Koordination fuer swarm-ai
+# Stand: 2026-02-22

@@ -73,7 +73,7 @@
     "task_pools": {
         "software": {
             "type": "file",
-            "path": "BACH_Dev/NEXT_RELEASE.md",
+            "path": "tasks/NEXT_RELEASE.md",
             "description": "Release-Plan Aufgaben fuer Schwarm-Verarbeitung"
         }
     },

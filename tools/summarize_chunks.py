@@ -14,7 +14,7 @@ Zweck:
 Usage:
     python summarize_chunks.py [--model haiku|sonnet] [--batch-size 10] [--dry-run]
 
-Author: BACH Development Team (SQ047)
+Author: Lukas Geiger (ellmos-ai)
 """
 
 import argparse

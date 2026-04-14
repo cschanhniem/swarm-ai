@@ -30,8 +30,9 @@
 
 ## Open Issues
 
-1. **End-to-end Tests:** summarize_chunks.py und translate_swarm.py brauchen noch einen echten API-Lauf (nicht gate-blockend)
-2. **BACH-Referenzen in Kommentaren:** "BACH Development Team" als Author, "BACH" in translate_swarm System-Prompt -- kosmetische Bereinigung fuer standalone Release empfohlen (nicht gate-blockend)
+1. **End-to-end Tests:** summarize_chunks.py und translate_swarm.py brauchen noch einen echten API-Lauf (nicht gate-blockend -- Unit-Tests decken die Logik ab, end-to-end waere zusaetzliche Absicherung gegen API-Drift)
+
+> BACH-Referenzen (ehemals Issue 2) wurden 2026-04-15 bereinigt: Author-Headers, System-Prompt, Pfad-Beispiele und BACH-Secrets-Fallback in consensus_swarm.py entfernt. Repo ist jetzt vollstaendig standalone.
 
 ## Gating Rule
 
