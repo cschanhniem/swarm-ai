@@ -1,27 +1,37 @@
 # swarm-ai
 
-**🇬🇧 [English Version](README.md)**
+**LLM-Schwarmintelligenz-Toolkit für parallele Claude- und LLM-Agenten-Orchestrierung.**
 
-**LLM-Schwarmintelligenz-Toolkit** — 5 parallele Ausführungsmuster zur Orchestrierung mehrerer LLM-Instanzen.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
+[![Tests](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml)
+[![Lizenz MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![ellmos](https://img.shields.io/badge/ellmos-Agenten--Orchestrierung-4b5563)](https://github.com/ellmos-ai)
 
-![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
-![License MIT](https://img.shields.io/badge/license-MIT-green)
+**English:** [README.md](README.md)
 
----
+swarm-ai ist ein local-first Python-Toolkit für Entwicklerinnen und Entwickler, die dieselbe Aufgabe über mehrere LLM-Instanzen ausführen und die Ergebnisse anschließend zusammenführen wollen. Der Fokus liegt auf fünf wiederverwendbaren Koordinationsmustern: parallele Chunk-Verarbeitung, Boss-/Worker-Ausführung, Stigmergie, Konsensabstimmung und Spezialisten-Routing.
 
-## Überblick
+Das Projekt ist kein Docker-Swarm-Werkzeug, keine gehostete Agentenplattform und keine generische "AI swarm"-Demo. Es ist ein kleines, prüfbares Toolkit für Experimente mit Multi-Agent-LLM-Orchestrierung über CLI und Python.
 
-swarm-ai implementiert fünf Schwarmintelligenz-Muster für parallele LLM-Ausführung. Jedes Muster adressiert einen anderen Koordinationsbedarf — von einfacher paralleler Chunk-Verarbeitung bis hin zu emergenter, pheromonbasierter Pfadauswahl.
+![swarm-ai Koordinationsmuster](README/assets/swarm-patterns.svg)
 
-| # | Pattern | Beschreibung | Modul |
-|---|---------|--------------|-------|
-| 1 | **Epstein (Parallel Chunks)** | Arbeit in Chunks aufteilen, parallel verarbeiten, Ergebnisse zusammenführen | `translate_swarm.py`, `summarize_chunks.py` |
-| 2 | **Hierarchy (Boss + Worker)** | Koordinator verteilt Aufgaben an Worker, Aggregator führt zusammen | `swarm_haiku_3.json`, `runner.py` |
-| 3 | **Stigmergy (Pheromone)** | Agenten kommunizieren indirekt über gemeinsame Marker (Ameisenkolonie-Stil) | `stigmergy_api.py` |
-| 4 | **Consensus (Majority Vote)** | Mehrere Agenten beantworten dieselbe Frage, Mehrheitsentscheid gewinnt | `consensus_swarm.py` |
-| 5 | **Specialist (Boss Routing)** | Boss leitet Aufgaben an domänenspezifische Experten-Agenten weiter | Chain-Definitionen (JSON) |
+## Warum swarm-ai
 
----
+- **Parallele LLM-Ausführung:** große Aufgaben in Teilstücke aufteilen und über mehrere Claude- oder Anthropic-Aufrufe verarbeiten.
+- **Konsensprüfungen:** mehrere Agenten unabhängig antworten lassen und Zustimmung, Konfidenz und Stimmen berechnen.
+- **Stigmergie-Experimente:** ein SQLite-basierter Pheromonspeicher ermöglicht indirekte Koordinationssignale zwischen Agenten.
+- **Chain-Definitionen:** Hierarchie- und Spezialisten-Schwärme werden als JSON beschrieben statt fest verdrahtet.
+- **Local-first Workflow:** Code, Prompts, Benchmarks und Designdokumente bleiben lokal und versioniert im Repo.
+
+## Muster
+
+| # | Muster | Geeignet für | Implementierung |
+|---|---|---|---|
+| 1 | **Epstein / Parallele Chunks** | Große Dokumente oder Aufgaben, die teilbar und zusammenführbar sind | `tools/translate_swarm.py`, `tools/summarize_chunks.py` |
+| 2 | **Hierarchie / Boss + Worker** | Ein Koordinator verteilt Arbeit an mehrere Worker | `tools/runner.py`, `tools/swarm_haiku_3.json` |
+| 3 | **Stigmergie / Pheromonpfade** | Agenten koordinieren sich indirekt über gemeinsame Marker | `tools/stigmergy_api.py` |
+| 4 | **Konsens / Mehrheitsentscheid** | Mehrere unabhängige Antworten sollen zu Konfidenz und Abstimmung führen | `tools/consensus_swarm.py` |
+| 5 | **Spezialist / Boss-Routing** | Unterschiedliche Teilaufgaben brauchen unterschiedliche Expertenrollen | `tools/swarm_haiku_research.json` |
 
 ## Installation
 
@@ -31,88 +41,34 @@ cd swarm-ai
 pip install -r requirements.txt
 ```
 
-API-Schlüssel setzen:
+Für Tools mit API-Aufrufen wird ein Anthropic API-Key benötigt:
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-api03-...
 ```
 
----
+Die `ClaudeRunner`-Beispiele benötigen zusätzlich eine installierte und authentifizierte `claude`-CLI.
 
 ## Schnellstart
 
-### 1. Epstein — Parallele Chunk-Verarbeitung
+### Konsens-Schwarm
 
-Große Arbeitslasten in Chunks aufteilen und mit parallelen LLM-Instanzen verarbeiten:
-
-```bash
-PYTHONIOENCODING=utf-8 python tools/translate_swarm.py --dry-run
-PYTHONIOENCODING=utf-8 python tools/summarize_chunks.py --dry-run
-```
-
-### 2. Hierarchy — Boss + Worker Chain
-
-Koordinator weist Aufgaben zu, Worker führen parallel aus, Aggregator führt Ergebnisse zusammen:
+Mehrere Agenten beantworten dieselbe Frage, anschließend wird aggregiert:
 
 ```bash
-# Chain-Definitionen (Coordinator + 3 Workers + Aggregator)
-cat tools/swarm_haiku_3.json
-```
-
-```python
-from tools.runner import ClaudeRunner
-
-runner = ClaudeRunner(model="claude-haiku-4-5-20251001")
-results = runner.run_parallel([
-    "Analyze security vulnerabilities in Flask apps",
-    "Review Python packaging best practices",
-    "Compare async frameworks in Python",
-], max_workers=3)
-```
-
-### 3. Stigmergy — Pheromonbasierte Koordination
-
-Agenten hinterlassen Marker („Pheromone") auf Pfaden. Andere Agenten nehmen diese Marker wahr, um vielversprechenden Richtungen zu folgen:
-
-```python
-from tools.stigmergy_api import StigmergyAPI
-
-api = StigmergyAPI(db_path="swarm.db", agent_id="agent_A")
-
-# Agent A markiert einen erfolgreichen Pfad
-api.deposit("approach_refactor", strength=0.9, metadata={"result": "success"})
-
-# Agent B liest, welche Pfade vielversprechend sind
-paths = api.sense()  # sorted by strength DESC
-best = api.get_best_path()  # -> "approach_refactor"
-
-# Schwache Pheromone verdunsten lassen (Bereinigung)
-api.evaporate(decay_rate=0.1)
-```
-
-### 4. Consensus — Mehrheitsentscheid
-
-Mehrere LLM-Instanzen beantworten dieselbe Frage unabhängig voneinander, dann bestimmt ein Mehrheitsentscheid die finale Antwort:
-
-```bash
-# Einfache Frage (5 Agenten, Mehrheitsentscheid)
-PYTHONIOENCODING=utf-8 python tools/consensus_swarm.py "What is the capital of France?"
-
-# Klassifikationsmodus mit vordefinierten Kategorien
 PYTHONIOENCODING=utf-8 python tools/consensus_swarm.py \
-    --mode classify \
-    --categories "positive,negative,neutral" \
-    --question "The movie was okay."
+  --mode boolean \
+  --agents 7 \
+  --question "Is Python dynamically typed?"
+```
 
-# Boolean-Modus (Ja/Nein)
-PYTHONIOENCODING=utf-8 python tools/consensus_swarm.py \
-    --mode boolean \
-    --agents 7 \
-    --question "Is Python dynamically typed?"
+Trockenlauf ohne Tokenkosten:
 
-# Trockenlauf (nur Kostenschätzung)
+```bash
 PYTHONIOENCODING=utf-8 python tools/consensus_swarm.py --dry-run "Test question"
 ```
+
+Nutzung aus Python:
 
 ```python
 from tools.consensus_swarm import run_consensus
@@ -122,85 +78,104 @@ result = run_consensus(
     num_agents=5,
     mode="boolean",
 )
-print(result["consensus"]["consensus_answer"])  # "JA"
-print(result["consensus"]["confidence"])         # 1.0
+
+print(result["consensus"]["consensus_answer"])
+print(result["consensus"]["confidence"])
 ```
 
-### 5. Specialist — Boss Routing
+### Stigmergie-Speicher
 
-Der Boss analysiert eingehende Aufgaben und leitet sie an domänenspezifische Experten-Agenten weiter. Konfiguration über JSON-Chain-Definitionen:
+Agenten können pheromonartige Pfadmarker in SQLite ablegen, lesen und verdunsten lassen:
 
-```bash
-cat tools/swarm_haiku_research.json  # Planner + 5 Researchers + Synthesizer
+```python
+from tools.stigmergy_api import StigmergyAPI
+
+api = StigmergyAPI(db_path="swarm.db", agent_id="agent_A")
+
+api.deposit("approach_refactor", strength=0.9, metadata={"result": "success"})
+paths = api.sense()
+best = api.get_best_path()
+api.evaporate(decay_rate=0.1)
 ```
 
----
+### Parallele Claude-CLI-Aufrufe
+
+`ClaudeRunner` verteilt unabhängige Prompts parallel über Claude Code:
+
+```python
+from tools.runner import ClaudeRunner
+
+runner = ClaudeRunner(model="claude-haiku-4-5-20251001")
+results = runner.run_parallel(
+    [
+        "Analyze security vulnerabilities in Flask apps",
+        "Review Python packaging best practices",
+        "Compare async frameworks in Python",
+    ],
+    max_workers=3,
+)
+```
 
 ## Benchmarks
 
-Die Benchmark-Suite ausführen, um sequenzielle und parallele Ausführung zu vergleichen:
+Der enthaltene Benchmark vergleicht sequenzielle und parallele Ausführung:
 
 ```bash
-# Verfügbare Aufgaben anzeigen (Trockenlauf)
 PYTHONIOENCODING=utf-8 python tools/benchmark.py
-
-# Vergleich ausführen
 PYTHONIOENCODING=utf-8 python tools/benchmark.py --compare --workers 3
-
-# Ergebnisse exportieren
-PYTHONIOENCODING=utf-8 python tools/benchmark.py --compare \
-    --export results/benchmark_$(date +%Y%m%d).json
 ```
 
-### Ergebnisse (2026-03-06, Claude Haiku 4.5, 20 Aufgaben, 3 Worker)
+Gemessenes Ergebnis aus `results/benchmark_20260306.json`:
 
-| Metrik | Sequenziell | Parallel (3W) | Speedup |
-|--------|------------|---------------|---------|
-| Gesamtzeit | 1306s | 514s | **2.54x** |
-| Erfolgsrate | 20/20 | 19/20 | — |
-| Parallele Effizienz | — | — | 85% |
-| Eingesparte Zeit | — | 792s (61%) | — |
+| Metrik | Sequenziell | Parallel (3 Worker) | Ergebnis |
+|---|---:|---:|---:|
+| Gesamtzeit | 1306s | 514s | 2,54x Speedup |
+| Erfolgsrate | 20/20 | 19/20 | 95% paralleler Erfolg |
+| Parallele Effizienz | - | 85% | 85% |
+| Gesparte Zeit | - | 792s | 61% |
 
-Vollständige Ergebnisse: [`results/benchmark_20260306.json`](results/benchmark_20260306.json)
+## Repository-Struktur
 
----
-
-## Architektur
-
-```
+```text
 swarm_ai/
-├── tools/
-│   ├── runner.py              # ClaudeRunner — CLI-Wrapper mit run_parallel()
-│   ├── consensus_swarm.py     # Consensus Pattern (Mehrheitsentscheid)
-│   ├── stigmergy_api.py       # Stigmergy Pattern (Pheromon-Koordination)
-│   ├── translate_swarm.py     # Epstein Pattern (parallele Übersetzung)
-│   ├── summarize_chunks.py    # Epstein Pattern (parallele Zusammenfassung)
-│   ├── benchmark.py           # Sequenzielles vs. paralleles Benchmarking
-│   ├── swarm_haiku_3.json     # Hierarchy Chain (3 Worker)
-│   └── swarm_haiku_research.json  # Specialist Chain (5 Researchers)
-├── konzepte/                  # Designdokumente (Deutsch)
-│   ├── schwarm-operationen.md
-│   ├── schwarm-entscheidungsbaum.md
-│   └── trampelpfadanalyse.md
-├── results/                   # Benchmark-Ergebnisse (JSON)
-└── tests/                     # Testskripte
+|-- tools/
+|   |-- runner.py                  # Claude-CLI-Wrapper mit run_parallel()
+|   |-- consensus_swarm.py         # Mehrheitsentscheid und Konfidenzberechnung
+|   |-- stigmergy_api.py           # SQLite-Pheromonkoordination
+|   |-- translate_swarm.py         # Paralleles Übersetzungsmuster
+|   |-- summarize_chunks.py        # Paralleles Zusammenfassungsmuster
+|   |-- benchmark.py               # Sequenzielles vs. paralleles Benchmarking
+|   |-- swarm_haiku_3.json         # Boss-/Worker-Chain-Definition
+|   `-- swarm_haiku_research.json  # Spezialisten-Research-Chain
+|-- konzepte/                      # Deutsche Designdokumente
+|-- experiments/                   # Experimentelle Prototypen
+|-- results/                       # Benchmark-Snapshots
+`-- tests/                         # Pytest-Suite
 ```
 
-### Kernkomponenten
+## Projektstatus
 
-- **`ClaudeRunner`** (`runner.py`): Kapselt die Claude-CLI mit konfigurierbarem Modell, Timeout, Berechtigungsmodus und paralleler Ausführung über `ThreadPoolExecutor`.
-- **`StigmergyAPI`** (`stigmergy_api.py`): SQLite-basierter Pheromon-Speicher. Agenten hinterlegen, erfassen und verdunsten Pheromone, um sich ohne direkte Kommunikation zu koordinieren.
-- **`consensus_swarm`**: Führt N Agenten mit demselben Prompt bei `temperature=0.7` für Diversität aus und berechnet dann Übereinstimmungsquote und Konfidenzwert.
-- **`benchmark`**: 20 Aufgaben in 4 Kategorien (Softwareentwicklung, Forschung, Wiki, Code-Review) zur Messung des parallelen Speedups.
+swarm-ai ist öffentlich und als experimentelles Toolkit nutzbar. Die Kernmodule besitzen eine lokale Testsuite; einige Konzept- und Experimentdateien referenzieren weiterhin BACH, weil sie die Herkunft der Muster dokumentieren. Für produktive Nutzung sollten die Module unter `tools/` und die getesteten Python-APIs als Einstieg dienen.
 
----
+Aktuelle Prüfung:
+
+- 98 lokale Tests grün.
+- MIT-lizenziert.
+- Noch kein PyPI-Release.
+- Keine grafische Oberfläche und keine gehostete Landing-Page.
+
+## Verwandte ellmos-Projekte
+
+- [BACH](https://github.com/ellmos-ai/bach): vollständiges textbasiertes OS für LLM-Agenten.
+- [USMC](https://github.com/ellmos-ai/usmc): lokaler SQLite-Memory-Baustein für LLM-Agenten.
+- [Rinnsal](https://github.com/ellmos-ai/rinnsal): leichte LLM-Agenten-Infrastruktur.
+- [clutch](https://github.com/ellmos-ai/clutch): providerneutrales Routing für Einzelaufgaben.
+- [MarbleRun](https://github.com/ellmos-ai/MarbleRun): Chain-Ausführung für sequenzielle Agenten-Loops.
 
 ## Mitwirken
 
-Siehe [CONTRIBUTING.md](CONTRIBUTING.md) für Richtlinien.
-
----
+Siehe [CONTRIBUTING.md](CONTRIBUTING.md). Sinnvolle Beiträge sind Standalone-Bereinigung der Muster, End-to-End-Beispiele, reproduzierbare Benchmarks und klarere Chain-Definitionen.
 
 ## Lizenz
 
-[MIT](LICENSE) — Copyright 2026 Lukas Geiger
+[MIT](LICENSE) - Copyright 2026 Lukas Geiger

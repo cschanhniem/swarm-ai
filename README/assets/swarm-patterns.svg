@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">swarm-ai coordination patterns</title>
+  <desc id="desc">Five LLM swarm coordination patterns: chunks, hierarchy, stigmergy, consensus, and specialist routing.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .hub { fill: #111827; }
+      .node { fill: #2563eb; }
+      .node2 { fill: #059669; }
+      .node3 { fill: #d97706; }
+      .node4 { fill: #7c3aed; }
+      .line { stroke: #64748b; stroke-width: 2; fill: none; stroke-linecap: round; }
+      .dash { stroke: #64748b; stroke-width: 2; fill: none; stroke-dasharray: 5 5; stroke-linecap: round; }
+      .label { font: 700 18px system-ui, -apple-system, Segoe UI, sans-serif; fill: #0f172a; }
+      .small { font: 500 12px system-ui, -apple-system, Segoe UI, sans-serif; fill: #475569; }
+      .mono { font: 600 11px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="360"/>
+  <text class="label" x="40" y="42">swarm-ai: five local-first LLM coordination patterns</text>
+  <text class="small" x="40" y="66">Fan out, coordinate, vote, and route multiple model calls from Python tools and JSON chain definitions.</text>
+
+  <g transform="translate(40 95)">
+    <rect class="panel" x="0" y="0" width="165" height="210" rx="8"/>
+    <text class="label" x="18" y="30">Chunks</text>
+    <text class="small" x="18" y="51">split, run, merge</text>
+    <path class="line" d="M82 72 L82 103"/>
+    <circle class="hub" cx="82" cy="72" r="11"/>
+    <circle class="node" cx="42" cy="122" r="12"/>
+    <circle class="node" cx="82" cy="122" r="12"/>
+    <circle class="node" cx="122" cy="122" r="12"/>
+    <path class="line" d="M82 83 L42 110 M82 83 L82 110 M82 83 L122 110"/>
+    <path class="line" d="M42 136 L82 165 M82 136 L82 165 M122 136 L82 165"/>
+    <circle class="node2" cx="82" cy="174" r="12"/>
+    <text class="mono" x="18" y="198">translate/summarize</text>
+  </g>
+
+  <g transform="translate(225 95)">
+    <rect class="panel" x="0" y="0" width="165" height="210" rx="8"/>
+    <text class="label" x="18" y="30">Hierarchy</text>
+    <text class="small" x="18" y="51">boss + workers</text>
+    <circle class="hub" cx="82" cy="78" r="13"/>
+    <circle class="node" cx="42" cy="126" r="12"/>
+    <circle class="node" cx="82" cy="126" r="12"/>
+    <circle class="node" cx="122" cy="126" r="12"/>
+    <circle class="node2" cx="82" cy="174" r="12"/>
+    <path class="line" d="M82 91 L42 114 M82 91 L82 114 M82 91 L122 114"/>
+    <path class="line" d="M42 139 L82 162 M82 139 L82 162 M122 139 L82 162"/>
+    <text class="mono" x="18" y="198">runner + JSON</text>
+  </g>
+
+  <g transform="translate(410 95)">
+    <rect class="panel" x="0" y="0" width="165" height="210" rx="8"/>
+    <text class="label" x="18" y="30">Stigmergy</text>
+    <text class="small" x="18" y="51">pheromone paths</text>
+    <circle class="node3" cx="42" cy="88" r="11"/>
+    <circle class="node3" cx="118" cy="88" r="11"/>
+    <circle class="node2" cx="82" cy="143" r="14"/>
+    <path class="dash" d="M42 100 C55 125, 62 142, 82 143 C99 144, 108 123, 118 100"/>
+    <path class="dash" d="M42 88 C68 68, 94 68, 118 88"/>
+    <text class="small" x="48" y="148">SQLite</text>
+    <text class="mono" x="18" y="198">stigmergy_api</text>
+  </g>
+
+  <g transform="translate(595 95)">
+    <rect class="panel" x="0" y="0" width="165" height="210" rx="8"/>
+    <text class="label" x="18" y="30">Consensus</text>
+    <text class="small" x="18" y="51">majority vote</text>
+    <circle class="node4" cx="42" cy="100" r="12"/>
+    <circle class="node4" cx="82" cy="80" r="12"/>
+    <circle class="node4" cx="122" cy="100" r="12"/>
+    <circle class="node2" cx="82" cy="150" r="16"/>
+    <path class="line" d="M42 113 L72 140 M82 94 L82 134 M122 113 L92 140"/>
+    <text class="small" x="68" y="155">vote</text>
+    <text class="mono" x="18" y="198">consensus_swarm</text>
+  </g>
+
+  <g transform="translate(780 95)">
+    <rect class="panel" x="0" y="0" width="140" height="210" rx="8"/>
+    <text class="label" x="18" y="30">Specialist</text>
+    <text class="small" x="18" y="51">role routing</text>
+    <circle class="hub" cx="70" cy="78" r="13"/>
+    <circle class="node" cx="38" cy="126" r="11"/>
+    <circle class="node3" cx="70" cy="146" r="11"/>
+    <circle class="node4" cx="102" cy="126" r="11"/>
+    <path class="line" d="M70 91 L38 114 M70 91 L70 134 M70 91 L102 114"/>
+    <text class="mono" x="18" y="198">research chain</text>
+  </g>
+</svg>

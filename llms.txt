@@ -1,44 +1,61 @@
 # swarm-ai - LLM Swarm Intelligence Toolkit
 
-> swarm-ai is a standalone toolkit that implements five swarm-intelligence patterns for parallel LLM execution. Each pattern solves a different coordination problem -- from simple parallel chunking to emergent pheromone-based path selection -- so agents can be orchestrated the way ant colonies, hierarchies, or majority-vote committees would solve a task.
+Canonical repository: https://github.com/ellmos-ai/swarm-ai
 
-Part of the ellmos family (Extra Large Language Model Operating Systems). Where clutch routes a single task to the optimal model, swarm-ai fans *one* task out across many model instances and combines their results. Zero-dependency Python 3.10+, MIT. Benchmark: 2.54x speedup, 85% parallel efficiency on 20 tasks with 3 workers (Claude Haiku 4.5).
+swarm-ai is a local-first Python toolkit for parallel LLM and Claude agent orchestration. It implements five coordination patterns for running one task through multiple model instances and combining the results: parallel chunk processing, boss/worker hierarchy, stigmergy, consensus voting, and specialist routing.
 
-The five patterns: Epstein (split work into chunks, process in parallel, merge results), Hierarchy (boss + workers + aggregator), Stigmergy (pheromone-based indirect coordination, ant-colony style, SQLite-backed), Consensus (N agents answer independently, majority vote with confidence score), Specialist (boss routes tasks to domain-specific experts via JSON chain definitions). Each pattern ships with a CLI tool and Python API; combine them in chain-definition JSON.
+The project is part of the ellmos family. It is distinct from Docker Swarm, hosted agent platforms, and generic "AI swarm" demos. Its public surface is a small set of inspectable Python tools, JSON chain definitions, benchmark data, and German design documents.
 
-## Docs
+## Primary Use Cases
 
-- [README](https://github.com/ellmos-ai/swarm-ai/blob/master/README.md): Overview, 5 patterns with examples, benchmarks, architecture
-- [CONTRIBUTING](https://github.com/ellmos-ai/swarm-ai/blob/master/CONTRIBUTING.md): Contribution workflow
-- [LICENSE](https://github.com/ellmos-ai/swarm-ai/blob/master/LICENSE): MIT license text
+- Parallel LLM execution for chunked translation and summarization.
+- Consensus voting for factual checks, classification, and quality control.
+- SQLite-backed stigmergy experiments where agents leave pheromone-like path markers.
+- Boss/worker and specialist routing experiments through JSON chain definitions.
+- Benchmarking sequential versus parallel model calls.
 
-## Swarm patterns (implementations)
+## Implemented Patterns
 
-- [runner.py](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/runner.py): ClaudeRunner -- CLI wrapper with `run_parallel()` via ThreadPoolExecutor
-- [consensus_swarm.py](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/consensus_swarm.py): Consensus pattern (majority vote, confidence scoring)
-- [stigmergy_api.py](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/stigmergy_api.py): Stigmergy pattern (pheromone deposit / sense / evaporate)
-- [translate_swarm.py](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/translate_swarm.py): Epstein pattern (parallel translation)
-- [summarize_chunks.py](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/summarize_chunks.py): Epstein pattern (parallel summarisation)
-- [benchmark.py](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/benchmark.py): Sequential vs. parallel benchmarking across 20 tasks / 4 categories
-- [swarm_haiku_3.json](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/swarm_haiku_3.json): Hierarchy chain definition (Coordinator + 3 Workers + Aggregator)
-- [swarm_haiku_research.json](https://github.com/ellmos-ai/swarm-ai/blob/master/tools/swarm_haiku_research.json): Specialist chain (Planner + 5 Researchers + Synthesizer)
+- Epstein / parallel chunks: split work, process chunks concurrently, merge output.
+- Hierarchy / boss + worker: coordinator dispatches tasks, workers execute, aggregator merges.
+- Stigmergy / pheromone paths: indirect coordination through a SQLite-backed marker store.
+- Consensus / majority vote: several agents answer independently; the tool computes agreement and confidence.
+- Specialist / boss routing: a planner routes work to domain-specific expert roles.
 
-## Design documents (German)
+## Important Files
 
-- [konzepte/schwarm-operationen.md](https://github.com/ellmos-ai/swarm-ai/blob/master/konzepte/schwarm-operationen.md): Swarm operations reference
-- [konzepte/schwarm-entscheidungsbaum.md](https://github.com/ellmos-ai/swarm-ai/blob/master/konzepte/schwarm-entscheidungsbaum.md): Decision tree for picking a pattern
-- [konzepte/trampelpfadanalyse.md](https://github.com/ellmos-ai/swarm-ai/blob/master/konzepte/trampelpfadanalyse.md): Pheromone-path analysis
+- README.md: English public overview, quick start, benchmark summary, related projects.
+- README_de.md: German public overview with correct Umlaute.
+- tools/runner.py: Claude CLI wrapper with `run_parallel()`.
+- tools/consensus_swarm.py: Anthropic API consensus swarm CLI and Python API.
+- tools/stigmergy_api.py: SQLite-backed pheromone coordination API.
+- tools/translate_swarm.py: parallel translation pattern.
+- tools/summarize_chunks.py: parallel summarization pattern.
+- tools/benchmark.py: sequential versus parallel benchmark runner.
+- tools/swarm_haiku_3.json: hierarchy chain definition.
+- tools/swarm_haiku_research.json: specialist research chain definition.
+- results/benchmark_20260306.json: benchmark snapshot used in README.
+- README/assets/swarm-patterns.svg: README architecture and pattern diagram.
 
-## ellmos family (related projects)
+## Verification State
 
-- [clutch](https://github.com/ellmos-ai/clutch): Provider-neutral LLM routing (single-task orchestration, complementary to swarm-ai)
-- [MarbleRun / llmauto](https://github.com/ellmos-ai/MarbleRun): Chain-execution framework for sequential agent loops
-- [USMC](https://github.com/ellmos-ai/usmc): Shared memory primitive (Tier 1)
-- [Rinnsal](https://github.com/ellmos-ai/rinnsal): Lightweight LLM agent infrastructure (Tier 2)
-- [BACH](https://github.com/ellmos-ai/bach): Full text-based OS for LLMs (Tier 3)
-- [Skills](https://github.com/ellmos-ai/skills): Portable skill library
+- Local test suite: 98 pytest tests.
+- Python requirement: 3.10+.
+- Runtime dependency: `anthropic`.
+- CLI/API calls require `ANTHROPIC_API_KEY`.
+- `ClaudeRunner` examples require a configured `claude` CLI.
+- No PyPI package release yet.
+- No graphical UI, screenshot, or hosted landing page.
 
-## Optional
+## Related ellmos Projects
 
-- [GitHub Issues](https://github.com/ellmos-ai/swarm-ai/issues): Bug reports and feature requests
-- [Benchmark results](https://github.com/ellmos-ai/swarm-ai/tree/master/results): JSON benchmark snapshots
+- BACH: https://github.com/ellmos-ai/bach - full text-based OS for LLM agents.
+- USMC: https://github.com/ellmos-ai/usmc - local SQLite memory primitive for LLM agents.
+- Rinnsal: https://github.com/ellmos-ai/rinnsal - lightweight LLM agent infrastructure.
+- clutch: https://github.com/ellmos-ai/clutch - provider-neutral routing for a single task.
+- MarbleRun: https://github.com/ellmos-ai/MarbleRun - chain execution for sequential agent loops.
+- Skills: https://github.com/ellmos-ai/skills - portable skill library.
+
+## Discovery Keywords
+
+LLM swarm intelligence, multi-agent orchestration, Claude agent orchestration, parallel LLM calls, consensus swarm, stigmergy AI, pheromone coordination, SQLite agent memory, local-first agent toolkit, Python LLM agents, boss worker agents, specialist agent routing, agent benchmark, Anthropic API, Claude CLI.
