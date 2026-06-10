@@ -59,3 +59,5 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 ## Discovery Keywords
 
 LLM swarm intelligence, multi-agent orchestration, Claude agent orchestration, parallel LLM calls, consensus swarm, stigmergy AI, pheromone coordination, SQLite agent memory, local-first agent toolkit, Python LLM agents, boss worker agents, specialist agent routing, agent benchmark, Anthropic API, Claude CLI.
+
+## Last-checked: 2026-06-11
