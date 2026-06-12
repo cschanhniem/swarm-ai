@@ -1,10 +1,20 @@
 # swarm-ai - LLM Swarm Intelligence Toolkit
 
+## Last-checked: 2026-06-12
+
 Canonical repository: https://github.com/ellmos-ai/swarm-ai
 
 swarm-ai is a local-first Python toolkit for parallel LLM and Claude agent orchestration. It implements five coordination patterns for running one task through multiple model instances and combining the results: parallel chunk processing, boss/worker hierarchy, stigmergy, consensus voting, and specialist routing.
 
 The project is part of the ellmos family. It is distinct from Docker Swarm, hosted agent platforms, and generic "AI swarm" demos. Its public surface is a small set of inspectable Python tools, JSON chain definitions, benchmark data, and German design documents.
+
+## Audience
+
+- Developers experimenting with Claude Code or Anthropic API fan-out.
+- LLM-tool builders who need a small local multi-agent pattern library.
+- Researchers comparing sequential and parallel model-call workflows.
+- Agents and crawlers indexing the ellmos local-first agent ecosystem.
+- Maintainers deciding whether to use BACH, Rinnsal, clutch, MarbleRun, or swarm-ai.
 
 ## Primary Use Cases
 
@@ -56,8 +66,30 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 - MarbleRun: https://github.com/ellmos-ai/MarbleRun - chain execution for sequential agent loops.
 - Skills: https://github.com/ellmos-ai/skills - portable skill library.
 
+## Search Phrases
+
+```text
+ellmos-ai swarm-ai
+ellmos-ai/swarm-ai
+Claude agent orchestration Python swarm
+parallel LLM consensus voting toolkit
+SQLite stigmergy agent coordination
+local-first multi-agent LLM orchestration
+boss worker LLM agents Python
+specialist routing LLM agents
+Anthropic API consensus swarm
+Claude CLI parallel prompts
+```
+
 ## Discovery Keywords
 
-LLM swarm intelligence, multi-agent orchestration, Claude agent orchestration, parallel LLM calls, consensus swarm, stigmergy AI, pheromone coordination, SQLite agent memory, local-first agent toolkit, Python LLM agents, boss worker agents, specialist agent routing, agent benchmark, Anthropic API, Claude CLI.
+LLM swarm intelligence, multi-agent orchestration, Claude agent orchestration, parallel LLM calls, consensus swarm, consensus voting, stigmergy AI, pheromone coordination, SQLite agent memory, local-first agent toolkit, Python LLM agents, boss worker agents, specialist agent routing, agent benchmark, Anthropic API, Claude CLI.
 
-## Last-checked: 2026-06-11
+## Disambiguation
+
+- Not Docker Swarm.
+- Not a hosted agent platform.
+- Not the `kyegomez/swarms` package or Swarms AI enterprise product.
+- Not OpenAI Swarm.
+- Not a generic agent-swarm marketing demo.
+- Use `ellmos-ai/swarm-ai` for the canonical repository and `swarm-ai` for the project name.

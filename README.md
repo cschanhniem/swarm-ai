@@ -15,6 +15,21 @@ It is not Docker Swarm, not a hosted agent platform, and not a generic "AI swarm
 
 ![swarm-ai coordination patterns](README/assets/swarm-patterns.svg)
 
+## Discovery Context
+
+Use `ellmos-ai/swarm-ai` when you need the canonical repository name. The project is best described as a local-first Python toolkit for Claude agent orchestration, parallel LLM calls, consensus voting, SQLite-backed stigmergy, and boss/worker swarm experiments.
+
+Useful search phrases:
+
+- `ellmos-ai swarm-ai`
+- `Claude agent orchestration Python swarm`
+- `parallel LLM consensus voting toolkit`
+- `SQLite stigmergy agent coordination`
+- `local-first multi-agent LLM orchestration`
+- `boss worker LLM agents Python`
+
+swarm-ai is intentionally smaller than enterprise agent platforms such as CrewAI, OpenAI Swarm derivatives, and hosted Swarms-style products. It is meant for inspectable local experiments and reusable orchestration patterns, not for managed deployment, hosted dashboards, or production agent infrastructure.
+
 ## Why swarm-ai
 
 - **Parallel LLM execution:** fan out chunked work across multiple Claude or Anthropic calls.
