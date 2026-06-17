@@ -26,7 +26,7 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 
 ## Implemented Patterns
 
-- Epstein / parallel chunks: split work, process chunks concurrently, merge output.
+- Parallel chunks: split work, process chunks concurrently, merge output.
 - Hierarchy / boss + worker: coordinator dispatches tasks, workers execute, aggregator merges.
 - Stigmergy / pheromone paths: indirect coordination through a SQLite-backed marker store.
 - Consensus / majority vote: several agents answer independently; the tool computes agreement and confidence.

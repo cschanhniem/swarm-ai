@@ -4,7 +4,7 @@
 
 ## 5 Grundmuster
 
-### 1. Epstein-Methode (Parallele Chunks)
+### 1. Parallel-Chunks
 
 Aufgabe -> N gleichgrosse Chunks -> N parallele Agenten -> Ergebnisse zusammenfuehren
 
@@ -110,7 +110,7 @@ Verschiedene Experten-Agenten -> jeder fuer sein Fachgebiet
 
 | Muster | Koordination | Skalierung | Kosten | Qualitaet |
 |--------|-------------|------------|--------|-----------|
-| Epstein | Zentral (Split+Merge) | Linear | 1x | Gleichwertig |
+| parallel-chunks | Zentral (Split+Merge) | Linear | 1x | Gleichwertig |
 | Hierarchie | Hierarchisch | Moderat | 1.5x | +20% |
 | Stigmergy | Dezentral | Sehr gut | 1x | +10% |
 | Konsensus | Abstimmung | Schlecht | 3x | +30% |

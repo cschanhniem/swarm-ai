@@ -15,7 +15,7 @@ Aufgabe gegeben
     |       |
     |       +-- JA --> Sind alle Teilaufgaben gleich (homogen)?
     |                   |
-    |                   +-- JA --> Epstein-Methode (Chunk-Schwarm)
+    |                   +-- JA --> Parallel-Chunks
     |                   |         Chunk-Groesse: 20-30 Aufgaben/Agent
     |                   |
     |                   +-- NEIN --> Braucht es Koordination zwischen Agenten?
@@ -51,7 +51,7 @@ Bevor du einen Schwarm startest, beantworte:
 
 | Muster | Kosten-Faktor | Qualitaets-Gewinn | Empfehlung |
 |--------|--------------|------------------|------------|
-| Epstein | 1x (pro Task) | Gleichwertig | Fuer repetitive Tasks (Uebersetzung, Review) |
+| parallel-chunks | 1x (pro Task) | Gleichwertig | Fuer repetitive Tasks (Uebersetzung, Review) |
 | Hierarchie | 1.5x | +20% | Fuer komplexe Projekte mit Abhaengigkeiten |
 | Stigmergy | 1x (selbst-regulierend) | +10% | Exploration, Optimierung |
 | Konsensus | 3x | +30% | Kritische Entscheidungen (Release, Diagnose) |
@@ -59,7 +59,7 @@ Bevor du einen Schwarm startest, beantworte:
 
 ## Praktische Heuristiken
 
-### Wann Epstein?
+### Wann Parallel-Chunks?
 - Mehr als 10 gleichartige Aufgaben
 - Keine Abhaengigkeiten zwischen Teilaufgaben
 - Zeitdruck (parallele Ausfuehrung spart Zeit)
@@ -87,8 +87,8 @@ Bevor du einen Schwarm startest, beantworte:
 ## BACH-Integration
 
 ```bash
-# Epstein-Schwarm starten (konzeptuell):
-bach task add "Schwarm: Uebersetzung 100 Dokumente" --type epstein --chunk-size 20
+# Parallel-Chunks-Schwarm starten (konzeptuell):
+bach task add "Schwarm: Uebersetzung 100 Dokumente" --type parallel-chunks --chunk-size 20
 
 # Hierarchie-Schwarm:
 bach agent run "Projektleiter-Aufgabe" --mode hierarchical
