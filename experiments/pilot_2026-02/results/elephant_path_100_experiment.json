@@ -1,0 +1,941 @@
+{
+  "name": "Elephant Path / Trampelpfadanalyse",
+  "version": "5.0",
+  "mode": "naive-parallel",
+  "naive_setup": {
+    "memory_cleared": true,
+    "tools_restricted": "Bash,Glob,Grep,Read",
+    "skills_disabled": true
+  },
+  "start_time": "2026-02-15T09:48:12.425626",
+  "end_time": "2026-02-15T10:24:27.763590",
+  "wall_clock_seconds": 2175.3,
+  "num_probes": 100,
+  "completed": 53,
+  "errors": 47,
+  "model": "haiku",
+  "tasks": [
+    "Wie erstellt man einen Task in BACH?",
+    "Wie startet man BACH?",
+    "Wo sind die Steuerbelege in BACH?",
+    "Welche offenen Tasks gibt es in BACH?",
+    "Welche Python-Tools gibt es in BACH?",
+    "Schreibe einen kurzen Wiki-Artikel ueber ein Thema deiner Wahl in BACH",
+    "Wo findet man die BACH-Logs?",
+    "Welche Agenten gibt es in BACH?",
+    "Wie exportiert man Daten aus der BACH-Datenbank?",
+    "Was ist der aktuelle System-Status von BACH?",
+    "Wie sendet man eine Nachricht in BACH?",
+    "Wie erstellt man ein Backup des Systems?",
+    "Suche nach Kontakt-Informationen in BACH",
+    "Welche Abonnements werden in BACH verwaltet?",
+    "Wo werden Gesundheitsdaten in BACH gespeichert?",
+    "Wie verbindet man einen Telegram-Bot mit BACH?",
+    "Wie delegiert man einen Task an einen anderen Partner?",
+    "Wo sind die Haushaltsdaten und monatlichen Fixkosten?",
+    "Durchsuche das BACH-Wissen nach interessanten Eintraegen",
+    "Wie erstellt man einen neuen Skill oder ein neues Tool in BACH?"
+  ],
+  "probes": [
+    {
+      "num": 1,
+      "status": "timeout",
+      "duration": 120.8,
+      "turns": 0,
+      "paths_found": 15,
+      "cost": 0.0,
+      "stdout_bytes": 61264
+    },
+    {
+      "num": 2,
+      "status": "completed",
+      "duration": 80.0,
+      "turns": 7,
+      "paths_found": 6,
+      "cost": 0.048695699999999995,
+      "stdout_bytes": 84918
+    },
+    {
+      "num": 3,
+      "status": "timeout",
+      "duration": 120.8,
+      "turns": 0,
+      "paths_found": 6,
+      "cost": 0.0,
+      "stdout_bytes": 48334
+    },
+    {
+      "num": 4,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 4,
+      "cost": 0.0,
+      "stdout_bytes": 12855
+    },
+    {
+      "num": 5,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 9,
+      "cost": 0.0,
+      "stdout_bytes": 60727
+    },
+    {
+      "num": 6,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 60734
+    },
+    {
+      "num": 7,
+      "status": "completed",
+      "duration": 82.9,
+      "turns": 6,
+      "paths_found": 5,
+      "cost": 0.04342085,
+      "stdout_bytes": 33077
+    },
+    {
+      "num": 8,
+      "status": "completed",
+      "duration": 90.0,
+      "turns": 7,
+      "paths_found": 6,
+      "cost": 0.0457854,
+      "stdout_bytes": 44867
+    },
+    {
+      "num": 9,
+      "status": "timeout",
+      "duration": 120.9,
+      "turns": 0,
+      "paths_found": 9,
+      "cost": 0.0,
+      "stdout_bytes": 33444
+    },
+    {
+      "num": 10,
+      "status": "completed",
+      "duration": 98.7,
+      "turns": 9,
+      "paths_found": 8,
+      "cost": 0.03351945,
+      "stdout_bytes": 41220
+    },
+    {
+      "num": 11,
+      "status": "completed",
+      "duration": 118.6,
+      "turns": 9,
+      "paths_found": 8,
+      "cost": 0.07520915000000002,
+      "stdout_bytes": 158827
+    },
+    {
+      "num": 12,
+      "status": "timeout",
+      "duration": 121.1,
+      "turns": 0,
+      "paths_found": 6,
+      "cost": 0.0,
+      "stdout_bytes": 167922
+    },
+    {
+      "num": 13,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 44386
+    },
+    {
+      "num": 14,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 6,
+      "cost": 0.0,
+      "stdout_bytes": 36692
+    },
+    {
+      "num": 15,
+      "status": "timeout",
+      "duration": 120.9,
+      "turns": 0,
+      "paths_found": 6,
+      "cost": 0.0,
+      "stdout_bytes": 119977
+    },
+    {
+      "num": 16,
+      "status": "timeout",
+      "duration": 121.1,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 71444
+    },
+    {
+      "num": 17,
+      "status": "timeout",
+      "duration": 121.4,
+      "turns": 0,
+      "paths_found": 7,
+      "cost": 0.0,
+      "stdout_bytes": 24060
+    },
+    {
+      "num": 18,
+      "status": "timeout",
+      "duration": 121.8,
+      "turns": 0,
+      "paths_found": 5,
+      "cost": 0.0,
+      "stdout_bytes": 52719
+    },
+    {
+      "num": 19,
+      "status": "timeout",
+      "duration": 121.0,
+      "turns": 0,
+      "paths_found": 10,
+      "cost": 0.0,
+      "stdout_bytes": 58150
+    },
+    {
+      "num": 20,
+      "status": "timeout",
+      "duration": 124.1,
+      "turns": 0,
+      "paths_found": 7,
+      "cost": 0.0,
+      "stdout_bytes": 120427
+    },
+    {
+      "num": 21,
+      "status": "timeout",
+      "duration": 122.2,
+      "turns": 0,
+      "paths_found": 11,
+      "cost": 0.0,
+      "stdout_bytes": 152809
+    },
+    {
+      "num": 22,
+      "status": "completed",
+      "duration": 102.3,
+      "turns": 9,
+      "paths_found": 8,
+      "cost": 0.0369826,
+      "stdout_bytes": 54901
+    },
+    {
+      "num": 23,
+      "status": "timeout",
+      "duration": 120.8,
+      "turns": 0,
+      "paths_found": 4,
+      "cost": 0.0,
+      "stdout_bytes": 23065
+    },
+    {
+      "num": 24,
+      "status": "timeout",
+      "duration": 121.0,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 65039
+    },
+    {
+      "num": 25,
+      "status": "completed",
+      "duration": 80.8,
+      "turns": 5,
+      "paths_found": 4,
+      "cost": 0.05510825,
+      "stdout_bytes": 72756
+    },
+    {
+      "num": 26,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 96533
+    },
+    {
+      "num": 27,
+      "status": "completed",
+      "duration": 81.4,
+      "turns": 7,
+      "paths_found": 6,
+      "cost": 0.04213105,
+      "stdout_bytes": 37303
+    },
+    {
+      "num": 28,
+      "status": "completed",
+      "duration": 76.3,
+      "turns": 10,
+      "paths_found": 12,
+      "cost": 0.04448655,
+      "stdout_bytes": 54310
+    },
+    {
+      "num": 29,
+      "status": "timeout",
+      "duration": 120.2,
+      "turns": 0,
+      "paths_found": 11,
+      "cost": 0.0,
+      "stdout_bytes": 72034
+    },
+    {
+      "num": 30,
+      "status": "timeout",
+      "duration": 120.2,
+      "turns": 0,
+      "paths_found": 11,
+      "cost": 0.0,
+      "stdout_bytes": 53156
+    },
+    {
+      "num": 31,
+      "status": "completed",
+      "duration": 91.2,
+      "turns": 10,
+      "paths_found": 10,
+      "cost": 0.0521887,
+      "stdout_bytes": 167214
+    },
+    {
+      "num": 32,
+      "status": "completed",
+      "duration": 68.6,
+      "turns": 9,
+      "paths_found": 10,
+      "cost": 0.0499458,
+      "stdout_bytes": 118529
+    },
+    {
+      "num": 33,
+      "status": "timeout",
+      "duration": 120.2,
+      "turns": 0,
+      "paths_found": 10,
+      "cost": 0.0,
+      "stdout_bytes": 49919
+    },
+    {
+      "num": 34,
+      "status": "timeout",
+      "duration": 120.2,
+      "turns": 0,
+      "paths_found": 11,
+      "cost": 0.0,
+      "stdout_bytes": 47633
+    },
+    {
+      "num": 35,
+      "status": "completed",
+      "duration": 90.8,
+      "turns": 10,
+      "paths_found": 11,
+      "cost": 0.1065174,
+      "stdout_bytes": 272297
+    },
+    {
+      "num": 36,
+      "status": "completed",
+      "duration": 100.4,
+      "turns": 10,
+      "paths_found": 9,
+      "cost": 0.055507100000000004,
+      "stdout_bytes": 102178
+    },
+    {
+      "num": 37,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 10,
+      "cost": 0.0,
+      "stdout_bytes": 182594
+    },
+    {
+      "num": 38,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 71915
+    },
+    {
+      "num": 39,
+      "status": "completed",
+      "duration": 74.7,
+      "turns": 10,
+      "paths_found": 9,
+      "cost": 0.20860315,
+      "stdout_bytes": 5733638
+    },
+    {
+      "num": 40,
+      "status": "timeout",
+      "duration": 120.2,
+      "turns": 0,
+      "paths_found": 10,
+      "cost": 0.0,
+      "stdout_bytes": 131697
+    },
+    {
+      "num": 41,
+      "status": "completed",
+      "duration": 104.8,
+      "turns": 10,
+      "paths_found": 9,
+      "cost": 0.07944585000000001,
+      "stdout_bytes": 140781
+    },
+    {
+      "num": 42,
+      "status": "completed",
+      "duration": 46.9,
+      "turns": 5,
+      "paths_found": 4,
+      "cost": 0.023385950000000003,
+      "stdout_bytes": 28077
+    },
+    {
+      "num": 43,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 9,
+      "cost": 0.0,
+      "stdout_bytes": 61171
+    },
+    {
+      "num": 44,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 9,
+      "cost": 0.0,
+      "stdout_bytes": 80996
+    },
+    {
+      "num": 45,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 392479
+    },
+    {
+      "num": 46,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 9,
+      "cost": 0.0,
+      "stdout_bytes": 155706
+    },
+    {
+      "num": 47,
+      "status": "completed",
+      "duration": 113.9,
+      "turns": 10,
+      "paths_found": 9,
+      "cost": 0.07253835,
+      "stdout_bytes": 66108
+    },
+    {
+      "num": 48,
+      "status": "completed",
+      "duration": 99.5,
+      "turns": 7,
+      "paths_found": 6,
+      "cost": 0.038692500000000005,
+      "stdout_bytes": 44853
+    },
+    {
+      "num": 49,
+      "status": "timeout",
+      "duration": 120.8,
+      "turns": 0,
+      "paths_found": 17,
+      "cost": 0.0,
+      "stdout_bytes": 208288
+    },
+    {
+      "num": 50,
+      "status": "completed",
+      "duration": 97.0,
+      "turns": 14,
+      "paths_found": 13,
+      "cost": 0.05566935,
+      "stdout_bytes": 138637
+    },
+    {
+      "num": 51,
+      "status": "completed",
+      "duration": 93.8,
+      "turns": 11,
+      "paths_found": 10,
+      "cost": 0.09758445,
+      "stdout_bytes": 190708
+    },
+    {
+      "num": 52,
+      "status": "completed",
+      "duration": 112.0,
+      "turns": 12,
+      "paths_found": 13,
+      "cost": 0.07804025,
+      "stdout_bytes": 234744
+    },
+    {
+      "num": 53,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 16,
+      "cost": 0.0,
+      "stdout_bytes": 131151
+    },
+    {
+      "num": 54,
+      "status": "completed",
+      "duration": 101.0,
+      "turns": 9,
+      "paths_found": 9,
+      "cost": 0.0592403,
+      "stdout_bytes": 83578
+    },
+    {
+      "num": 55,
+      "status": "timeout",
+      "duration": 120.6,
+      "turns": 0,
+      "paths_found": 13,
+      "cost": 0.0,
+      "stdout_bytes": 280530
+    },
+    {
+      "num": 56,
+      "status": "completed",
+      "duration": 119.8,
+      "turns": 14,
+      "paths_found": 15,
+      "cost": 0.0871037,
+      "stdout_bytes": 200902
+    },
+    {
+      "num": 57,
+      "status": "completed",
+      "duration": 99.4,
+      "turns": 10,
+      "paths_found": 10,
+      "cost": 0.06505475000000001,
+      "stdout_bytes": 89371
+    },
+    {
+      "num": 58,
+      "status": "timeout",
+      "duration": 120.6,
+      "turns": 0,
+      "paths_found": 11,
+      "cost": 0.0,
+      "stdout_bytes": 70090
+    },
+    {
+      "num": 59,
+      "status": "completed",
+      "duration": 74.5,
+      "turns": 11,
+      "paths_found": 10,
+      "cost": 0.07971644999999998,
+      "stdout_bytes": 194807
+    },
+    {
+      "num": 60,
+      "status": "timeout",
+      "duration": 120.6,
+      "turns": 0,
+      "paths_found": 14,
+      "cost": 0.0,
+      "stdout_bytes": 163557
+    },
+    {
+      "num": 61,
+      "status": "completed",
+      "duration": 114.1,
+      "turns": 11,
+      "paths_found": 10,
+      "cost": 0.105509,
+      "stdout_bytes": 189588
+    },
+    {
+      "num": 62,
+      "status": "completed",
+      "duration": 74.3,
+      "turns": 13,
+      "paths_found": 17,
+      "cost": 0.06159919999999999,
+      "stdout_bytes": 156649
+    },
+    {
+      "num": 63,
+      "status": "timeout",
+      "duration": 120.6,
+      "turns": 0,
+      "paths_found": 6,
+      "cost": 0.0,
+      "stdout_bytes": 26612
+    },
+    {
+      "num": 64,
+      "status": "completed",
+      "duration": 78.8,
+      "turns": 8,
+      "paths_found": 7,
+      "cost": 0.052650749999999996,
+      "stdout_bytes": 101987
+    },
+    {
+      "num": 65,
+      "status": "completed",
+      "duration": 68.6,
+      "turns": 9,
+      "paths_found": 11,
+      "cost": 0.051260549999999995,
+      "stdout_bytes": 100417
+    },
+    {
+      "num": 66,
+      "status": "timeout",
+      "duration": 120.6,
+      "turns": 0,
+      "paths_found": 10,
+      "cost": 0.0,
+      "stdout_bytes": 72845
+    },
+    {
+      "num": 67,
+      "status": "completed",
+      "duration": 68.9,
+      "turns": 8,
+      "paths_found": 7,
+      "cost": 0.048724149999999994,
+      "stdout_bytes": 32960
+    },
+    {
+      "num": 68,
+      "status": "completed",
+      "duration": 64.7,
+      "turns": 9,
+      "paths_found": 8,
+      "cost": 0.058655200000000005,
+      "stdout_bytes": 40494
+    },
+    {
+      "num": 69,
+      "status": "completed",
+      "duration": 116.3,
+      "turns": 15,
+      "paths_found": 16,
+      "cost": 0.07678215,
+      "stdout_bytes": 115241
+    },
+    {
+      "num": 70,
+      "status": "timeout",
+      "duration": 120.2,
+      "turns": 0,
+      "paths_found": 5,
+      "cost": 0.0,
+      "stdout_bytes": 9724
+    },
+    {
+      "num": 71,
+      "status": "completed",
+      "duration": 51.2,
+      "turns": 6,
+      "paths_found": 5,
+      "cost": 0.06410690000000001,
+      "stdout_bytes": 172577
+    },
+    {
+      "num": 72,
+      "status": "completed",
+      "duration": 111.4,
+      "turns": 10,
+      "paths_found": 10,
+      "cost": 0.04916095000000001,
+      "stdout_bytes": 1234237
+    },
+    {
+      "num": 73,
+      "status": "completed",
+      "duration": 112.6,
+      "turns": 11,
+      "paths_found": 10,
+      "cost": 0.08845785,
+      "stdout_bytes": 144120
+    },
+    {
+      "num": 74,
+      "status": "completed",
+      "duration": 104.3,
+      "turns": 9,
+      "paths_found": 8,
+      "cost": 0.0835815,
+      "stdout_bytes": 193116
+    },
+    {
+      "num": 75,
+      "status": "completed",
+      "duration": 97.3,
+      "turns": 11,
+      "paths_found": 11,
+      "cost": 0.09486765,
+      "stdout_bytes": 274954
+    },
+    {
+      "num": 76,
+      "status": "completed",
+      "duration": 74.5,
+      "turns": 10,
+      "paths_found": 9,
+      "cost": 0.06580514999999999,
+      "stdout_bytes": 175992
+    },
+    {
+      "num": 77,
+      "status": "completed",
+      "duration": 107.7,
+      "turns": 11,
+      "paths_found": 13,
+      "cost": 0.05150194999999999,
+      "stdout_bytes": 56391
+    },
+    {
+      "num": 78,
+      "status": "completed",
+      "duration": 106.1,
+      "turns": 11,
+      "paths_found": 10,
+      "cost": 0.12298839999999998,
+      "stdout_bytes": 73598
+    },
+    {
+      "num": 79,
+      "status": "completed",
+      "duration": 80.6,
+      "turns": 11,
+      "paths_found": 10,
+      "cost": 0.06616074999999999,
+      "stdout_bytes": 98084
+    },
+    {
+      "num": 80,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 11,
+      "cost": 0.0,
+      "stdout_bytes": 119603
+    },
+    {
+      "num": 81,
+      "status": "timeout",
+      "duration": 120.2,
+      "turns": 0,
+      "paths_found": 5,
+      "cost": 0.0,
+      "stdout_bytes": 110054
+    },
+    {
+      "num": 82,
+      "status": "completed",
+      "duration": 59.2,
+      "turns": 7,
+      "paths_found": 6,
+      "cost": 0.030103699999999997,
+      "stdout_bytes": 30252
+    },
+    {
+      "num": 83,
+      "status": "completed",
+      "duration": 114.4,
+      "turns": 16,
+      "paths_found": 16,
+      "cost": 0.07623769999999999,
+      "stdout_bytes": 119815
+    },
+    {
+      "num": 84,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 19,
+      "cost": 0.0,
+      "stdout_bytes": 124869
+    },
+    {
+      "num": 85,
+      "status": "timeout",
+      "duration": 120.1,
+      "turns": 0,
+      "paths_found": 8,
+      "cost": 0.0,
+      "stdout_bytes": 185429
+    },
+    {
+      "num": 86,
+      "status": "completed",
+      "duration": 106.5,
+      "turns": 13,
+      "paths_found": 12,
+      "cost": 0.0988226,
+      "stdout_bytes": 99417
+    },
+    {
+      "num": 87,
+      "status": "completed",
+      "duration": 87.4,
+      "turns": 8,
+      "paths_found": 7,
+      "cost": 0.047887500000000006,
+      "stdout_bytes": 39660
+    },
+    {
+      "num": 88,
+      "status": "completed",
+      "duration": 65.2,
+      "turns": 9,
+      "paths_found": 8,
+      "cost": 0.05636955,
+      "stdout_bytes": 40180
+    },
+    {
+      "num": 89,
+      "status": "timeout",
+      "duration": 120.8,
+      "turns": 0,
+      "paths_found": 7,
+      "cost": 0.0,
+      "stdout_bytes": 154183
+    },
+    {
+      "num": 90,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 21,
+      "cost": 0.0,
+      "stdout_bytes": 94427
+    },
+    {
+      "num": 91,
+      "status": "completed",
+      "duration": 67.0,
+      "turns": 8,
+      "paths_found": 7,
+      "cost": 0.07628295,
+      "stdout_bytes": 173239
+    },
+    {
+      "num": 92,
+      "status": "timeout",
+      "duration": 120.7,
+      "turns": 0,
+      "paths_found": 10,
+      "cost": 0.0,
+      "stdout_bytes": 116926
+    },
+    {
+      "num": 93,
+      "status": "completed",
+      "duration": 111.4,
+      "turns": 16,
+      "paths_found": 23,
+      "cost": 0.07203965000000001,
+      "stdout_bytes": 169936
+    },
+    {
+      "num": 94,
+      "status": "completed",
+      "duration": 94.7,
+      "turns": 8,
+      "paths_found": 7,
+      "cost": 0.05433105,
+      "stdout_bytes": 48215
+    },
+    {
+      "num": 95,
+      "status": "timeout",
+      "duration": 120.6,
+      "turns": 0,
+      "paths_found": 14,
+      "cost": 0.0,
+      "stdout_bytes": 139264
+    },
+    {
+      "num": 96,
+      "status": "completed",
+      "duration": 89.6,
+      "turns": 11,
+      "paths_found": 11,
+      "cost": 0.05229809999999999,
+      "stdout_bytes": 76860
+    },
+    {
+      "num": 97,
+      "status": "completed",
+      "duration": 106.6,
+      "turns": 9,
+      "paths_found": 8,
+      "cost": 0.0390852,
+      "stdout_bytes": 74686
+    },
+    {
+      "num": 98,
+      "status": "completed",
+      "duration": 74.2,
+      "turns": 10,
+      "paths_found": 9,
+      "cost": 0.08512235000000001,
+      "stdout_bytes": 163322
+    },
+    {
+      "num": 99,
+      "status": "completed",
+      "duration": 79.2,
+      "turns": 12,
+      "paths_found": 11,
+      "cost": 0.07302025000000001,
+      "stdout_bytes": 109392
+    },
+    {
+      "num": 100,
+      "status": "timeout",
+      "duration": 120.6,
+      "turns": 0,
+      "paths_found": 21,
+      "cost": 0.0,
+      "stdout_bytes": 93313
+    }
+  ]
+}
