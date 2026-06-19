@@ -1,3 +1,3 @@
 # stigmergy/__init__.py
-# Pheromon-basierte Schwarm-Koordination fuer swarm-ai
-# Stand: 2026-02-22
+# Pheromone-based swarm coordination for swarm-ai
+# Last updated: 2026-02-22

@@ -26,11 +26,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Optional
 
-try:
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
     import anthropic
+
+try:
+    import anthropic  # noqa: F811
 except ImportError:
-    print("[FEHLER] anthropic SDK nicht installiert: pip install anthropic")
-    sys.exit(1)
+    anthropic = None  # noqa: F811
 
 # --- Konstanten ---
 
@@ -67,6 +71,16 @@ SYSTEM_PROMPT = (
 
 
 def get_api_key() -> str:
+    try:
+        import anthropic
+    except ImportError:
+        raise RuntimeError("anthropic SDK not installed: pip install anthropic")
+
+    try:
+        import anthropic
+    except ImportError:
+        raise RuntimeError("anthropic SDK not installed: pip install anthropic")
+    
     """API-Key aus Umgebungsvariable laden."""
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if api_key:

@@ -1,8 +1,8 @@
 """
-llmauto.core.runner -- Claude CLI Wrapper
-==========================================
-Zentraler Baustein: Startet Claude-Prozesse mit konfigurierbaren Parametern.
-Handhabt Environment, Fallback, Timeout, Output-Capture.
+swarm_ai.runner -- Claude CLI Wrapper
+======================================
+Core component: starts Claude processes with configurable parameters.
+Handles environment, fallback, timeout, and output capture.
 """
 import subprocess
 import os
@@ -12,7 +12,7 @@ from datetime import datetime
 
 
 class ClaudeRunner:
-    """Wrapper um die Claude CLI fuer automatisierte Aufrufe."""
+    """Wrapper around the Claude CLI for automated calls."""
 
     def __init__(self, model="claude-sonnet-4-6", fallback_model=None,
                  permission_mode="dontAsk", allowed_tools=None, timeout=1800,
@@ -25,14 +25,14 @@ class ClaudeRunner:
         self.cwd = cwd
 
     def _build_env(self):
-        """Environment vorbereiten: CLAUDECODE entfernen, Encoding setzen."""
+        """Prepare environment: remove CLAUDECODE, set encoding."""
         env = os.environ.copy()
         env.pop("CLAUDECODE", None)
         env["PYTHONIOENCODING"] = "utf-8"
         return env
 
     def _build_cmd(self, prompt, **overrides):
-        """Claude CLI Kommando zusammenbauen."""
+        """Build the Claude CLI command."""
         model = overrides.get("model", self.model)
         continue_conv = overrides.get("continue_conversation", False)
 
@@ -99,7 +99,7 @@ class ClaudeRunner:
             return {
                 "success": False,
                 "output": "",
-                "stderr": "claude CLI nicht gefunden. Ist Claude Code installiert?",
+                "stderr": "claude CLI not found. Is Claude Code installed?",
                 "returncode": -2,
                 "duration_s": 0,
                 "model": overrides.get("model", self.model),
@@ -117,7 +117,7 @@ class ClaudeRunner:
             }
 
     def run_parallel(self, prompts, max_workers=3, **overrides):
-        """Fuehrt mehrere Claude-Aufrufe parallel aus.
+        """Execute multiple Claude calls in parallel.
 
         Args:
             prompts: Liste von Prompt-Strings oder Liste von Dicts mit {prompt, **overrides}
