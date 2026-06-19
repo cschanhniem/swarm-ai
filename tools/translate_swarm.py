@@ -38,11 +38,15 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 
-try:
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
     import anthropic
+
+try:
+    import anthropic  # noqa: F811
 except ImportError:
-    print("[FEHLER] anthropic SDK nicht installiert: pip install anthropic")
-    sys.exit(1)
+    anthropic = None  # noqa: F811
 
 # --- Konstanten ---
 

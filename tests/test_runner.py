@@ -138,7 +138,7 @@ class TestRun:
 
         assert result["success"] is False
         assert result["returncode"] == -2
-        assert "nicht gefunden" in result["stderr"]
+        assert "not found" in result["stderr"]
 
     @patch("tools.runner.subprocess.run")
     def test_generic_exception(self, mock_run):

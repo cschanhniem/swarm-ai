@@ -1,26 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-consensus_swarm.py - Konsensus-Schwarm-Muster mit Claude API
-=============================================================
+consensus_swarm.py - Consensus swarm pattern with Claude API
+==============================================================
 
-Mehrere LLM-Instanzen beantworten dieselbe Frage parallel.
-Ergebnisse werden verglichen und ein Mehrheitsentscheid getroffen.
+Run multiple LLM instances on the same question in parallel,
+then compare results and take a majority decision.
 
-Anwendungsfaelle:
-- Fakten-Validierung (stimmt eine Aussage?)
-- Klassifikation (welche Kategorie?)
-- Extraktion (welche Entities?)
-- Qualitaetskontrolle (ist eine Zusammenfassung korrekt?)
+Use cases:
+- Fact validation (is a statement true?)
+- Classification (which category?)
+- Extraction (which entities?)
+- Quality control (is a summary correct?)
 
 Usage:
-    python consensus_swarm.py "Was ist die Hauptstadt von Frankreich?"
-    python consensus_swarm.py --agents 5 --question "Ist Python typisiert?"
-    python consensus_swarm.py --mode classify --categories "positiv,negativ,neutral" --question "Der Film war okay."
-    python consensus_swarm.py --dry-run --question "Testfrage"
+    python consensus_swarm.py "What is the capital of France?"
+    python consensus_swarm.py --agents 5 --question "Is Python typed?"
+    python consensus_swarm.py --mode classify --categories "positive,negative,neutral" --question "The movie was okay."
+    python consensus_swarm.py --dry-run --question "Test question"
 
 Author: Lukas Geiger (ellmos-ai)
 """
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -33,13 +35,17 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 
-try:
-    import anthropic
-except ImportError:
-    print("[FEHLER] anthropic SDK nicht installiert: pip install anthropic")
-    sys.exit(1)
+from typing import TYPE_CHECKING
 
-# --- Konstanten ---
+if TYPE_CHECKING:
+    import anthropic
+
+try:
+    import anthropic  # noqa: F811
+except ImportError:
+    anthropic = None  # noqa: F811
+
+# --- Constants ---
 
 MODEL = "claude-haiku-4-5-20251001"
 MAX_RETRIES = 3
@@ -49,7 +55,7 @@ DEFAULT_WORKERS = 5
 
 COST_PER_1M = {"input": 1.00, "output": 5.00}  # Haiku-Preise
 
-# --- API-Key ---
+# --- API Key ---
 
 
 def get_api_key() -> str:
@@ -64,7 +70,7 @@ def get_api_key() -> str:
     )
 
 
-# --- Schwarm-Agenten ---
+# --- Swarm Agents ---
 
 
 def query_agent(client: anthropic.Anthropic, agent_id: int,
@@ -82,7 +88,7 @@ def query_agent(client: anthropic.Anthropic, agent_id: int,
                 max_tokens=256,
                 system=system_prompt,
                 messages=[{"role": "user", "content": user_prompt}],
-                temperature=0.7,  # Etwas Varianz fuer Diversitaet
+                temperature=0.7,  # Some variance for diversity
             )
 
             answer = message.content[0].text.strip()
@@ -220,7 +226,7 @@ def compute_consensus(results: List[Dict], mode: str = "answer") -> Dict:
     }
 
 
-# --- Haupt-Orchestrierung ---
+# --- Main Orchestration ---
 
 
 def run_consensus(question: str, num_agents: int = DEFAULT_AGENTS,
@@ -252,7 +258,7 @@ def run_consensus(question: str, num_agents: int = DEFAULT_AGENTS,
     api_key = get_api_key()
     client = anthropic.Anthropic(api_key=api_key)
 
-    # Parallel ausfuehren
+    # Execute in parallel
     results = []
     start_time = time.time()
 
@@ -278,12 +284,12 @@ def run_consensus(question: str, num_agents: int = DEFAULT_AGENTS,
     # Konsensus berechnen
     consensus = compute_consensus(results, mode)
 
-    # Token-Statistik
+    # Token statistics
     total_input = sum(r["input_tokens"] for r in results)
     total_output = sum(r["output_tokens"] for r in results)
     total_cost = (total_input * COST_PER_1M["input"] + total_output * COST_PER_1M["output"]) / 1_000_000
 
-    # Ausgabe
+    # Output
     print(f"\n{'=' * 60}")
     print(f"  KONSENSUS-ERGEBNIS")
     print(f"{'=' * 60}")
@@ -319,32 +325,32 @@ def main():
     )
     parser.add_argument(
         "question", nargs="?", default=None,
-        help="Die Frage (alternativ: --question)"
+        help="The question (alternative: --question)"
     )
     parser.add_argument(
         "--question", "-q", dest="question_flag",
-        help="Die Frage (alternativ als Flag)"
+        help="The question (alternative as flag)"
     )
     parser.add_argument(
         "--agents", "-a", type=int, default=DEFAULT_AGENTS,
-        help=f"Anzahl der Agenten (default: {DEFAULT_AGENTS})"
+        help=f"Number of agents (default: {DEFAULT_AGENTS})"
     )
     parser.add_argument(
         "--workers", "-w", type=int, default=DEFAULT_WORKERS,
-        help=f"Parallele Threads (default: {DEFAULT_WORKERS})"
+        help=f"Parallel threads (default: {DEFAULT_WORKERS})"
     )
     parser.add_argument(
         "--mode", "-m", choices=["answer", "classify", "boolean"],
         default="answer",
-        help="Modus: answer (frei), classify (Kategorien), boolean (Ja/Nein)"
+        help="Mode: answer (free), classify (categories), boolean (yes/no)"
     )
     parser.add_argument(
         "--categories", "-c",
-        help="Komma-getrennte Kategorien fuer classify-Modus"
+        help="Comma-separated categories for classify mode"
     )
     parser.add_argument(
         "--dry-run", action="store_true",
-        help="Nur Kosten-Schaetzung, kein API-Call"
+        help="Cost estimation only, no API call"
     )
     parser.add_argument(
         "--json", action="store_true", dest="json_output",
@@ -355,7 +361,7 @@ def main():
 
     question = args.question or args.question_flag
     if not question:
-        parser.error("Frage erforderlich (als Argument oder --question)")
+        parser.error("Question required (as argument or --question)")
 
     categories = None
     if args.categories:
