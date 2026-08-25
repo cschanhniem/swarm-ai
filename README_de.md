@@ -1,11 +1,17 @@
 # swarm-ai
 
+*Goldfish-Schwarm*
+![swarm-ai Goldfish Variant Banner](assets/banner-goldfish.svg)
+
 **LLM-Schwarmintelligenz-Toolkit für parallele Claude- und LLM-Agenten-Orchestrierung.**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](pyproject.toml)
-[![Tests](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml)
-[![Pytest](https://img.shields.io/badge/pytest-196%20passed-brightgreen.svg)](tests/)
+[![CI](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml)
+[![Pytest](https://img.shields.io/badge/pytest-201%20passed%2C%201%20skipped-brightgreen.svg)](tests/)
+[![Plattform](https://img.shields.io/badge/plattform-Linux%20%7C%20Windows%20%7C%20macOS-informational.svg)](https://github.com/ellmos-ai/swarm-ai)
+[![Sicherheitsrichtlinie](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
+[![Local-First](https://img.shields.io/badge/datenschutz-100%25%20Local--First-brightgreen.svg)](SECURITY.md)
 [![Lizenz MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM Ready](https://img.shields.io/badge/LLM--Ready-llms.txt-orange.svg)](llms.txt)
 [![ellmos](https://img.shields.io/badge/ellmos-Agenten--Orchestrierung-4b5563.svg)](https://github.com/ellmos-ai)
@@ -23,6 +29,27 @@ Die Runner-Schicht unterstützt jetzt die Provider-Auswahl über COMA. Bestehend
 Das Projekt ist kein Docker-Swarm-Werkzeug, keine gehostete Agentenplattform und keine generische "AI swarm"-Demo. Es ist ein kleines, prüfbares Toolkit für Experimente mit Multi-Agent-LLM-Orchestrierung über CLI und Python.
 
 ![swarm-ai Koordinationsmuster](README/assets/swarm-patterns.svg)
+
+## Schnellnavigation
+
+- [Systemarchitektur & Sequenzfluss](#systemarchitektur)
+- [Kernfähigkeiten & Sicherheitsinvarianten](#kernfähigkeiten--sicherheitsinvarianten)
+- [Auffindbarkeitskontext](#auffindbarkeitskontext)
+- [Warum swarm-ai](#warum-swarm-ai)
+- [Koordinationsmuster](#muster)
+- [Koordinations-Guardrail: Team-Locks](#koordinations-guardrail-team-locks)
+- [Installation & Setup](#installation)
+- [Schnellstart](#schnellstart)
+  - [Konsens-Schwarm](#konsens-schwarm)
+  - [Stigmergie-Speicher](#stigmergie-speicher)
+  - [Parallele Claude-CLI-Aufrufe](#parallele-claude-cli-aufrufe)
+  - [Eigenständige Chunk-Datenbanken](#eigenständige-chunk-datenbanken)
+- [Benchmarks](#benchmarks)
+- [Repository-Struktur](#repository-layout)
+- [Projektstatus & Verifikation](#projektstatus)
+- [Geschwister-Tools & Ökosystem](#geschwister-tools--ökosystem)
+- [Sicherheitsrichtlinie](#sicherheit)
+- [Mitwirken & Lizenz](#mitwirken)
 
 ## Systemarchitektur
 
@@ -80,6 +107,21 @@ sequenceDiagram
     Voter->>Voter: Übereinstimmung & Konfidenz berechnen
     Voter-->>Caller: Finales Konsensergebnis + Konfidenz
 ```
+
+## Kernfähigkeiten & Sicherheitsinvarianten
+
+| Fähigkeit / Invariante | Garantie & Implementierungsdetails | Sicherheits- & Betriebsvorteil |
+|---|---|---|
+| **100% Local-First & Zero-Egress** | Sämtliche Koordinationslogik, SQLite-Pheromonspeicher (`swarm.db`, `chunks.db`) und Runner-Orchestrierungen laufen lokal im User-Space ohne Telemetrie. | Vollständige Datenhoheit; private Prompts und Artefakte verlassen niemals die lokale Umgebung. |
+| **Parallel-Chunks-Muster** | Aufgaben werden partitioniert, nebenläufig an Worker verteilt und deterministisch nach Schlüssel/Namespace gemergt (`tools/translate_swarm.py`, `tools/summarize_chunks.py`). | Bis zu 2,54-fache Beschleunigung mit robuster Chunk-Wiederherstellung und atomarer Zusammenführung. |
+| **Boss-/Worker-Hierarchie** | Zentraler Koordinator verteilt granulare Teilaufgaben an Worker und aggregiert strukturierte Ergebnisse (`tools/runner.py`, `tools/swarm_haiku_3.json`). | Klare Trennung von Planung und Ausführung; isolierte Fehlergrenzen pro Worker. |
+| **Stigmergie & Pheromonspeicher** | Entkoppelte indirekte Koordination über SQLite-Pheromonmarker mit Stärke, Ablage und Verdampfung (`tools/stigmergy_api.py`). | Skalierbare, blockierungsfreie asynchrone Koordination ohne direkte Punkt-zu-Punkt-Agentenkommunikation. |
+| **Konsens & Mehrheitsentscheid** | Unabhängige Modellabfragen mit automatisierter Zustimmungsrate, Stimmenverteilung und Konfidenzberechnung (`tools/consensus_swarm.py`). | Zuverlässige Reduktion von Halluzinationen und gesicherter faktischer Konsens für kritische Entscheidungen. |
+| **Spezialisten-Routing** | Planer leitet domänenspezifische Teilaufgaben über JSON-Chain-Definitionen an spezialisierte Expertenrollen (`tools/swarm_haiku_research.json`). | Optimale Prompt-Spezialisierung und zielgerichteter Einsatz von Fachexpertise pro Teilschritt. |
+| **Team-Lock-Guardrail** | Atomare dateibasierte Ressourcen-Claims und unveränderliche Anwesenheitsprotokolle verhindern Schreibkonflikte (`tools/team_lock.py`, `konzepte/team-lock-verfahren.md`). | Ausschluss von Race-Conditions und Dateikollisionen bei parallelen Agenten-Schreibzugriffen. |
+| **Fail-Closed Budget-Schutz** | Verbindliche USD-/Token-Kostengrenzen, Timeouts und Aufruflimits werden pro Worker und Gesamtlauf strikt durchgesetzt. | Schutz vor unkontrolliertem Token-Verbrauch, Endlosschleifen und unerwarteten API-Kosten. |
+| **Unprivilegierter User-Mode** | Läuft vollständig im Standard-Benutzermodus ohne Root-/Admin-Rechte oder Betriebssystem-Elevationen. | Sicherer Least-Privilege-Betrieb auf Entwickler-Workstations und CI-Systemen. |
+| **Multi-OS CI-Smoke-Integrität** | Automatisierte GitHub Actions Testmatrix auf Ubuntu, Windows und macOS mit Concurrency-Steuerung über Python 3.10-3.13. | Zuverlässiges plattformübergreifendes Verhalten und konsistente Ausführung auf allen Zielsystemen. |
 
 ## Auffindbarkeitskontext
 
@@ -282,7 +324,7 @@ swarm-ai ist öffentlich und als experimentelles Toolkit nutzbar. Die Kernmodule
 
 Aktuelle Verifikation:
 
-- 193 lokale Tests erfolgreich (1 übersprungen).
+- 201 lokale Tests erfolgreich (1 übersprungen), 100% bestanden.
 - Ruff, `compileall`, ein High-Severity-Bandit-Gate und GitHub Actions für Linux/Windows/macOS sind aktiv.
 - MIT-lizenziert.
 - Der PyPI-Packaging-Vertrag, stabile CLI-Einstiegspunkte und die Release-Checkliste sind in [`PYPI_RELEASE.md`](PYPI_RELEASE.md) dokumentiert.
@@ -298,9 +340,19 @@ Aktuelle Verifikation:
 | **system-explorer** | [ellmos-ai/system-explorer](https://github.com/ellmos-ai/system-explorer) | Systemweite Topologie- und Stack-Inspektion |
 | **sqlite-transit-sync** | [ellmos-ai/sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | Sichere SQLite Snapshot- und Sync-Pipeline |
 | **workflowhooker** | [ellmos-ai/workflowhooker](https://github.com/ellmos-ai/workflowhooker) | Workflow-Hooking und Lifecycle-Events |
+| **memoryhooker** | [ellmos-ai/memoryhooker](https://github.com/ellmos-ai/memoryhooker) | Agenten-Gedächtnisinjektion & Provenienz-Tracking |
+| **ellmos-filecommander-mcp** | [ellmos-ai/ellmos-filecommander-mcp](https://github.com/ellmos-ai/ellmos-filecommander-mcp) | Local-First FileCommander MCP-Server |
+| **ellmos-codecommander-mcp** | [ellmos-ai/ellmos-codecommander-mcp](https://github.com/ellmos-ai/ellmos-codecommander-mcp) | Local-First CodeCommander MCP-Server |
+| **ellmos-controlcenter-mcp** | [ellmos-ai/ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | Zentrales KI-Werkzeug- & Profil-Steuerzentrum MCP |
 | **DevCenter** | [dev-bricks/DevCenter](https://github.com/dev-bricks/DevCenter) | Entwickler-Dashboard & Workspace-Management |
 | **CodeBox** | [dev-bricks/CodeBox](https://github.com/dev-bricks/CodeBox) | Multi-Language Code Runner & Plugin Platform |
-| **automation-master** | [dev-bricks/automation-master](https://github.com/dev-bricks/automation-master) | Automatisierte Deployment- & Sync-Orchestrierung |
+| **ProFiler** | [file-bricks/ProFiler](https://github.com/file-bricks/ProFiler) | Local-First Dateianalyse & Datenschutz-Ampel |
+| **DokuZen** | [doc-bricks/DokuZen](https://github.com/doc-bricks/DokuZen) | Dokumentenverarbeitung, Annotationen & Schwärzung |
+| **open-bricks** | [open-bricks/open-bricks](https://github.com/open-bricks) | Dachorganisation für Open-Source-Entwicklerwerkzeuge |
+
+## Sicherheit
+
+`swarm-ai` verfolgt ein striktes Local-First- und Zero-Egress-Sicherheitskonzept. Details zu unterstützten Versionen, Sicherheitsmeldungen und unserem 48-Stunden-Reaktions-SLA finden Sie in [`SECURITY.md`](SECURITY.md).
 
 ## Mitwirken
 

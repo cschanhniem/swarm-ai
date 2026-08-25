@@ -21,6 +21,13 @@
 - **Zero-Egress Data Protection**: Local files, internal prompts, and private database states are never sent to third-party tracking services or external telemetry endpoints.
 - **Fail-Closed Budgeting**: All parallel swarm routines enforce explicit token ceilings, call limits, and retry boundaries to prevent uncontrolled resource exhaustion.
 
+### Vulnerability Response & SLA
+
+We take security disclosures seriously and commit to:
+- **Initial Response SLA**: Within **48 hours** of receiving a valid disclosure.
+- **Triage & Status Update**: Within **5 business days** with an assessment and remediation roadmap.
+- **Fix & Advisory Release**: Coordinated release of security patch alongside a public GitHub Security Advisory.
+
 ### Reporting a Vulnerability
 
 If you discover a potential security vulnerability in `swarm-ai`:
@@ -30,6 +37,7 @@ If you discover a potential security vulnerability in `swarm-ai`:
    - Navigate to [Security Advisories](https://github.com/ellmos-ai/swarm-ai/security/advisories/new)
 3. Alternatively, contact the maintainers directly via email:
    - `security@ellmos.ai`
+   - `security@open-bricks.org`
    - `support@lukasgeiger.com`
    - `lukas@open-bricks.org`
 
@@ -58,6 +66,13 @@ Please include in your report:
 - **Datenschutz & Zero-Egress**: Lokale Dateien, Prompts und Datenbankzustände werden zu keinem Zeitpunkt an externe Tracking- oder Telemetrie-Dienste übertragen.
 - **Fail-Closed Budget-Schutz**: Alle parallelen Schwarm-Routinen erzwingen verbindliche Kosten- und Token-Obergrenzen sowie Limitierungen für API-Wiederholungen.
 
+### Reaktionszeiten & SLA
+
+Wir nehmen Sicherheitsmeldungen sehr ernst und garantieren:
+- **Erste Rückmeldung (SLA)**: Innerhalb von **48 Stunden** nach Eingang einer validen Sicherheitsmeldung.
+- **Triage & Statusupdate**: Innerhalb von **5 Werktagen** mit Bewertung und Behebungsplan.
+- **Fix & Advisory-Release**: Koordinierte Veröffentlichung des Fixes zusammen mit einem GitHub Security Advisory.
+
 ### Schwachstelle melden
 
 Wenn Sie eine Sicherheitslücke in `swarm-ai` entdecken:
@@ -67,6 +82,7 @@ Wenn Sie eine Sicherheitslücke in `swarm-ai` entdecken:
    - [Sicherheitsbericht erstellen](https://github.com/ellmos-ai/swarm-ai/security/advisories/new)
 3. Alternativ per E-Mail an das Sicherheitsteam:
    - `security@ellmos.ai`
+   - `security@open-bricks.org`
    - `support@lukasgeiger.com`
    - `lukas@open-bricks.org`
 

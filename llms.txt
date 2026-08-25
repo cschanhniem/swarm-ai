@@ -1,6 +1,6 @@
 # swarm-ai - LLM Swarm Intelligence Toolkit
 
-## Last-checked: 2026-08-21
+## Last-checked: 2026-08-25
 
 Canonical repository: https://github.com/ellmos-ai/swarm-ai
 
@@ -55,7 +55,7 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 
 ## Verification State
 
-- Local test suite: 196 pytest tests passed (1 skipped).
+- Local test suite: 201 pytest tests passed (1 skipped), 100% green.
 - Core lint/compile/security gates: Ruff, compileall, Bandit high severity.
 - Historical experiments require explicit modes, finite per-agent/total budgets,
   safe mode, and validated fixture targets; they never modify user memory files.

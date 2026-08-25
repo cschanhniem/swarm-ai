@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.0] - 2026-08-25
+
+### Added
+
+- Discoverability, README-Design & Badges: Structured Quick Navigation / Schnellnavigation (14 jump anchors) with bilingual parity across `README.md` and `README_de.md`. [G 2026-08-25]
+- Capabilities & Invariants Matrix: Added bilingual Table of Core Capabilities & Security Invariants covering 10 fundamental architecture guarantees (100% Local-First & Zero-Egress, Parallel Chunks, Boss/Worker, Stigmergy, Consensus, Specialist Routing, Team Locks, Fail-Closed Budgeting, Unprivileged User Mode, Multi-OS CI). [G 2026-08-25]
+- Sibling Tools & Ecosystem Expansion: Comprehensive 16-repository ecosystem table across `ellmos-ai`, `dev-bricks`, `file-bricks`, `doc-bricks`, and `open-bricks` (coma, clutch, MarbleRun, policy-registry, system-explorer, sqlite-transit-sync, workflowhooker, memoryhooker, ellmos-filecommander-mcp, ellmos-codecommander-mcp, ellmos-controlcenter-mcp, DevCenter, CodeBox, ProFiler, DokuZen, open-bricks). [G 2026-08-25]
+- CI Concurrency Control: Hardened `.github/workflows/ci.yml` with GitHub Actions `concurrency` group and `cancel-in-progress: true` to prevent redundant parallel workflow runs. [G 2026-08-25]
+- PEP 621 Standard Metadaten: Added POSIX Linux, Microsoft Windows, MacOS, Topic Security and Topic Distributed Computing classifiers and `[project.urls]` for Parent Organization (`ellmos-ai`) and Umbrella Ecosystem (`open-bricks`) in `pyproject.toml`. [G 2026-08-25]
+- Dual-Language Security SLA & Contacts: Hardened `SECURITY.md` with explicit 48-hour Initial Response SLA, 5-day triage commitment, and official security contacts (`security@ellmos.ai`, `security@open-bricks.org`, `support@lukasgeiger.com`, `lukas@open-bricks.org`). [G 2026-08-25]
+- Repository Hygiene & Gitignore: Added synchronization conflict patterns (`*.sync-conflict-*`, `*.conflict`) and lockfiles (`LOCK*.txt`) to `.gitignore`. [G 2026-08-25]
+- Automated Contract Tests: Extended `tests/test_metadata.py` with 4 new contract test functions verifying CI concurrency, ecosystem URLs, supported versions & 48h SLA, README quick navigation, capabilities table, sibling matrix, and gitignore hygiene (11/11 passed, 201 total tests passed, 1 skipped). [G 2026-08-25]
+- Machine-Readable Context: Synchronized `llms.txt` timestamp (`2026-08-25`), version `0.1.0`, and verified test suite metrics. [G 2026-08-25]
+
 ## Unreleased
 
 ### Added

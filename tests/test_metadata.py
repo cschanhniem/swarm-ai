@@ -75,10 +75,17 @@ def test_pep621_classifiers_and_urls_parity():
     assert "Programming Language :: Python :: 3.13" in pyproject_text
     assert "License :: OSI Approved :: MIT License" in pyproject_text
     assert "Operating System :: OS Independent" in pyproject_text
+    assert "Operating System :: POSIX :: Linux" in pyproject_text
+    assert "Operating System :: Microsoft :: Windows" in pyproject_text
+    assert "Operating System :: MacOS" in pyproject_text
+    assert "Topic :: Security" in pyproject_text
+    assert "Topic :: System :: Distributed Computing" in pyproject_text
     assert "Documentation = " in pyproject_text
     assert '"Bug Tracker" = ' in pyproject_text
     assert "Changelog = " in pyproject_text
     assert "Security = " in pyproject_text
+    assert '"Parent Organization" = "https://github.com/ellmos-ai"' in pyproject_text
+    assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in pyproject_text
 
 
 def test_security_policy_bilingual_parity():
@@ -88,9 +95,16 @@ def test_security_policy_bilingual_parity():
     assert "# Security Policy / Sicherheitsrichtlinie" in content
     assert "## English" in content
     assert "## Deutsch" in content
+    assert "### Supported Versions" in content
+    assert "### Unterstützte Versionen" in content
+    assert "`0.1.x`" in content
+    assert "48 hours" in content
+    assert "48 Stunden" in content
     assert "security@ellmos.ai" in content
+    assert "security@open-bricks.org" in content
     assert "support@lukasgeiger.com" in content
     assert "lukas@open-bricks.org" in content
+    assert "Zero-Egress" in content
 
 
 def test_ci_workflow_parity():
@@ -102,4 +116,124 @@ def test_ci_workflow_parity():
     assert "macos-latest" in ci_text
     assert "3.10" in ci_text
     assert "3.13" in ci_text
+    assert "concurrency:" in ci_text
+    assert "cancel-in-progress: true" in ci_text
 
+
+def test_readme_quick_navigation_and_bilingual_parity():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "## Quick Navigation" in readme_en
+    assert "## Schnellnavigation" in readme_de
+
+    en_anchors = [
+        "#system-architecture",
+        "#core-capabilities--security-invariants",
+        "#discovery-context",
+        "#why-swarm-ai",
+        "#patterns",
+        "#coordination-guardrail-team-locks",
+        "#installation",
+        "#quick-start",
+        "#benchmarks",
+        "#repository-layout",
+        "#project-status",
+        "#sibling-tools--ecosystem",
+        "#security",
+        "#contributing",
+    ]
+    for anchor in en_anchors:
+        assert anchor in readme_en, f"Anchor {anchor} must exist in README.md"
+
+    de_anchors = [
+        "#systemarchitektur",
+        "#kernfähigkeiten--sicherheitsinvarianten",
+        "#auffindbarkeitskontext",
+        "#warum-swarm-ai",
+        "#muster",
+        "#koordinations-guardrail-team-locks",
+        "#installation",
+        "#schnellstart",
+        "#benchmarks",
+        "#repository-layout",
+        "#projektstatus",
+        "#geschwister-tools--ökosystem",
+        "#sicherheit",
+        "#mitwirken",
+    ]
+    for anchor in de_anchors:
+        assert anchor in readme_de, f"Anchor {anchor} must exist in README_de.md"
+
+
+def test_core_capabilities_and_security_invariants_table():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "## Core Capabilities & Security Invariants" in readme_en
+    assert "## Kernfähigkeiten & Sicherheitsinvarianten" in readme_de
+
+    capabilities = [
+        "100% Local-First & Zero-Egress",
+        "Parallel Chunks Pattern",
+        "Boss / Worker Hierarchy",
+        "Stigmergy & Pheromone Store",
+        "Consensus & Majority Vote",
+        "Specialist Routing",
+        "Team Lock Guardrail",
+        "Fail-Closed Budgeting",
+        "Unprivileged User Mode",
+        "Multi-OS CI Smoke Integrity",
+    ]
+    for cap in capabilities:
+        assert cap in readme_en, f"Capability '{cap}' must be present in README.md"
+
+    german_caps = [
+        "100% Local-First & Zero-Egress",
+        "Parallel-Chunks-Muster",
+        "Boss-/Worker-Hierarchie",
+        "Stigmergie & Pheromonspeicher",
+        "Konsens & Mehrheitsentscheid",
+        "Spezialisten-Routing",
+        "Team-Lock-Guardrail",
+        "Fail-Closed Budget-Schutz",
+        "Unprivilegierter User-Mode",
+        "Multi-OS CI-Smoke-Integrität",
+    ]
+    for cap in german_caps:
+        assert cap in readme_de, f"German capability '{cap}' must be present in README_de.md"
+
+
+def test_sibling_tools_and_ecosystem_matrix():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    siblings = [
+        "coma",
+        "clutch",
+        "MarbleRun",
+        "policy-registry",
+        "system-explorer",
+        "sqlite-transit-sync",
+        "workflowhooker",
+        "memoryhooker",
+        "ellmos-filecommander-mcp",
+        "ellmos-codecommander-mcp",
+        "ellmos-controlcenter-mcp",
+        "DevCenter",
+        "CodeBox",
+        "ProFiler",
+        "DokuZen",
+        "open-bricks",
+    ]
+    for tool in siblings:
+        assert tool in readme_en, f"Sibling '{tool}' must be listed in README.md"
+        assert tool in readme_de, f"Sibling '{tool}' must be listed in README_de.md"
+
+
+def test_gitignore_hygiene_patterns():
+    gitignore_text = (ROOT / ".gitignore").read_text(encoding="utf-8")
+    assert "*.sync-conflict-*" in gitignore_text
+    assert "*.conflict" in gitignore_text
+    assert "LOCK*.txt" in gitignore_text
+    assert ".ruff_cache/" in gitignore_text

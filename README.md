@@ -7,8 +7,11 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](pyproject.toml)
-[![Tests](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml)
-[![Pytest](https://img.shields.io/badge/pytest-196%20passed-brightgreen.svg)](tests/)
+[![CI](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml)
+[![Pytest](https://img.shields.io/badge/pytest-201%20passed%2C%201%20skipped-brightgreen.svg)](tests/)
+[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-informational.svg)](https://github.com/ellmos-ai/swarm-ai)
+[![Security Policy](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
+[![Local-First](https://img.shields.io/badge/privacy-100%25%20Local--First-brightgreen.svg)](SECURITY.md)
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![LLM Ready](https://img.shields.io/badge/LLM--Ready-llms.txt-orange.svg)](llms.txt)
 [![ellmos](https://img.shields.io/badge/ellmos-agent%20orchestration-4b5563.svg)](https://github.com/ellmos-ai)
@@ -26,6 +29,27 @@ The runner layer now supports provider selection through COMA. Existing `ClaudeR
 It is not Docker Swarm, not a hosted agent platform, and not a generic "AI swarm" demo. The repository is a small, inspectable toolkit for experimenting with multi-agent LLM orchestration from the command line or from Python.
 
 ![swarm-ai coordination patterns](README/assets/swarm-patterns.svg)
+
+## Quick Navigation
+
+- [System Architecture & Sequence Flow](#system-architecture)
+- [Core Capabilities & Security Invariants](#core-capabilities--security-invariants)
+- [Discovery Context](#discovery-context)
+- [Why swarm-ai](#why-swarm-ai)
+- [Coordination Patterns](#patterns)
+- [Coordination Guardrail: Team Locks](#coordination-guardrail-team-locks)
+- [Installation & Setup](#installation)
+- [Quick Start](#quick-start)
+  - [Consensus Swarm](#consensus-swarm)
+  - [Stigmergy Store](#stigmergy-store)
+  - [Parallel Claude CLI Calls](#parallel-claude-cli-calls)
+  - [Standalone Chunk Databases](#standalone-chunk-databases)
+- [Benchmarks](#benchmarks)
+- [Repository Layout](#repository-layout)
+- [Project Status & Verification](#project-status)
+- [Sibling Tools & Ecosystem](#sibling-tools--ecosystem)
+- [Security Policy](#security)
+- [Contributing & License](#contributing)
 
 ## System Architecture
 
@@ -83,6 +107,21 @@ sequenceDiagram
     Voter->>Voter: Calculate Agreement & Confidence
     Voter-->>Caller: Final Consensus Result + Confidence
 ```
+
+## Core Capabilities & Security Invariants
+
+| Capability / Invariant | Guarantee & Implementation Details | Security & Operational Benefit |
+|---|---|---|
+| **100% Local-First & Zero-Egress** | All coordination logic, SQLite marker stores (`swarm.db`, `chunks.db`), and runner orchestration run in local user space without external telemetry. | Complete data privacy; private prompts and sensitive artifacts never leave the local environment. |
+| **Parallel Chunks Pattern** | Workloads are split, concurrently dispatched across workers, and deterministically merged via key/namespace (`tools/translate_swarm.py`, `tools/summarize_chunks.py`). | Massive throughput speedup (up to 2.54x) with resilient chunk recovery and atomic result merging. |
+| **Boss / Worker Hierarchy** | Top-down coordinator dispatches granular subtasks to workers and aggregates structured responses (`tools/runner.py`, `tools/swarm_haiku_3.json`). | Clear separation of planning and execution; isolated worker failure boundaries. |
+| **Stigmergy & Pheromone Store** | Decoupled indirect agent coordination via SQLite pheromone markers with strength, deposition, and evaporation (`tools/stigmergy_api.py`). | Scalable, non-blocking asynchronous coordination without requiring direct point-to-point agent messaging. |
+| **Consensus & Majority Vote** | Independent model querying with automated agreement rate, vote distribution, and confidence calculation (`tools/consensus_swarm.py`). | Robust hallucination mitigation and verified factual consensus for critical decisions. |
+| **Specialist Routing** | Planner routes domain-specific subtasks to dedicated specialist roles via JSON chain definitions (`tools/swarm_haiku_research.json`). | Optimal prompt tailoring and domain expertise utilization per subtask. |
+| **Team Lock Guardrail** | Atomic per-resource claim files and immutable attendance logs prevent concurrent edit conflicts (`tools/team_lock.py`, `konzepte/team-lock-verfahren.md`). | Zero race conditions and file collisions during parallel multi-agent file modifications. |
+| **Fail-Closed Budgeting** | Explicit USD/token cost ceilings, execution timeouts, and rate limits enforced per worker and per swarm run. | Protection against uncontrolled token runaway, infinite loops, and API budget overruns. |
+| **Unprivileged User Mode** | Operates strictly in standard user mode without requiring root/admin privileges or special OS elevations. | Safe, least-privilege execution on developer workstations and CI runners. |
+| **Multi-OS CI Smoke Integrity** | Automated GitHub Actions test matrix across Ubuntu, Windows, and macOS with concurrency control and Python 3.10-3.13 support. | Reliable cross-platform behavior and consistent execution across diverse developer setups. |
 
 ## Discovery Context
 
@@ -295,7 +334,7 @@ tool allowlist, MCP disabled, and never modify user memory files.
 
 Current verification:
 
-- 193 local tests passing (1 skipped).
+- 201 local tests passing (1 skipped), 100% green.
 - Ruff, `compileall`, a high-severity Bandit gate, and pinned Linux/Windows/macOS GitHub Actions are enabled.
 - MIT licensed.
 - The PyPI packaging contract, stable CLI entry points, and release checklist
@@ -313,9 +352,19 @@ Current verification:
 | **system-explorer** | [ellmos-ai/system-explorer](https://github.com/ellmos-ai/system-explorer) | System-wide topology & stack inspection |
 | **sqlite-transit-sync** | [ellmos-ai/sqlite-transit-sync](https://github.com/ellmos-ai/sqlite-transit-sync) | Secure SQLite snapshot & sync pipeline |
 | **workflowhooker** | [ellmos-ai/workflowhooker](https://github.com/ellmos-ai/workflowhooker) | Workflow hooking & lifecycle event interceptor |
+| **memoryhooker** | [ellmos-ai/memoryhooker](https://github.com/ellmos-ai/memoryhooker) | Agent memory injection & provenance tracking |
+| **ellmos-filecommander-mcp** | [ellmos-ai/ellmos-filecommander-mcp](https://github.com/ellmos-ai/ellmos-filecommander-mcp) | Local-First FileCommander MCP Server |
+| **ellmos-codecommander-mcp** | [ellmos-ai/ellmos-codecommander-mcp](https://github.com/ellmos-ai/ellmos-codecommander-mcp) | Local-First CodeCommander MCP Server |
+| **ellmos-controlcenter-mcp** | [ellmos-ai/ellmos-controlcenter-mcp](https://github.com/ellmos-ai/ellmos-controlcenter-mcp) | Unified AI Tools & Profiles Control Center MCP |
 | **DevCenter** | [dev-bricks/DevCenter](https://github.com/dev-bricks/DevCenter) | Developer workstation hub & process control |
 | **CodeBox** | [dev-bricks/CodeBox](https://github.com/dev-bricks/CodeBox) | Multi-language code runner & plugin platform |
-| **automation-master** | [dev-bricks/automation-master](https://github.com/dev-bricks/automation-master) | Automated deployment & synchronization orchestrator |
+| **ProFiler** | [file-bricks/ProFiler](https://github.com/file-bricks/ProFiler) | Local-First file analysis & privacy traffic light |
+| **DokuZen** | [doc-bricks/DokuZen](https://github.com/doc-bricks/DokuZen) | Document processing, annotations & redaction |
+| **open-bricks** | [open-bricks/open-bricks](https://github.com/open-bricks) | Umbrella open-source developer tooling ecosystem |
+
+## Security
+
+`swarm-ai` maintains a strict local-first, zero-egress architecture. For details on supported versions, vulnerability disclosures, and our 48-hour response SLA, please refer to [`SECURITY.md`](SECURITY.md).
 
 ## Contributing
 
