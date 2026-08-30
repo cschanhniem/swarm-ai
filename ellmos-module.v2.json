@@ -50,7 +50,7 @@
   "source_of_truth": {
     "type": "git-repository",
     "path": ".",
-    "repository": "https://github.com/ellmos-ai/swarm-ai.git"
+    "repository": "https://github.com/ellmos-ai/swarm_ai"
   },
   "adapters": []
 }
