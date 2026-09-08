@@ -48,12 +48,12 @@ dependencies = [
 providers = ["coma @ git+https://github.com/dev-bricks/coma.git"]
 
 [project.urls]
-Homepage = "https://github.com/ellmos-ai/swarm-ai"
-Documentation = "https://github.com/ellmos-ai/swarm-ai#readme"
-Repository = "https://github.com/ellmos-ai/swarm-ai"
-"Bug Tracker" = "https://github.com/ellmos-ai/swarm-ai/issues"
-Changelog = "https://github.com/ellmos-ai/swarm-ai/blob/master/CHANGELOG.md"
-Security = "https://github.com/ellmos-ai/swarm-ai/blob/master/SECURITY.md"
+Homepage = "https://github.com/ellmos-ai/swarm_ai"
+Documentation = "https://github.com/ellmos-ai/swarm_ai#readme"
+Repository = "https://github.com/ellmos-ai/swarm_ai"
+"Bug Tracker" = "https://github.com/ellmos-ai/swarm_ai/issues"
+Changelog = "https://github.com/ellmos-ai/swarm_ai/blob/master/CHANGELOG.md"
+Security = "https://github.com/ellmos-ai/swarm_ai/blob/master/SECURITY.md"
 "Parent Organization" = "https://github.com/ellmos-ai"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
 

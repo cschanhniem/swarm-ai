@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.0] - 2026-09-08
+
+### Added
+
+- Technical Hygiene & CI Matrix Hardening: Expanded GitHub Actions CI test matrix (`.github/workflows/ci.yml`) to test Python 3.10, 3.11, 3.12, and 3.13 across Ubuntu, Windows, and macOS with pip caching enabled (`cache: 'pip'`). [G 2026-09-08]
+- Gitignore Hardening: Added extended sync conflict and temporary file patterns (`*-CONFLIT-*`, `*.tmp`, `*.bak`, `.coverage`, `htmlcov/`) to `.gitignore`. [G 2026-09-08]
+- Canonical Remote Parity: Synchronized repository URLs across `pyproject.toml`, `SECURITY.md`, `README.md`, `README_de.md`, and `llms.txt` with the canonical GitHub remote (`ellmos-ai/swarm_ai`). [G 2026-09-08]
+- Automated Contract Test Hardening: Extended `tests/test_metadata.py` with multi-Python CI matrix checks (3.10-3.13), gitignore conflict patterns, Ruff configuration contract validation, and changelog release hygiene tests (13/13 contract tests passed, 204 total tests passed, 100% green). [G 2026-09-08]
+- Context Synchronization: Synchronized `llms.txt` to `2026-09-08` with verified test metrics and canonical remote endpoints. [G 2026-09-08]
+
 ## [0.1.0] - 2026-08-25
 
 ### Added

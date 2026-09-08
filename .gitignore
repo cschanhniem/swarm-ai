@@ -42,6 +42,13 @@ LOCK*.txt
 # Sync conflicts
 *.sync-conflict-*
 *.conflict
+*-CONFLIT-*
+
+# Test coverage & Temporary files
+.coverage
+htmlcov/
+*.tmp
+*.bak
 
 # Interne Aufgaben
 AUFGABEN.txt

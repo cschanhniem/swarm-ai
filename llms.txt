@@ -1,8 +1,8 @@
 # swarm-ai - LLM Swarm Intelligence Toolkit
 
-## Last-checked: 2026-08-25
+## Last-checked: 2026-09-08
 
-Canonical repository: https://github.com/ellmos-ai/swarm-ai
+Canonical repository: https://github.com/ellmos-ai/swarm_ai
 
 swarm-ai is a local-first Python toolkit for parallel LLM and Claude agent orchestration. It implements five coordination patterns for running one task through multiple model instances and combining the results: parallel chunk processing, boss/worker hierarchy, stigmergy, consensus voting, and specialist routing.
 
@@ -55,7 +55,7 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 
 ## Verification State
 
-- Local test suite: 201 pytest tests passed (1 skipped), 100% green.
+- Local test suite: 204 pytest tests passed, 100% green.
 - Core lint/compile/security gates: Ruff, compileall, Bandit high severity.
 - Historical experiments require explicit modes, finite per-agent/total budgets,
   safe mode, and validated fixture targets; they never modify user memory files.

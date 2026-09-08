@@ -34,7 +34,7 @@ If you discover a potential security vulnerability in `swarm-ai`:
 
 1. **Do NOT** open a public issue or discussion.
 2. Submit a report privately via **GitHub Security Advisories**:
-   - Navigate to [Security Advisories](https://github.com/ellmos-ai/swarm-ai/security/advisories/new)
+   - Navigate to [Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)
 3. Alternatively, contact the maintainers directly via email:
    - `security@ellmos.ai`
    - `security@open-bricks.org`
@@ -79,7 +79,7 @@ Wenn Sie eine Sicherheitslücke in `swarm-ai` entdecken:
 
 1. Eröffnen Sie bitte **kein** öffentliches GitHub-Issue.
 2. Melden Sie die Schwachstelle vertraulich über **GitHub Security Advisories**:
-   - [Sicherheitsbericht erstellen](https://github.com/ellmos-ai/swarm-ai/security/advisories/new)
+   - [Sicherheitsbericht erstellen](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)
 3. Alternativ per E-Mail an das Sicherheitsteam:
    - `security@ellmos.ai`
    - `security@open-bricks.org`

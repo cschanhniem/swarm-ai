@@ -7,9 +7,9 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](pyproject.toml)
-[![CI](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm-ai/actions/workflows/ci.yml)
-[![Pytest](https://img.shields.io/badge/pytest-201%20passed%2C%201%20skipped-brightgreen.svg)](tests/)
-[![Plattform](https://img.shields.io/badge/plattform-Linux%20%7C%20Windows%20%7C%20macOS-informational.svg)](https://github.com/ellmos-ai/swarm-ai)
+[![CI](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml)
+[![Pytest](https://img.shields.io/badge/pytest-204%20bestanden-brightgreen.svg)](tests/)
+[![Plattform](https://img.shields.io/badge/plattform-Linux%20%7C%20Windows%20%7C%20macOS-informational.svg)](https://github.com/ellmos-ai/swarm_ai)
 [![Sicherheitsrichtlinie](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
 [![Local-First](https://img.shields.io/badge/datenschutz-100%25%20Local--First-brightgreen.svg)](SECURITY.md)
 [![Lizenz MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -169,7 +169,7 @@ Ressource und unveränderliche Anwesenheitsdateien pro Teilnehmer.
 ## Installation
 
 ```bash
-git clone https://github.com/ellmos-ai/swarm-ai.git
+git clone https://github.com/ellmos-ai/swarm_ai.git
 cd swarm-ai
 pip install -r requirements.txt
 ```

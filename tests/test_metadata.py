@@ -44,9 +44,18 @@ def test_llms_txt_and_documentation_parity():
     readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
 
-    assert "https://github.com/ellmos-ai/swarm-ai" in llms_txt
-    assert "https://github.com/ellmos-ai/swarm-ai" in readme_en
-    assert "https://github.com/ellmos-ai/swarm-ai" in readme_de
+    assert (
+        "https://github.com/ellmos-ai/swarm_ai" in llms_txt
+        or "https://github.com/ellmos-ai/swarm-ai" in llms_txt
+    )
+    assert (
+        "https://github.com/ellmos-ai/swarm_ai" in readme_en
+        or "https://github.com/ellmos-ai/swarm-ai" in readme_en
+    )
+    assert (
+        "https://github.com/ellmos-ai/swarm_ai" in readme_de
+        or "https://github.com/ellmos-ai/swarm-ai" in readme_de
+    )
 
     # Verify key patterns documented
     patterns = [
@@ -72,6 +81,8 @@ def test_pep621_classifiers_and_urls_parity():
     pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert "Programming Language :: Python :: 3" in pyproject_text
     assert "Programming Language :: Python :: 3.10" in pyproject_text
+    assert "Programming Language :: Python :: 3.11" in pyproject_text
+    assert "Programming Language :: Python :: 3.12" in pyproject_text
     assert "Programming Language :: Python :: 3.13" in pyproject_text
     assert "License :: OSI Approved :: MIT License" in pyproject_text
     assert "Operating System :: OS Independent" in pyproject_text
@@ -115,6 +126,8 @@ def test_ci_workflow_parity():
     assert "windows-latest" in ci_text
     assert "macos-latest" in ci_text
     assert "3.10" in ci_text
+    assert "3.11" in ci_text
+    assert "3.12" in ci_text
     assert "3.13" in ci_text
     assert "concurrency:" in ci_text
     assert "cancel-in-progress: true" in ci_text
@@ -235,5 +248,19 @@ def test_gitignore_hygiene_patterns():
     gitignore_text = (ROOT / ".gitignore").read_text(encoding="utf-8")
     assert "*.sync-conflict-*" in gitignore_text
     assert "*.conflict" in gitignore_text
+    assert "*-CONFLIT-*" in gitignore_text
     assert "LOCK*.txt" in gitignore_text
     assert ".ruff_cache/" in gitignore_text
+
+
+def test_ruff_configuration_parity():
+    pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert "[tool.ruff]" in pyproject_text
+    assert 'target-version = "py310"' in pyproject_text
+    assert "select = " in pyproject_text
+
+
+def test_changelog_hygiene_and_latest_entry():
+    changelog_text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "2026-09-08" in changelog_text
+    assert "\ufffd" not in changelog_text
