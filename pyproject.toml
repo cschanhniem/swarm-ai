@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ellmos-swarm-ai"
-version = "0.1.0"
+version = "0.1.1"
 description = "Local-first Python toolkit for parallel LLM and Claude agent orchestration"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -56,6 +56,8 @@ Changelog = "https://github.com/ellmos-ai/swarm_ai/blob/master/CHANGELOG.md"
 Security = "https://github.com/ellmos-ai/swarm_ai/blob/master/SECURITY.md"
 "Parent Organization" = "https://github.com/ellmos-ai"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
+"Third-Party Licenses" = "https://github.com/ellmos-ai/swarm_ai/blob/master/THIRD_PARTY_LICENSES.md"
+"Marketing Log" = "https://github.com/ellmos-ai/swarm_ai/blob/master/MARKETING-LOG.txt"
 
 [project.scripts]
 swarm-consensus = "tools.consensus_swarm:main"
@@ -71,6 +73,7 @@ include = ["tools*"]
 tools = ["*.json"]
 
 [tool.pytest.ini_options]
+addopts = "-ra -v"
 testpaths = ["tests"]
 pythonpath = ["."]
 

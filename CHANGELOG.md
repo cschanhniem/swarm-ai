@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.1] - 2026-09-10
+
+### Added
+
+- Discoverability, Visual Architecture & Design (Pfad B): Modernized bilingual documentation architecture (`README.md` & `README_de.md`) with standardized Shields.io badge array, 14-point Schnellnavigation with exact anchor parity, dual Mermaid diagrams (5-layer flowchart TB & autonumbered sequenceDiagram), 10 Governance & Runtime Invariants table (`INV-LOCAL-01` to `INV-SLA-10`), and 16-repository ecosystem matrix across `ellmos-ai`, `dev-bricks`, `file-bricks`, `doc-bricks`, and `open-bricks`. [G 2026-09-10]
+- Third-Party License Inventory: Created comprehensive `THIRD_PARTY_LICENSES.md` documenting Anthropic SDK, COMA, pytest, Ruff, Bandit, and Python Standard Library licenses. [G 2026-09-10]
+- Marketing & Discoverability Audit: Added repository-level `MARKETING-LOG.txt` documenting user personas, integration matrices, search index terms, and local-first value propositions. [G 2026-09-10]
+- Packaging & PEP 621 Standard URLs: Synchronized `pyproject.toml` version to 0.1.1, added `addopts = "-ra -v"` to `[tool.pytest.ini_options]`, and registered URLs for Third-Party Licenses and Marketing Log. [G 2026-09-10]
+- Gitignore Hardening: Hardened `.gitignore` against multi-host cloud-sync conflicts (`*-conflict-*`, `*.sync-temp-*`, `*-ASUS-GEI.*`) and multi-agent lock files (`LOCK`, `LOCK.*`, `*.lock`, `LOCK.permissions.json`). [G 2026-09-10]
+- Automated Contract Test Expansion: Added 5 new contract tests to `tests/test_metadata.py` (`test_governance_invariants_table_parity`, `test_third_party_licenses_inventory`, `test_marketing_log_exists`, `test_pyproject_pytest_ini_and_urls`, `test_mermaid_diagrams_parity`), bringing test suite to 209 passed tests (100% green). [G 2026-09-10]
+- Context & Verification Parity: Updated `llms.txt` with Last-checked date `2026-09-10`, version 0.1.1, 10 governance invariants, and 209 verified tests. [G 2026-09-10]
+
 ## [0.1.0] - 2026-09-08
 
 ### Added

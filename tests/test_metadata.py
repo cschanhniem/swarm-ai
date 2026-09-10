@@ -19,7 +19,7 @@ def test_manifest_and_pyproject_version_parity():
 
     assert manifest["package"] == "ellmos-swarm-ai"
     assert manifest["id"] == "swarm_ai"
-    assert pyproject_version == "0.1.0"
+    assert pyproject_version == "0.1.1"
 
 
 def test_cli_entrypoints_parity():
@@ -217,6 +217,27 @@ def test_core_capabilities_and_security_invariants_table():
         assert cap in readme_de, f"German capability '{cap}' must be present in README_de.md"
 
 
+def test_governance_invariants_table_parity():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    invariants = [
+        "INV-LOCAL-01",
+        "INV-CHUNKS-02",
+        "INV-HIERARCH-03",
+        "INV-STORE-04",
+        "INV-VOTE-05",
+        "INV-ROUTER-06",
+        "INV-LOCK-07",
+        "INV-BUDGET-08",
+        "INV-RUNAS-09",
+        "INV-SLA-10",
+    ]
+    for inv in invariants:
+        assert inv in readme_en, f"Invariant '{inv}' must be present in README.md"
+        assert inv in readme_de, f"Invariant '{inv}' must be present in README_de.md"
+
+
 def test_sibling_tools_and_ecosystem_matrix():
     readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
@@ -244,12 +265,56 @@ def test_sibling_tools_and_ecosystem_matrix():
         assert tool in readme_de, f"Sibling '{tool}' must be listed in README_de.md"
 
 
+def test_third_party_licenses_inventory():
+    licenses_file = ROOT / "THIRD_PARTY_LICENSES.md"
+    assert licenses_file.exists(), "THIRD_PARTY_LICENSES.md must exist"
+    content = licenses_file.read_text(encoding="utf-8")
+    assert "anthropic" in content
+    assert "coma" in content
+    assert "pytest" in content
+    assert "ruff" in content
+    assert "bandit" in content
+    assert "MIT License" in content
+
+
+def test_marketing_log_exists():
+    marketing_log = ROOT / "MARKETING-LOG.txt"
+    assert marketing_log.exists(), "MARKETING-LOG.txt must exist"
+    content = marketing_log.read_text(encoding="utf-8")
+    assert "DISCOVERABILITY & MARKETING LOG" in content
+    assert "swarm-ai" in content
+    assert "INV-LOCAL-01" in content
+
+
+def test_pyproject_pytest_ini_and_urls():
+    pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert '[tool.pytest.ini_options]' in pyproject_text
+    assert 'addopts = "-ra -v"' in pyproject_text
+    assert '"Third-Party Licenses" = ' in pyproject_text
+    assert '"Marketing Log" = ' in pyproject_text
+
+
+def test_mermaid_diagrams_parity():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "flowchart TB" in readme_en
+    assert "sequenceDiagram" in readme_en
+    assert "flowchart TB" in readme_de
+    assert "sequenceDiagram" in readme_de
+
+
 def test_gitignore_hygiene_patterns():
     gitignore_text = (ROOT / ".gitignore").read_text(encoding="utf-8")
     assert "*.sync-conflict-*" in gitignore_text
     assert "*.conflict" in gitignore_text
     assert "*-CONFLIT-*" in gitignore_text
+    assert "*-conflict-*" in gitignore_text
+    assert "LOCK" in gitignore_text
+    assert "LOCK.*" in gitignore_text
+    assert "*.lock" in gitignore_text
     assert "LOCK*.txt" in gitignore_text
+    assert "LOCK.permissions.json" in gitignore_text
     assert ".ruff_cache/" in gitignore_text
 
 
@@ -262,5 +327,6 @@ def test_ruff_configuration_parity():
 
 def test_changelog_hygiene_and_latest_entry():
     changelog_text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "2026-09-08" in changelog_text
+    assert "2026-09-10" in changelog_text
+    assert "## [0.1.1] - 2026-09-10" in changelog_text
     assert "\ufffd" not in changelog_text

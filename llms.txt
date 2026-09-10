@@ -1,12 +1,13 @@
 # swarm-ai - LLM Swarm Intelligence Toolkit
 
-## Last-checked: 2026-09-08
+## Last-checked: 2026-09-10
+Version: 0.1.1
 
 Canonical repository: https://github.com/ellmos-ai/swarm_ai
 
 swarm-ai is a local-first Python toolkit for parallel LLM and Claude agent orchestration. It implements five coordination patterns for running one task through multiple model instances and combining the results: parallel chunk processing, boss/worker hierarchy, stigmergy, consensus voting, and specialist routing.
 
-The project is part of the ellmos family. It is distinct from Docker Swarm, hosted agent platforms, and generic "AI swarm" demos. Its public surface is a small set of inspectable Python tools, JSON chain definitions, benchmark data, and German design documents.
+The project is part of the ellmos family and open-bricks umbrella ecosystem. It is distinct from Docker Swarm, hosted agent platforms, and generic "AI swarm" demos. Its public surface is a small set of inspectable Python tools, JSON chain definitions, benchmark data, and German design documents.
 
 ## Audience
 
@@ -32,6 +33,20 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 - Consensus / majority vote: several agents answer independently; the tool computes agreement and confidence.
 - Specialist / boss routing: a planner routes work to domain-specific expert roles.
 
+## Governance & Runtime Invariants
+
+The architecture enforces 10 strict runtime guarantees (INV-LOCAL-01 to INV-SLA-10):
+- INV-LOCAL-01: 100% Local-First & Zero-Egress (no tracking, local SQLite stores)
+- INV-RUNAS-02: Unprivileged User Mode (RunAsInvoker, zero elevated rights)
+- INV-BUDGET-03: Fail-Closed Budgeting (strict USD, token, and call limits)
+- INV-STORE-04: SQLite Stigmergy Store (atomic transactions, schema stability)
+- INV-CHUNKS-05: Parallel Chunks Pattern (deterministic key/namespace merge)
+- INV-HIERARCH-06: Boss / Worker Hierarchy (isolated worker error domains)
+- INV-VOTE-07: Consensus & Majority Vote (statistical confidence & voting)
+- INV-ROUTER-08: Specialist Routing & COMA Bridge (modular provider routing)
+- INV-LOCK-09: Team Lock Guardrail (concurrency & race-condition prevention)
+- INV-SLA-10: 48h Security Response & 5-Day Triage SLA (SECURITY.md)
+
 ## Important Files
 
 - README.md: English public overview, quick start, architecture Mermaid diagrams, benchmark summary, related projects.
@@ -46,19 +61,18 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 - tools/swarm_haiku_research.json: specialist research chain definition.
 - konzepte/team-lock-verfahren.md: portable project-local coordination guardrail for shared-file swarm work.
 - results/benchmark_20260306.json: benchmark snapshot used in README.
-- results/benchmark_20260813.json: cost-free current benchmark dry-run with
-  model pricing and reproducibility metadata.
-- PYPI_RELEASE.md: distribution name, PEP-440 versioning, CLI entry points, and
-  the readback-gated release checklist.
+- results/benchmark_20260813.json: cost-free current benchmark dry-run with model pricing and reproducibility metadata.
+- PYPI_RELEASE.md: distribution name, PEP-440 versioning, CLI entry points, and the readback-gated release checklist.
 - SECURITY.md: bilingual security policy, local-first & zero-egress architecture, and vulnerability reporting contacts.
+- THIRD_PARTY_LICENSES.md: inventory of third-party open-source components and licenses.
+- MARKETING-LOG.txt: marketing personas, discoverability audit, and architectural invariants.
 - tests/test_metadata.py: automated metadata and manifest parity test suite.
 
 ## Verification State
 
-- Local test suite: 204 pytest tests passed, 100% green.
+- Local test suite: 209 pytest tests passed, 100% green.
 - Core lint/compile/security gates: Ruff, compileall, Bandit high severity.
-- Historical experiments require explicit modes, finite per-agent/total budgets,
-  safe mode, and validated fixture targets; they never modify user memory files.
+- Historical experiments require explicit modes, finite per-agent/total budgets, safe mode, and validated fixture targets; they never modify user memory files.
 - Python requirement: 3.10+.
 - Runtime dependency: `anthropic`.
 - CLI/API calls require `ANTHROPIC_API_KEY`.
@@ -74,7 +88,7 @@ The project is part of the ellmos family. It is distinct from Docker Swarm, host
 - Rinnsal: https://github.com/ellmos-ai/rinnsal - lightweight LLM agent infrastructure.
 - clutch: https://github.com/ellmos-ai/clutch - provider-neutral routing for a single task.
 - MarbleRun: https://github.com/ellmos-ai/MarbleRun - chain execution for sequential agent loops.
-- policy-registry: https://github.com/ellmos-ai/policy-registry - policy registry and security authority.
+- policy-registry: https://github.com/ellmos-ai/policy-registry - policy governance and security authority.
 - system-explorer: https://github.com/ellmos-ai/system-explorer - modular environment scanner.
 - sqlite-transit-sync: https://github.com/ellmos-ai/sqlite-transit-sync - SQLite transit synchronization.
 - workflowhooker: https://github.com/ellmos-ai/workflowhooker - workflow automation hook manager.

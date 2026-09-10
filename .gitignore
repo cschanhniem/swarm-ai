@@ -35,20 +35,30 @@ data/
 Thumbs.db
 .DS_Store
 
-# Logs & Locks
+# Logs & Multi-Agent Locks
 *.log
+LOCK
+LOCK.*
+*.lock
 LOCK*.txt
+LOCK.permissions.json
 
-# Sync conflicts
+# Multi-Host Sync Conflicts
+*-conflict-*
 *.sync-conflict-*
 *.conflict
 *-CONFLIT-*
+*.sync-temp-*
+*-ASUS-GEI.*
 
-# Test coverage & Temporary files
+# Test coverage, Packaging & Temporary files
 .coverage
 htmlcov/
+wheelhouse/
+.wheel-smoke/
 *.tmp
 *.bak
+*~
 
 # Interne Aufgaben
 AUFGABEN.txt

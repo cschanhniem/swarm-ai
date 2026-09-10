@@ -5,30 +5,35 @@
 
 **LLM swarm intelligence toolkit for parallel Claude and LLM agent orchestration.**
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](pyproject.toml)
-[![CI](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml)
-[![Pytest](https://img.shields.io/badge/pytest-204%20passed-brightgreen.svg)](tests/)
-[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-informational.svg)](https://github.com/ellmos-ai/swarm_ai)
-[![Security Policy](https://img.shields.io/badge/security-48h%20SLA-blue.svg)](SECURITY.md)
-[![Local-First](https://img.shields.io/badge/privacy-100%25%20Local--First-brightgreen.svg)](SECURITY.md)
-[![License MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![LLM Ready](https://img.shields.io/badge/LLM--Ready-llms.txt-orange.svg)](llms.txt)
-[![ellmos](https://img.shields.io/badge/ellmos-agent%20orchestration-4b5563.svg)](https://github.com/ellmos-ai)
-[![open-bricks](https://img.shields.io/badge/open--bricks-ecosystem-0284c7.svg)](https://github.com/open-bricks)
+<p align="center">
+  <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/version-0.1.1-blue" alt="Version 0.1.1"></a>
+  <a href="https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-passing-brightgreen" alt="CI Status"></a>
+  <a href="tests/"><img src="https://img.shields.io/badge/tests-209%20passed%20%7C%20100%25%20green-brightgreen" alt="Tests 209 Passed"></a>
+  <a href="https://www.python.org"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue" alt="Python 3.10+"></a>
+  <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/platforms-Windows%20%7C%20Linux%20%7C%20macOS-blue" alt="Platforms"></a>
+  <a href="SECURITY.md"><img src="https://img.shields.io/badge/privacy-100%25%20Local--First%20%7C%20Zero--Egress-success" alt="Privacy: Local-First"></a>
+  <a href="SECURITY.md"><img src="https://img.shields.io/badge/security-RunAsInvoker%20%7C%20Non--Elevation-success" alt="Security: Non-Elevation"></a>
+  <a href="SECURITY.md"><img src="https://img.shields.io/badge/security%20SLA-48h%20Response%20%7C%205d%20Triage-blue" alt="Security SLA"></a>
+  <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-black" alt="Code Style: Ruff"></a>
+  <a href="https://github.com/ellmos-ai"><img src="https://img.shields.io/badge/ecosystem-ellmos--ai-informational" alt="Ecosystem: ellmos-ai"></a>
+  <a href="https://github.com/open-bricks"><img src="https://img.shields.io/badge/umbrella-open--bricks-blueviolet" alt="Umbrella: open-bricks"></a>
+  <a href="llms.txt"><img src="https://img.shields.io/badge/LLM--Ready-llms.txt-orange" alt="LLM Ready"></a>
+  <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/last--checked-2026--09--10-blue" alt="Last Checked"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
+</p>
 
-**Deutsch:** [README_de.md](README_de.md)
+<p align="center"><strong>English</strong> · <a href="README_de.md">Deutsch</a></p>
 
 > [!NOTE]
 > For LLM & AI agent integration details, structured file maps, and pattern verification indices, see [`llms.txt`](llms.txt).
 
-swarm-ai is a local-first Python toolkit for developers who want to run the same task through multiple LLM instances and merge the results. It focuses on five reusable coordination patterns: parallel chunk processing, boss/worker execution, stigmergy, consensus voting, and specialist routing.
+swarm-ai is a local-first Python toolkit for developers who want to run the same task through multiple LLM instances and combine the results. The focus is on five reusable coordination patterns: parallel chunk processing, boss/worker execution, stigmergy, consensus voting, and specialist routing.
 
-The runner layer now supports provider selection through COMA. Existing `ClaudeRunner` consumers remain compatible; new code can use `create_runner("codex")`, `create_runner("agy")`, or `create_runner("kimi", allow_unverified=True)`. Codex is read-only by default, Agy receives the configured workspace, and Kimi remains guarded until its local model/login gate is satisfied. Install the optional bridge with `pip install -e ".[providers]"`.
+The runner layer supports provider selection through COMA. Existing `ClaudeRunner` usage remains compatible; new code can use `create_runner("codex")`, `create_runner("agy")`, or `create_runner("kimi", allow_unverified=True)`. Codex is read-only by default, Agy receives the configured workspace, and Kimi remains disabled until local model/login verification. Install the optional bridge via `pip install -e ".[providers]"`.
 
-It is not Docker Swarm, not a hosted agent platform, and not a generic "AI swarm" demo. The repository is a small, inspectable toolkit for experimenting with multi-agent LLM orchestration from the command line or from Python.
+The project is not Docker Swarm, not a hosted agent platform, and not a generic "AI swarm" demo. It is a small, inspectable toolkit for multi-agent LLM orchestration experiments via CLI and Python.
 
-![swarm-ai coordination patterns](README/assets/swarm-patterns.svg)
+![swarm-ai Coordination Patterns](README/assets/swarm-patterns.svg)
 
 ## Quick Navigation
 
@@ -36,7 +41,7 @@ It is not Docker Swarm, not a hosted agent platform, and not a generic "AI swarm
 - [Core Capabilities & Security Invariants](#core-capabilities--security-invariants)
 - [Discovery Context](#discovery-context)
 - [Why swarm-ai](#why-swarm-ai)
-- [Coordination Patterns](#patterns)
+- [Patterns](#patterns)
 - [Coordination Guardrail: Team Locks](#coordination-guardrail-team-locks)
 - [Installation & Setup](#installation)
 - [Quick Start](#quick-start)
@@ -44,20 +49,20 @@ It is not Docker Swarm, not a hosted agent platform, and not a generic "AI swarm
   - [Stigmergy Store](#stigmergy-store)
   - [Parallel Claude CLI Calls](#parallel-claude-cli-calls)
   - [Standalone Chunk Databases](#standalone-chunk-databases)
-- [Benchmarks](#benchmarks)
+- [Benchmarks & Performance](#benchmarks)
 - [Repository Layout](#repository-layout)
 - [Project Status & Verification](#project-status)
 - [Sibling Tools & Ecosystem](#sibling-tools--ecosystem)
-- [Security Policy](#security)
+- [Security & Privacy SLA](#security)
 - [Contributing & License](#contributing)
 
 ## System Architecture
 
 ```mermaid
-graph TD
+flowchart TB
     subgraph Client["Client Surfaces & Entrypoints"]
         CLI["CLI Commands<br/>(swarm-consensus, swarm-benchmark, swarm-translate, swarm-summarize, swarm-stigmergy-init)"]
-        API["Python API Layer<br/>(run_consensus, StigmergyAPI, ClaudeRunner)"]
+        API["Python API Layer<br/>(run_consensus, StigmergyAPI, ClaudeRunner, create_runner)"]
     end
 
     subgraph Coordination["Coordination Patterns & Guardrails"]
@@ -72,56 +77,66 @@ graph TD
     subgraph Execution["Execution & Provider Layer"]
         CR["ClaudeRunner / Anthropic SDK"]
         COMA["COMA Bridge Provider<br/>(Codex, Agy, Kimi)"]
-        DB[(SQLite Stores<br/>swarm.db / chunks.db / pheromones)]
+    end
+
+    subgraph Storage["Storage & Artifacts Layer"]
+        DB[(SQLite Stores<br/>swarm.db / chunks.db / Pheromone Store)]
+        RES["Benchmark & Run Artifacts<br/>results/ & logs/"]
     end
 
     CLI --> Coordination
     API --> Coordination
     Coordination --> TL
     Coordination --> Execution
-    Execution --> DB
+    Execution --> Storage
 ```
 
-### Consensus Execution Sequence Flow
+### Consensus & Swarm Lifecycle Sequence
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor Caller as Caller / CLI
     participant Orch as Swarm Orchestrator
+    participant Guard as Team Lock Guardrail
     participant WorkerA as Agent Worker 1
     participant WorkerB as Agent Worker 2
     participant WorkerN as Agent Worker N
+    participant Store as SQLite Pheromone / Chunk DB
     participant Voter as Consensus Aggregator
 
-    Caller->>Orch: Submit Question & Budget Cap
-    par Fan-Out Dispatch
-        Orch->>WorkerA: Query Model Instance
-        Orch->>WorkerB: Query Model Instance
-        Orch->>WorkerN: Query Model Instance
+    Caller->>Orch: Submit Question / Chunk Task & Budget Cap
+    Orch->>Guard: Claim Project-Local Resources (Atomic Lock)
+    Guard-->>Orch: Claim Verified & Attendance Logged
+    par Parallel Fan-Out Dispatch
+        Orch->>WorkerA: Query Model Instance (Haiku / Sonnet / Codex)
+        Orch->>WorkerB: Query Model Instance (Haiku / Sonnet / Codex)
+        Orch->>WorkerN: Query Model Instance (Haiku / Sonnet / Codex)
     end
-    WorkerA-->>Orch: Return Independent Response
-    WorkerB-->>Orch: Return Independent Response
-    WorkerN-->>Orch: Return Independent Response
-    Orch->>Voter: Aggregate Responses & Votes
-    Voter->>Voter: Calculate Agreement & Confidence
-    Voter-->>Caller: Final Consensus Result + Confidence
+    WorkerA-->>Orch: Independent Chunk / Vote Response
+    WorkerB-->>Orch: Independent Chunk / Vote Response
+    WorkerN-->>Orch: Independent Chunk / Vote Response
+    Orch->>Store: Deposit Pheromone Trails & Chunk State
+    Orch->>Voter: Aggregate Responses & Calculate Agreement
+    Voter->>Voter: Filter Outliers & Compute Confidence Score
+    Orch->>Guard: Release Team Lock (Clean Teardown)
+    Voter-->>Caller: Final Consensus Answer + Confidence Metric
 ```
 
 ## Core Capabilities & Security Invariants
 
-| Capability / Invariant | Guarantee & Implementation Details | Security & Operational Benefit |
-|---|---|---|
-| **100% Local-First & Zero-Egress** | All coordination logic, SQLite marker stores (`swarm.db`, `chunks.db`), and runner orchestration run in local user space without external telemetry. | Complete data privacy; private prompts and sensitive artifacts never leave the local environment. |
-| **Parallel Chunks Pattern** | Workloads are split, concurrently dispatched across workers, and deterministically merged via key/namespace (`tools/translate_swarm.py`, `tools/summarize_chunks.py`). | Massive throughput speedup (up to 2.54x) with resilient chunk recovery and atomic result merging. |
-| **Boss / Worker Hierarchy** | Top-down coordinator dispatches granular subtasks to workers and aggregates structured responses (`tools/runner.py`, `tools/swarm_haiku_3.json`). | Clear separation of planning and execution; isolated worker failure boundaries. |
-| **Stigmergy & Pheromone Store** | Decoupled indirect agent coordination via SQLite pheromone markers with strength, deposition, and evaporation (`tools/stigmergy_api.py`). | Scalable, non-blocking asynchronous coordination without requiring direct point-to-point agent messaging. |
-| **Consensus & Majority Vote** | Independent model querying with automated agreement rate, vote distribution, and confidence calculation (`tools/consensus_swarm.py`). | Robust hallucination mitigation and verified factual consensus for critical decisions. |
-| **Specialist Routing** | Planner routes domain-specific subtasks to dedicated specialist roles via JSON chain definitions (`tools/swarm_haiku_research.json`). | Optimal prompt tailoring and domain expertise utilization per subtask. |
-| **Team Lock Guardrail** | Atomic per-resource claim files and immutable attendance logs prevent concurrent edit conflicts (`tools/team_lock.py`, `konzepte/team-lock-verfahren.md`). | Zero race conditions and file collisions during parallel multi-agent file modifications. |
-| **Fail-Closed Budgeting** | Explicit USD/token cost ceilings, execution timeouts, and rate limits enforced per worker and per swarm run. | Protection against uncontrolled token runaway, infinite loops, and API budget overruns. |
-| **Unprivileged User Mode** | Operates strictly in standard user mode without requiring root/admin privileges or special OS elevations. | Safe, least-privilege execution on developer workstations and CI runners. |
-| **Multi-OS CI Smoke Integrity** | Automated GitHub Actions test matrix across Ubuntu, Windows, and macOS with concurrency control and Python 3.10-3.13 support. | Reliable cross-platform behavior and consistent execution across diverse developer setups. |
+| Invariant ID | Capability / Invariant | Guarantee & Implementation Details | Security & Operational Benefit |
+|---|---|---|---|
+| `INV-LOCAL-01` | **100% Local-First & Zero-Egress** | All coordination logic, SQLite marker stores (`swarm.db`, `chunks.db`), and runner orchestration run in local user space without external telemetry. | Complete data privacy; private prompts and sensitive artifacts never leave the local environment. |
+| `INV-CHUNKS-02` | **Parallel Chunks Pattern** | Workloads are split, concurrently dispatched across workers, and deterministically merged via key/namespace (`tools/translate_swarm.py`, `tools/summarize_chunks.py`). | Massive throughput speedup (up to 2.54x) with resilient chunk recovery and atomic result merging. |
+| `INV-HIERARCH-03` | **Boss / Worker Hierarchy** | Top-down coordinator dispatches granular subtasks to workers and aggregates structured responses (`tools/runner.py`, `tools/swarm_haiku_3.json`). | Clear separation of planning and execution; isolated worker failure boundaries. |
+| `INV-STORE-04` | **Stigmergy & Pheromone Store** | Decoupled indirect agent coordination via SQLite pheromone markers with strength, deposition, and evaporation (`tools/stigmergy_api.py`). | Scalable, non-blocking asynchronous coordination without requiring direct point-to-point agent messaging. |
+| `INV-VOTE-05` | **Consensus & Majority Vote** | Independent model querying with automated agreement rate, vote distribution, and confidence calculation (`tools/consensus_swarm.py`). | Robust hallucination mitigation and verified factual consensus for critical decisions. |
+| `INV-ROUTER-06` | **Specialist Routing** | Planner routes domain-specific subtasks to dedicated specialist roles via JSON chain definitions (`tools/swarm_haiku_research.json`). | Optimal prompt tailoring and domain expertise utilization per subtask. |
+| `INV-LOCK-07` | **Team Lock Guardrail** | Atomic per-resource claim files and immutable attendance logs prevent concurrent edit conflicts (`tools/team_lock.py`, `konzepte/team-lock-verfahren.md`). | Zero race conditions and file collisions during parallel multi-agent file modifications. |
+| `INV-BUDGET-08` | **Fail-Closed Budgeting** | Explicit USD/token cost ceilings, execution timeouts, and rate limits enforced per worker and per swarm run. | Protection against uncontrolled token runaway, infinite loops, and API budget overruns. |
+| `INV-RUNAS-09` | **Unprivileged User Mode** | Operates strictly in standard user mode (`RunAsInvoker`) without requiring root/admin privileges or special OS elevations. | Safe, least-privilege execution on developer workstations and CI runners. |
+| `INV-SLA-10` | **Multi-OS CI Smoke Integrity** | Automated GitHub Actions test matrix across Ubuntu, Windows, and macOS with concurrency control, Python 3.10-3.13, and 48h SLA. | Reliable cross-platform behavior and consistent execution across diverse developer setups. |
 
 ## Discovery Context
 
@@ -334,7 +349,7 @@ tool allowlist, MCP disabled, and never modify user memory files.
 
 Current verification:
 
-- 201 local tests passing (1 skipped), 100% green.
+- 209 local tests passing, 100% green.
 - Ruff, `compileall`, a high-severity Bandit gate, and pinned Linux/Windows/macOS GitHub Actions are enabled.
 - MIT licensed.
 - The PyPI packaging contract, stable CLI entry points, and release checklist
