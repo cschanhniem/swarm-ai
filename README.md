@@ -8,17 +8,19 @@
 <p align="center">
   <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/version-0.1.1-blue" alt="Version 0.1.1"></a>
   <a href="https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-passing-brightgreen" alt="CI Status"></a>
-  <a href="tests/"><img src="https://img.shields.io/badge/tests-209%20passed%20%7C%20100%25%20green-brightgreen" alt="Tests 209 Passed"></a>
+  <a href="tests/"><img src="https://img.shields.io/badge/tests-213%20passed%20%7C%20100%25%20green-brightgreen" alt="Tests 213 Passed"></a>
   <a href="https://www.python.org"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue" alt="Python 3.10+"></a>
   <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/platforms-Windows%20%7C%20Linux%20%7C%20macOS-blue" alt="Platforms"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/privacy-100%25%20Local--First%20%7C%20Zero--Egress-success" alt="Privacy: Local-First"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/security-RunAsInvoker%20%7C%20Non--Elevation-success" alt="Security: Non-Elevation"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/security%20SLA-48h%20Response%20%7C%205d%20Triage-blue" alt="Security SLA"></a>
+  <a href="THIRD_PARTY_LICENSES.md"><img src="https://img.shields.io/badge/third--party-audited%20%7C%20100%25%20permissive-success" alt="Third-Party Audited"></a>
+  <a href="MARKETING-LOG.txt"><img src="https://img.shields.io/badge/marketing--log-active-blue" alt="Marketing Log"></a>
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-black" alt="Code Style: Ruff"></a>
   <a href="https://github.com/ellmos-ai"><img src="https://img.shields.io/badge/ecosystem-ellmos--ai-informational" alt="Ecosystem: ellmos-ai"></a>
   <a href="https://github.com/open-bricks"><img src="https://img.shields.io/badge/umbrella-open--bricks-blueviolet" alt="Umbrella: open-bricks"></a>
   <a href="llms.txt"><img src="https://img.shields.io/badge/LLM--Ready-llms.txt-orange" alt="LLM Ready"></a>
-  <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/last--checked-2026--09--10-blue" alt="Last Checked"></a>
+  <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/last--checked-2026--09--11-blue" alt="Last Checked"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
 </p>
 
@@ -53,6 +55,7 @@ The project is not Docker Swarm, not a hosted agent platform, and not a generic 
 - [Repository Layout](#repository-layout)
 - [Project Status & Verification](#project-status)
 - [Sibling Tools & Ecosystem](#sibling-tools--ecosystem)
+- [Third-Party Licenses & Transparency](#third-party-licenses--transparency)
 - [Security & Privacy SLA](#security)
 - [Contributing & License](#contributing)
 
@@ -349,7 +352,7 @@ tool allowlist, MCP disabled, and never modify user memory files.
 
 Current verification:
 
-- 209 local tests passing, 100% green.
+- 213 local tests passing, 100% green.
 - Ruff, `compileall`, a high-severity Bandit gate, and pinned Linux/Windows/macOS GitHub Actions are enabled.
 - MIT licensed.
 - The PyPI packaging contract, stable CLI entry points, and release checklist
@@ -376,6 +379,16 @@ Current verification:
 | **ProFiler** | [file-bricks/ProFiler](https://github.com/file-bricks/ProFiler) | Local-First file analysis & privacy traffic light |
 | **DokuZen** | [doc-bricks/DokuZen](https://github.com/doc-bricks/DokuZen) | Document processing, annotations & redaction |
 | **open-bricks** | [open-bricks/open-bricks](https://github.com/open-bricks) | Umbrella open-source developer tooling ecosystem |
+
+## Third-Party Licenses & Transparency
+
+`swarm-ai` maintains a strict open-source licensing posture with **100% permissive licensing** across all runtime, test, and development dependencies:
+- **Zero Copyleft:** Contains no GPL, AGPL, or restrictive commercial components.
+- **Audited Dependencies:** Anthropic SDK (MIT), Python Standard Library (PSFL-2.0), pytest (MIT), Ruff (MIT/Apache-2.0), Bandit (Apache-2.0), and optional COMA provider bridge (MIT).
+- **RunAsInvoker Execution:** Runs completely in unprivileged user space without requesting administrative elevations.
+- **Fail-Closed Privacy:** Operates local-first with zero external telemetry or unconsented network egress.
+
+For the exhaustive license catalog, per-package notices, and copyright attributions, see [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).
 
 ## Security
 

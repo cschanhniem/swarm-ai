@@ -153,6 +153,7 @@ def test_readme_quick_navigation_and_bilingual_parity():
         "#repository-layout",
         "#project-status",
         "#sibling-tools--ecosystem",
+        "#third-party-licenses--transparency",
         "#security",
         "#contributing",
     ]
@@ -172,6 +173,7 @@ def test_readme_quick_navigation_and_bilingual_parity():
         "#repository-layout",
         "#projektstatus",
         "#geschwister-tools--ökosystem",
+        "#drittanbieter-lizenzen--transparenz",
         "#sicherheit",
         "#mitwirken",
     ]
@@ -327,6 +329,105 @@ def test_ruff_configuration_parity():
 
 def test_changelog_hygiene_and_latest_entry():
     changelog_text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "2026-09-10" in changelog_text
-    assert "## [0.1.1] - 2026-09-10" in changelog_text
+    assert "2026-09-11" in changelog_text
+    assert "## [0.1.1] - 2026-09-11" in changelog_text
     assert "\ufffd" not in changelog_text
+
+
+def test_bilingual_readme_navigation_anchor_sections():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    en_headings = [
+        "## System Architecture",
+        "## Core Capabilities & Security Invariants",
+        "## Discovery Context",
+        "## Why swarm-ai",
+        "## Patterns",
+        "## Coordination Guardrail: Team Locks",
+        "## Installation",
+        "## Quick Start",
+        "## Benchmarks",
+        "## Repository Layout",
+        "## Project Status",
+        "## Sibling Tools & Ecosystem",
+        "## Third-Party Licenses & Transparency",
+        "## Security",
+        "## Contributing",
+    ]
+    for h in en_headings:
+        assert h in readme_en, f"Heading '{h}' must exist in README.md"
+
+    de_headings = [
+        "## Systemarchitektur",
+        "## Kernfähigkeiten & Sicherheitsinvarianten",
+        "## Auffindbarkeitskontext",
+        "## Warum swarm-ai",
+        "## Muster",
+        "## Koordinations-Guardrail: Team-Locks",
+        "## Installation",
+        "## Schnellstart",
+        "## Benchmarks",
+        "## Repository-Struktur",
+        "## Projektstatus",
+        "## Geschwister-Tools & Ökosystem",
+        "## Drittanbieter-Lizenzen & Transparenz",
+        "## Sicherheit",
+        "## Mitwirken",
+    ]
+    for h in de_headings:
+        assert h in readme_de, f"Heading '{h}' must exist in README_de.md"
+
+
+def test_marketing_log_contract_and_invariants():
+    marketing_log = (ROOT / "MARKETING-LOG.txt").read_text(encoding="utf-8")
+    assert "Audit Date: 2026-09-11" in marketing_log
+    assert "Status: ACTIVE / PFAD B DISCOVERABILITY HARDENED" in marketing_log
+    assert "2. TARGET PERSONAS & AUDIENCE MAPPING" in marketing_log
+    assert "3. ARCHITECTURAL INVARIANTS & GOVERNANCE" in marketing_log
+
+    invariants = [
+        "INV-LOCAL-01",
+        "INV-RUNAS-02",
+        "INV-BUDGET-03",
+        "INV-STORE-04",
+        "INV-CHUNKS-05",
+        "INV-HIERARCH-06",
+        "INV-VOTE-07",
+        "INV-ROUTER-08",
+        "INV-LOCK-09",
+        "INV-SLA-10",
+    ]
+    for inv in invariants:
+        assert inv in marketing_log, f"Invariant {inv} must exist in MARKETING-LOG.txt"
+
+
+def test_readme_badge_matrix_parity():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "version-0.1.1-blue" in readme_en
+    assert "version-0.1.1-blue" in readme_de
+
+    assert "CI-passing-brightgreen" in readme_en
+    assert "CI-passing-brightgreen" in readme_de
+
+    assert "tests-213" in readme_en
+    assert "tests-213" in readme_de
+
+    assert "third--party-audited" in readme_en
+    assert "drittanbieter-gepr" in readme_de
+
+    assert "marketing--log-active" in readme_en
+    assert "marketing--log-aktiv" in readme_de
+
+    assert "last--checked-2026--09--11-blue" in readme_en
+    assert "letzte--pr%C3%BCfung-2026--09--11-blue" in readme_de
+
+
+def test_third_party_licenses_audit_and_non_elevation():
+    licenses_text = (ROOT / "THIRD_PARTY_LICENSES.md").read_text(encoding="utf-8")
+    assert "- **Audit Date:** 2026-09-11" in licenses_text
+    assert "RunAsInvoker Non-Elevation" in licenses_text
+    assert "Fail-Closed Evidence Acceptance" in licenses_text
+    assert "No copyleft (GPL / AGPL)" in licenses_text

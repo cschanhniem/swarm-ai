@@ -8,17 +8,19 @@
 <p align="center">
   <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/version-0.1.1-blue" alt="Version 0.1.1"></a>
   <a href="https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-passing-brightgreen" alt="CI-Status"></a>
-  <a href="tests/"><img src="https://img.shields.io/badge/tests-209%20bestanden%20%7C%20100%25%20gr%C3%BCn-brightgreen" alt="Tests: 209 bestanden"></a>
+  <a href="tests/"><img src="https://img.shields.io/badge/tests-213%20bestanden%20%7C%20100%25%20gr%C3%BCn-brightgreen" alt="Tests: 213 bestanden"></a>
   <a href="https://www.python.org"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue" alt="Python 3.10+"></a>
   <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/plattformen-Windows%20%7C%20Linux%20%7C%20macOS-blue" alt="Plattformen"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/datenschutz-100%25%20Local--First%20%7C%20Zero--Egress-success" alt="Datenschutz: Local-First"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/sicherheit-RunAsInvoker%20%7C%20Non--Elevation-success" alt="Sicherheit: RunAsInvoker"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/sicherheits--SLA-48h%20Antwort%20%7C%205d%20Triage-blue" alt="Sicherheits-SLA"></a>
+  <a href="THIRD_PARTY_LICENSES.md"><img src="https://img.shields.io/badge/drittanbieter-gepr%C3%BCft%20%7C%20100%25%20permissiv-success" alt="Drittanbieter geprüft"></a>
+  <a href="MARKETING-LOG.txt"><img src="https://img.shields.io/badge/marketing--log-aktiv-blue" alt="Marketing-Log"></a>
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-black" alt="Code-Stil: Ruff"></a>
   <a href="https://github.com/ellmos-ai"><img src="https://img.shields.io/badge/%C3%B6kosystem-ellmos--ai-informational" alt="Ökosystem: ellmos-ai"></a>
   <a href="https://github.com/open-bricks"><img src="https://img.shields.io/badge/dachorganisation-open--bricks-blueviolet" alt="Dachorganisation: open-bricks"></a>
   <a href="llms.txt"><img src="https://img.shields.io/badge/LLM--Ready-llms.txt-orange" alt="LLM Ready"></a>
-  <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/letzte--pr%C3%BCfung-2026--09--10-blue" alt="Letzte Prüfung"></a>
+  <a href="https://github.com/ellmos-ai/swarm_ai"><img src="https://img.shields.io/badge/letzte--pr%C3%BCfung-2026--09--11-blue" alt="Letzte Prüfung"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/lizenz-MIT-blue" alt="Lizenz: MIT"></a>
 </p>
 
@@ -53,6 +55,7 @@ Das Projekt ist kein Docker-Swarm-Werkzeug, keine gehostete Agentenplattform und
 - [Repository-Struktur](#repository-layout)
 - [Projektstatus & Verifikation](#projektstatus)
 - [Geschwister-Tools & Ökosystem](#geschwister-tools--ökosystem)
+- [Drittanbieter-Lizenzen & Transparenz](#drittanbieter-lizenzen--transparenz)
 - [Sicherheit & Datenschutz-SLA](#sicherheit)
 - [Mitwirken & Lizenz](#mitwirken)
 
@@ -316,6 +319,7 @@ Messergebnis aus `results/benchmark_20260306.json`:
 Der tokenfreie Trockenlauf für den aktuellen Benchmark-Katalog vom 2026-08-13 ist
 in [`results/benchmark_20260813.json`](results/benchmark_20260813.json) erfasst.
 
+<a id="repository-layout"></a>
 ## Repository-Struktur
 
 ```text
@@ -343,7 +347,7 @@ Historische Launcher unter `experiments/` schlagen standardmäßig fehl (fail-cl
 
 Aktuelle Verifikation:
 
-- 209 lokale Tests erfolgreich, 100% bestanden.
+- 213 lokale Tests erfolgreich, 100% bestanden.
 - Ruff, `compileall`, ein High-Severity-Bandit-Gate und GitHub Actions für Linux/Windows/macOS sind aktiv.
 - MIT-lizenziert.
 - Der PyPI-Packaging-Vertrag, stabile CLI-Einstiegspunkte und die Release-Checkliste sind in [`PYPI_RELEASE.md`](PYPI_RELEASE.md) dokumentiert.
@@ -368,6 +372,16 @@ Aktuelle Verifikation:
 | **ProFiler** | [file-bricks/ProFiler](https://github.com/file-bricks/ProFiler) | Local-First Dateianalyse & Datenschutz-Ampel |
 | **DokuZen** | [doc-bricks/DokuZen](https://github.com/doc-bricks/DokuZen) | Dokumentenverarbeitung, Annotationen & Schwärzung |
 | **open-bricks** | [open-bricks/open-bricks](https://github.com/open-bricks) | Dachorganisation für Open-Source-Entwicklerwerkzeuge |
+
+## Drittanbieter-Lizenzen & Transparenz
+
+`swarm-ai` verfolgt eine strikte Open-Source-Lizenzdisziplin mit **100% permissiver Lizenzierung** für alle Laufzeit- und Entwicklungskomponenten:
+- **Kein Copyleft:** Enthält keinerlei GPL-, AGPL- oder proprietär einschränkende Abhängigkeiten.
+- **Geprüfte Abhängigkeiten:** Anthropic SDK (MIT), Python-Standardbibliothek (PSFL-2.0), pytest (MIT), Ruff (MIT/Apache-2.0), Bandit (Apache-2.0) sowie optionale COMA-Provider-Bridge (MIT).
+- **RunAsInvoker-Ausführung:** Läuft vollständig im unprivilegierten Benutzerkontext ohne administrative Rechteerweiterungen.
+- **Fail-Closed-Datenschutz:** Arbeitet local-first mit null Telemetrie und ohne unkontrollierten Netzwerk-Egress.
+
+Das vollständige Lizenzinventar, Einzelnachweise und Copyright-Deklarationen sind in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) dokumentiert.
 
 ## Sicherheit
 

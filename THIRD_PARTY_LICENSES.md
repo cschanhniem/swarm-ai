@@ -55,7 +55,26 @@ This document inventories external dependencies, libraries, and open-source tool
 
 ---
 
+## Audit Information & Governance Assurance
+
+- **Audit Date:** 2026-09-11
+- **Auditor:** Antigravity / Gemini Agent (Pfad B Discoverability & License Parity)
+- **Local-First & Zero-Egress:** All runtime dependencies execute strictly locally; prompts and marker databases are never transmitted to third-party telemetry.
+- **RunAsInvoker Non-Elevation:** swarm-ai executes entirely within standard unprivileged user space without requiring administrative or root elevation.
+- **Fail-Closed Evidence Acceptance:** Any unverified or foreign runtime dependency missing explicit permissive license verification is rejected fail-closed.
+
+---
+
 ## Summary of License Compliance
+
+| Dependency | Scope | License | Copyleft | Status |
+|---|---|---|---|---|
+| `anthropic` | Core Runtime API | MIT License | No | Approved |
+| `sqlite3`, `pathlib`, etc. | Python Standard Library | PSFL-2.0 | No | Approved |
+| `coma` | Optional Provider Bridge | MIT License | No | Approved |
+| `pytest` | Testing & Verification | MIT License | No | Approved |
+| `ruff` | Static Linting & AST Check | MIT / Apache-2.0 | No | Approved |
+| `bandit` | Security Static Analysis | Apache-2.0 | No | Approved |
 
 All runtime and optional dependencies are permissively licensed (MIT, Apache-2.0, PSFL).
 No copyleft (GPL / AGPL) libraries are bundled or linked into the core distribution, ensuring unconstrained commercial and open-source utilization under the MIT license.

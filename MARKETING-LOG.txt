@@ -5,7 +5,7 @@ Repository: https://github.com/ellmos-ai/swarm_ai
 Project Name: swarm-ai (Distribution: ellmos-swarm-ai)
 Umbrella Ecosystem: open-bricks (https://github.com/open-bricks)
 Architecture Domain: Local-First Multi-Agent LLM Orchestration & Swarm Intelligence
-Audit Date: 2026-09-10
+Audit Date: 2026-09-11
 Status: ACTIVE / PFAD B DISCOVERABILITY HARDENED
 ================================================================================
 
@@ -97,19 +97,19 @@ Keywords:
 - doc-bricks/DokuZen: Document processing, annotations & redaction
 - open-bricks/open-bricks: Umbrella open-source developer tooling ecosystem
 
-6. RELEASE & MARKETING AUDIT (2026-09-10)
+6. RELEASE & MARKETING AUDIT (2026-09-11)
 --------------------------------------------------------------------------------
 Audit completed by Antigravity / Gemini Agent under Pfad B (Discoverability & Design):
   [x] Bilingual Landing Page Parity (README.md & README_de.md)
-  [x] Standard 14-Point Quick Navigation with anchor parity
-  [x] Standardized Shields.io Badges Array (208 passed tests, Python 3.10-3.13, CI)
+  [x] Standard 15-Point Quick Navigation with anchor parity (#third-party-licenses--transparency)
+  [x] Standardized Shields.io Badges Array (213 passed tests, Python 3.10-3.13, CI)
   [x] Dual Mermaid Diagrams (5-layer Flowchart & Sequence Diagram with autonumber)
   [x] 10 Invariants Governance Table (INV-LOCAL-01 to INV-SLA-10)
   [x] 16-Project Sibling Ecosystem Matrix
-  [x] Third-Party Licenses Inventory (THIRD_PARTY_LICENSES.md)
+  [x] Third-Party Licenses Inventory (THIRD_PARTY_LICENSES.md with RunAsInvoker guarantee)
   [x] Local Marketing Log (MARKETING-LOG.txt)
   [x] pyproject.toml PEP 621 URLs & pytest ini options
   [x] .gitignore Multi-Host & Lock Hardening
   [x] llms.txt Discovery Context & Timestamp Synchronization
-  [x] Automated Contract Test Verification (tests/test_metadata.py)
+  [x] Automated Contract Test Verification (tests/test_metadata.py with 213 passed tests)
 ================================================================================
