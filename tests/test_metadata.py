@@ -19,7 +19,7 @@ def test_manifest_and_pyproject_version_parity():
 
     assert manifest["package"] == "ellmos-swarm-ai"
     assert manifest["id"] == "swarm_ai"
-    assert pyproject_version == "0.1.1"
+    assert pyproject_version == "0.1.2"
 
 
 def test_cli_entrypoints_parity():
@@ -97,6 +97,7 @@ def test_pep621_classifiers_and_urls_parity():
     assert "Security = " in pyproject_text
     assert '"Parent Organization" = "https://github.com/ellmos-ai"' in pyproject_text
     assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in pyproject_text
+    assert '"LLM Ready" = ' in pyproject_text
 
 
 def test_security_policy_bilingual_parity():
@@ -381,8 +382,9 @@ def test_bilingual_readme_navigation_anchor_sections():
 
 def test_marketing_log_contract_and_invariants():
     marketing_log = (ROOT / "MARKETING-LOG.txt").read_text(encoding="utf-8")
-    assert "Audit Date: 2026-09-11" in marketing_log
-    assert "Status: ACTIVE / PFAD B DISCOVERABILITY HARDENED" in marketing_log
+    assert "Audit Date: 2026-09-12" in marketing_log
+    assert "Status: ACTIVE" in marketing_log
+    assert "Active Version: 0.1.2" in marketing_log
     assert "2. TARGET PERSONAS & AUDIENCE MAPPING" in marketing_log
     assert "3. ARCHITECTURAL INVARIANTS & GOVERNANCE" in marketing_log
 
@@ -406,14 +408,14 @@ def test_readme_badge_matrix_parity():
     readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
 
-    assert "version-0.1.1-blue" in readme_en
-    assert "version-0.1.1-blue" in readme_de
+    assert "version-0.1.2-blue" in readme_en
+    assert "version-0.1.2-blue" in readme_de
 
     assert "CI-passing-brightgreen" in readme_en
     assert "CI-passing-brightgreen" in readme_de
 
-    assert "tests-213" in readme_en
-    assert "tests-213" in readme_de
+    assert "tests-217" in readme_en
+    assert "tests-217" in readme_de
 
     assert "third--party-audited" in readme_en
     assert "drittanbieter-gepr" in readme_de
@@ -421,8 +423,8 @@ def test_readme_badge_matrix_parity():
     assert "marketing--log-active" in readme_en
     assert "marketing--log-aktiv" in readme_de
 
-    assert "last--checked-2026--09--11-blue" in readme_en
-    assert "letzte--pr%C3%BCfung-2026--09--11-blue" in readme_de
+    assert "last--checked-2026--09--12-blue" in readme_en
+    assert "letzte--pr%C3%BCfung-2026--09--12-blue" in readme_de
 
 
 def test_third_party_licenses_audit_and_non_elevation():
@@ -431,3 +433,44 @@ def test_third_party_licenses_audit_and_non_elevation():
     assert "RunAsInvoker Non-Elevation" in licenses_text
     assert "Fail-Closed Evidence Acceptance" in licenses_text
     assert "No copyleft (GPL / AGPL)" in licenses_text
+
+
+def test_ci_timeout_minutes_guardrail():
+    ci_text = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    assert "timeout-minutes: 15" in ci_text
+    assert "python -m pytest -ra -v" in ci_text
+
+
+def test_pep621_llm_ready_contract():
+    pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert '"LLM Ready" = "https://github.com/ellmos-ai/swarm_ai/blob/master/llms.txt"' in pyproject_text
+    assert (ROOT / "llms.txt").exists()
+
+
+def test_extended_gitignore_multi_host_and_lock_defense():
+    gitignore_text = (ROOT / ".gitignore").read_text(encoding="utf-8")
+    required_patterns = [
+        "*-WORKSTATION*",
+        "*-WORKSTATION-LG*",
+        "*-ASUS-GEI*",
+        "* (kopie)*",
+        "* (copy)*",
+        "*.orig",
+        "*.rej",
+        "uv.lock",
+        "!package-lock.json",
+        ".mypy_cache/",
+        ".tox/",
+        ".turbo/",
+        ".coverage.*",
+    ]
+    for pattern in required_patterns:
+        assert pattern in gitignore_text, f"Pattern '{pattern}' missing from .gitignore"
+
+
+def test_changelog_recent_pfad_a_entry():
+    changelog_text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## [0.1.2] - 2026-09-12" in changelog_text
+    assert "timeout-minutes: 15" in changelog_text
+    assert "Multi-Host Cloud-Sync & Canonical Lock Defense" in changelog_text
+    assert "PEP 621 Standard URLs" in changelog_text

@@ -40,9 +40,9 @@ if TYPE_CHECKING:
     import anthropic
 
 try:
-    import anthropic  # noqa: F811
+    import anthropic
 except ImportError:
-    anthropic = None  # noqa: F811
+    anthropic = None
 
 # --- Constants ---
 
@@ -281,7 +281,7 @@ def compute_consensus(results: List[Dict], mode: str = "answer",
     # Originale Antwort fuer den Gewinner finden
     consensus_answer = None
     if winner is not None:
-        for answer, norm in zip(valid_answers, normalized):
+        for answer, norm in zip(valid_answers, normalized, strict=True):
             if norm == winner:
                 consensus_answer = answer
                 break

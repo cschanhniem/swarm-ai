@@ -5,8 +5,9 @@ Repository: https://github.com/ellmos-ai/swarm_ai
 Project Name: swarm-ai (Distribution: ellmos-swarm-ai)
 Umbrella Ecosystem: open-bricks (https://github.com/open-bricks)
 Architecture Domain: Local-First Multi-Agent LLM Orchestration & Swarm Intelligence
-Audit Date: 2026-09-11
-Status: ACTIVE / PFAD B DISCOVERABILITY HARDENED
+Audit Date: 2026-09-12
+Status: ACTIVE / PFAD A TECHNICAL HYGIENE & DISCOVERABILITY HARDENED
+Active Version: 0.1.2
 ================================================================================
 
 1. PRODUCT IDENTITY & MISSION
@@ -112,4 +113,17 @@ Audit completed by Antigravity / Gemini Agent under Pfad B (Discoverability & De
   [x] .gitignore Multi-Host & Lock Hardening
   [x] llms.txt Discovery Context & Timestamp Synchronization
   [x] Automated Contract Test Verification (tests/test_metadata.py with 213 passed tests)
+================================================================================
+
+7. TECHNICAL HYGIENE & CI HARDENING AUDIT (2026-09-12)
+--------------------------------------------------------------------------------
+Audit completed by Antigravity / Gemini Agent under Pfad A (Technical Hygiene):
+  [x] CI Workflow Timeout Guardrails (timeout-minutes: 15 for tests, anthropic-compat, security)
+  [x] Standardized CI Test Command (python -m pytest -ra -v)
+  [x] Multi-Host Cloud-Sync & Canonical Lock Defense in .gitignore (*-WORKSTATION*, uv.lock)
+  [x] PEP 621 Standard URLs: LLM Ready -> llms.txt in pyproject.toml
+  [x] Expanded Ruff Lint Ruleset (E4, E7, E9, F, W, B, SIM, C4, RUF) with 0 errors
+  [x] Code Hygiene: strict=True in zip, loop variables, contextlib.suppress in team_lock & translate_swarm
+  [x] Automated Contract Tests: 4 new contract tests, 217 passed tests (100% green)
+  [x] Full Metadata Parity across README.md, README_de.md, llms.txt, pyproject.toml (v0.1.2)
 ================================================================================

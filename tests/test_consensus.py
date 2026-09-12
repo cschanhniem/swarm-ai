@@ -42,6 +42,7 @@ class TestBuildPrompts:
             mode="classify",
             categories=categories,
         )
+        assert user == "Der Film war gut."
         assert "positiv" in system
         assert "negativ" in system
         assert "neutral" in system

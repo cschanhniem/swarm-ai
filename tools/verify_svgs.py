@@ -6,7 +6,7 @@ files = ['assets/banner-swarm.svg', 'assets/banner-goldfish.svg']
 for filename in files:
     with open(filename, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     # 1. Well-formedness
     try:
         ET.fromstring(content)

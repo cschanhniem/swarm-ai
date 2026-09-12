@@ -39,7 +39,7 @@ import threading
 import uuid
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterator
@@ -50,9 +50,9 @@ if TYPE_CHECKING:
     import anthropic
 
 try:
-    import anthropic  # noqa: F811
+    import anthropic
 except ImportError:
-    anthropic = None  # noqa: F811
+    anthropic = None
 
 # --- Konstanten ---
 
@@ -715,10 +715,8 @@ def run_swarm(source_lang="de", target_lang="en", namespace=None,
         )
     finally:
         if not dry_run:
-            try:
+            with suppress(FileNotFoundError, sqlite3.Error):
                 release_translation_claims(get_db_path(), claim_token)
-            except (FileNotFoundError, sqlite3.Error):
-                pass
 
 
 def show_inventory(namespace=None, target_lang='en', source_lang='de'):

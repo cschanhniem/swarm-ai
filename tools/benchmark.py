@@ -549,7 +549,7 @@ def run_benchmark(tasks, runner, mode="sequential", max_workers=3, pricing=None)
         raw_results = runner.run_parallel(prompts, max_workers=max_workers)
         total_duration = time.time() - start
 
-        for task, result in zip(tasks, raw_results):
+        for task, result in zip(tasks, raw_results, strict=True):
             results.append(_record_result(task, result, "parallel", pricing))
             status = "OK" if result["success"] else "FEHLER"
             print(f"  [{task.get('category', '')}] {task['name']}: {status} ({result['duration_s']:.0f}s)")
@@ -790,7 +790,7 @@ def main():
     print(f"  Tasks:      {len(tasks)}")
     print(f"  Worker:     {args.workers}")
     print(f"  Timeout:    {args.timeout}s")
-    print(f"  Kategorien: {', '.join(set(t['category'] for t in tasks))}")
+    print(f"  Kategorien: {', '.join({t['category'] for t in tasks})}")
     print(
         f"  Preis:      ${pricing['input']:.2f} Input / "
         f"${pricing['output']:.2f} Output je 1M Tokens"

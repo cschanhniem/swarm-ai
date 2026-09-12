@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.2] - 2026-09-12
+
+### Added
+
+- CI Workflow Timeout Guardrails & Verbose Reporting: Added `timeout-minutes: 15` execution limits to `tests`, `anthropic-compat`, and `security` jobs in `.github/workflows/ci.yml` and standardized test execution to `python -m pytest -ra -v`. [G 2026-09-12]
+- Multi-Host Cloud-Sync & Canonical Lock Defense: Hardened `.gitignore` against multi-host conflict files (`*-WORKSTATION*`, `*-WORKSTATION-LG*`, `*-ASUS-GEI*`, `* (kopie)*`, `* (copy)*`, `*.orig`, `*.rej`), canonical lock system entries (`uv.lock`, `!package-lock.json`), and build/cache outputs (`.mypy_cache/`, `.tox/`, `.turbo/`, `.coverage.*`). [G 2026-09-12]
+- PEP 621 Standard URLs: Registered `"LLM Ready" = "https://github.com/ellmos-ai/swarm_ai/blob/master/llms.txt"` in `pyproject.toml` `[project.urls]` for autonomous LLM agent discoverability. [G 2026-09-12]
+- Expanded Ruff Ruleset & Code Hygiene: Expanded `[tool.ruff.lint]` in `pyproject.toml` to `["E4", "E7", "E9", "F", "W", "B", "SIM", "C4", "RUF"]` and performed code cleanup across `tools/` and `tests/` (`strict=True` in `zip()`, set comprehension in `benchmark.py`, loop variable renaming in `generate_banners.py`, `contextlib.suppress` in `team_lock.py` and `translate_swarm.py`, and assertion coverage in `test_consensus.py`). [G 2026-09-12]
+- Automated Contract Test Expansion: Added 4 new contract tests in `tests/test_metadata.py` (`test_ci_timeout_minutes_guardrail`, `test_pep621_llm_ready_contract`, `test_extended_gitignore_multi_host_and_lock_defense`, and `test_changelog_recent_pfad_a_entry`), bringing test suite to 217 passed tests (100% green). [G 2026-09-12]
+- Metadata & Badge Synchronization: Harmonized version 0.1.2, release date 2026-09-12, and 217 passed test badge metrics across `pyproject.toml`, `README.md`, `README_de.md`, `llms.txt`, and `MARKETING-LOG.txt`. [G 2026-09-12]
+
 ## [0.1.1] - 2026-09-11
 
 ### Added

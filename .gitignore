@@ -40,20 +40,33 @@ Thumbs.db
 LOCK
 LOCK.*
 *.lock
+!package-lock.json
+uv.lock
 LOCK*.txt
 LOCK.permissions.json
 
-# Multi-Host Sync Conflicts
+# Multi-Host Sync Conflicts & Cloud Defense
 *-conflict-*
 *.sync-conflict-*
 *.conflict
 *-CONFLIT-*
 *.sync-temp-*
 *-ASUS-GEI.*
+*-ASUS-GEI*
+*-WORKSTATION*
+*-WORKSTATION-LG*
+* (kopie)*
+* (copy)*
+*.orig
+*.rej
 
 # Test coverage, Packaging & Temporary files
 .coverage
+.coverage.*
 htmlcov/
+.mypy_cache/
+.tox/
+.turbo/
 wheelhouse/
 .wheel-smoke/
 *.tmp

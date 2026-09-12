@@ -1,7 +1,7 @@
 # swarm-ai - LLM Swarm Intelligence Toolkit
 
-## Last-checked: 2026-09-11
-Version: 0.1.1
+## Last-checked: 2026-09-12
+Version: 0.1.2
 
 Canonical repository: https://github.com/ellmos-ai/swarm_ai
 
@@ -70,7 +70,7 @@ The architecture enforces 10 strict runtime guarantees (INV-LOCAL-01 to INV-SLA-
 
 ## Verification State
 
-- Local test suite: 213 pytest tests passed, 100% green.
+- Local test suite: 217 pytest tests passed, 100% green.
 - Core lint/compile/security gates: Ruff, compileall, Bandit high severity.
 - Historical experiments require explicit modes, finite per-agent/total budgets, safe mode, and validated fixture targets; they never modify user memory files.
 - Python requirement: 3.10+.

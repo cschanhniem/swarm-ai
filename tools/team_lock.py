@@ -12,7 +12,7 @@ import math
 import os
 import time
 import uuid
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -56,10 +56,8 @@ class TeamLock:
             os.fsync(fd)
         except BaseException:
             os.close(fd)
-            try:
+            with suppress(OSError):
                 path.unlink()
-            except OSError:
-                pass
             raise
         else:
             os.close(fd)
@@ -127,7 +125,7 @@ class TeamLock:
                     raise
                 if time.monotonic() >= deadline:
                     handle.close()
-                    raise TimeoutError(f"timed out waiting for resource guard: {resource}")
+                    raise TimeoutError(f"timed out waiting for resource guard: {resource}") from None
                 time.sleep(0.01)
         try:
             yield

@@ -33,9 +33,9 @@ if TYPE_CHECKING:
     import anthropic
 
 try:
-    import anthropic  # noqa: F811
+    import anthropic
 except ImportError:
-    anthropic = None  # noqa: F811
+    anthropic = None
 
 # --- Konstanten ---
 

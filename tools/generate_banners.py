@@ -31,7 +31,7 @@ def create_swarm_svg():
 
     # Mask circles SMIL
     mask_circles_xml = []
-    for idx, (x, y, angle) in enumerate(all_points):
+    for idx, (x, y, _angle) in enumerate(all_points):
         dur = 6.0
         r_max = 300 if idx < num_outer else 220
         mask_circles_xml.append(f'''
@@ -92,7 +92,7 @@ def create_swarm_svg():
       .card-title {{ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 15px; }}
       .card-sub {{ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 500; font-size: 12px; }}
       .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; font-weight: 600; }}
-      
+
       @keyframes floatSlow {{ 0%, 100% {{ transform: translateY(0px); }} 50% {{ transform: translateY(-8px); }} }}
       @keyframes pulseGlow {{ 0%, 100% {{ opacity: 0.3; }} 50% {{ opacity: 0.8; }} }}
 
@@ -121,7 +121,7 @@ def create_swarm_svg():
     <!-- Mask that reveals top white layer as points fan out in 360 degrees -->
     <mask id="reveal-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="630">
       <rect x="0" y="0" width="1200" height="630" fill="#000000" />
-      
+
       <!-- Central expanding core -->
       <circle cx="600" cy="270" r="0" fill="#ffffff">
         <animate attributeName="r" values="0; 100; 800; 900; 900; 0" keyTimes="0; 0.08; 0.25; 0.8; 0.9; 1" dur="6.0s" repeatCount="indefinite" />
@@ -273,7 +273,7 @@ def create_goldfish_svg():
 
     # Mask circles
     mask_circles_xml = []
-    for idx, (x, y, angle) in enumerate(fish_targets):
+    for idx, (x, y, _angle) in enumerate(fish_targets):
         dur = 6.0
         r_max = 300 if idx % 2 == 0 else 220
         mask_circles_xml.append(f'''
@@ -471,7 +471,7 @@ def create_goldfish_svg():
 
 def main():
     os.makedirs("assets", exist_ok=True)
-    
+
     swarm_svg = create_swarm_svg()
     with open("assets/banner-swarm.svg", "w", encoding="utf-8") as f:
         f.write(swarm_svg)
