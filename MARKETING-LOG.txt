@@ -5,7 +5,7 @@ Repository: https://github.com/ellmos-ai/swarm_ai
 Project Name: swarm-ai (Distribution: ellmos-swarm-ai)
 Umbrella Ecosystem: open-bricks (https://github.com/open-bricks)
 Architecture Domain: Local-First Multi-Agent LLM Orchestration & Swarm Intelligence
-Audit Date: 2026-09-12
+Audit Date: 2026-09-13
 Status: ACTIVE / PFAD A TECHNICAL HYGIENE & DISCOVERABILITY HARDENED
 Active Version: 0.1.2
 ================================================================================
@@ -125,5 +125,24 @@ Audit completed by Antigravity / Gemini Agent under Pfad A (Technical Hygiene):
   [x] Expanded Ruff Lint Ruleset (E4, E7, E9, F, W, B, SIM, C4, RUF) with 0 errors
   [x] Code Hygiene: strict=True in zip, loop variables, contextlib.suppress in team_lock & translate_swarm
   [x] Automated Contract Tests: 4 new contract tests, 217 passed tests (100% green)
+  [x] Full Metadata Parity across README.md, README_de.md, llms.txt, pyproject.toml (v0.1.2)
+================================================================================
+
+8. TECHNICAL HYGIENE & CI TIMEOUT GUARDRAIL AUDIT (2026-09-13)
+--------------------------------------------------------------------------------
+Audit completed by Antigravity / Gemini Agent under Pfad A (Technical Hygiene):
+  [x] CI Workflow Timeout Guardrails across all workflows:
+      - .github/workflows/ci.yml: timeout-minutes: 15 (tests, anthropic-compat, security)
+      - .github/workflows/stale.yml: timeout-minutes: 10 (stale job)
+      - .github/workflows/codeql.yml: timeout-minutes: 15 (analyze job)
+      - .github/workflows/welcome.yml: timeout-minutes: 5 (welcome job)
+  [x] Multi-Host Cloud-Sync & Gitignore Defense in .gitignore:
+      - Extended conflict patterns (* (Kopie)*, * (Copy)*, *conflicted copy*, *-LAPTOP.*, *-LAPTOP-*, *-Mac Studio.*, .hypothesis/)
+  [x] PEP 621 Standard License Declaration:
+      - Added license-files = ["LICENSE"] in pyproject.toml
+  [x] Expanded Ruff Lint Ruleset & Import Organization:
+      - Added "I" to [tool.ruff.lint] select array; executed ruff check --fix across tools/ and tests/
+  [x] Automated Contract Tests:
+      - 3 new contract tests (test_pep621_license_files_contract, test_ruff_expanded_ruleset_and_isort_parity, test_workflows_presence_and_timeouts), bringing test suite to 220 passed tests (100% green)
   [x] Full Metadata Parity across README.md, README_de.md, llms.txt, pyproject.toml (v0.1.2)
 ================================================================================

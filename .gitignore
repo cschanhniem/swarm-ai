@@ -55,8 +55,14 @@ LOCK.permissions.json
 *-ASUS-GEI*
 *-WORKSTATION*
 *-WORKSTATION-LG*
+*-LAPTOP.*
+*-LAPTOP-*
+*-Mac Studio.*
 * (kopie)*
+* (Kopie)*
 * (copy)*
+* (Copy)*
+*conflicted copy*
 *.orig
 *.rej
 
@@ -64,6 +70,7 @@ LOCK.permissions.json
 .coverage
 .coverage.*
 htmlcov/
+.hypothesis/
 .mypy_cache/
 .tox/
 .turbo/

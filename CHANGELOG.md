@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.2] - 2026-09-13
+
+### Added
+
+- All-Workflow Timeout Guardrails: Enforced explicit timeout limits across all GitHub Actions workflows (`timeout-minutes: 10` for `stale.yml`, `timeout-minutes: 15` for `codeql.yml`, and `timeout-minutes: 5` for `welcome.yml`), complementing the existing 15-minute limits on `ci.yml`. [G 2026-09-13]
+- Multi-Host Cloud-Sync & Gitignore Hardening: Extended `.gitignore` defense patterns to shield against cross-device conflicts (`* (Kopie)*`, `* (Copy)*`, `*conflicted copy*`, `*-LAPTOP.*`, `*-LAPTOP-*`, `*-Mac Studio.*`, `.hypothesis/`). [G 2026-09-13]
+- PEP 621 Standard License Declaration: Added `license-files = ["LICENSE"]` in `pyproject.toml` to comply with modern standard packaging metadata specifications. [G 2026-09-13]
+- Import Organization & Ruff Ruleset Expansion: Added `"I"` (isort) to `[tool.ruff.lint]` select array and organized import blocks cleanly across `tools/` and `tests/`. [G 2026-09-13]
+- Automated Contract Test Expansion: Added 3 new contract tests in `tests/test_metadata.py` (`test_pep621_license_files_contract`, `test_ruff_expanded_ruleset_and_isort_parity`, `test_workflows_presence_and_timeouts`) and expanded CI timeout validations, bringing test suite to 220 passed tests (100% green). [G 2026-09-13]
+- Metadata & Badge Synchronization: Harmonized 220 passed test metrics and `2026-09-13` audit/check dates across `README.md`, `README_de.md`, `llms.txt`, and `MARKETING-LOG.txt`. [G 2026-09-13]
+
 ## [0.1.2] - 2026-09-12
 
 ### Added

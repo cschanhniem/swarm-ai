@@ -9,6 +9,7 @@ description = "Local-first Python toolkit for parallel LLM and Claude agent orch
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
+license-files = ["LICENSE"]
 authors = [
   {name = "ellmos-ai"}
 ]
@@ -83,5 +84,5 @@ target-version = "py310"
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E4", "E7", "E9", "F", "W", "B", "SIM", "C4", "RUF"]
+select = ["E4", "E7", "E9", "F", "W", "I", "B", "SIM", "C4", "RUF"]
 

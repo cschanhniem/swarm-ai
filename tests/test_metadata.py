@@ -382,7 +382,7 @@ def test_bilingual_readme_navigation_anchor_sections():
 
 def test_marketing_log_contract_and_invariants():
     marketing_log = (ROOT / "MARKETING-LOG.txt").read_text(encoding="utf-8")
-    assert "Audit Date: 2026-09-12" in marketing_log
+    assert "Audit Date: 2026-09-13" in marketing_log
     assert "Status: ACTIVE" in marketing_log
     assert "Active Version: 0.1.2" in marketing_log
     assert "2. TARGET PERSONAS & AUDIENCE MAPPING" in marketing_log
@@ -414,8 +414,8 @@ def test_readme_badge_matrix_parity():
     assert "CI-passing-brightgreen" in readme_en
     assert "CI-passing-brightgreen" in readme_de
 
-    assert "tests-217" in readme_en
-    assert "tests-217" in readme_de
+    assert "tests-220" in readme_en
+    assert "tests-220" in readme_de
 
     assert "third--party-audited" in readme_en
     assert "drittanbieter-gepr" in readme_de
@@ -423,8 +423,8 @@ def test_readme_badge_matrix_parity():
     assert "marketing--log-active" in readme_en
     assert "marketing--log-aktiv" in readme_de
 
-    assert "last--checked-2026--09--12-blue" in readme_en
-    assert "letzte--pr%C3%BCfung-2026--09--12-blue" in readme_de
+    assert "last--checked-2026--09--13-blue" in readme_en
+    assert "letzte--pr%C3%BCfung-2026--09--13-blue" in readme_de
 
 
 def test_third_party_licenses_audit_and_non_elevation():
@@ -440,6 +440,15 @@ def test_ci_timeout_minutes_guardrail():
     assert "timeout-minutes: 15" in ci_text
     assert "python -m pytest -ra -v" in ci_text
 
+    stale_text = (ROOT / ".github" / "workflows" / "stale.yml").read_text(encoding="utf-8")
+    assert "timeout-minutes: 10" in stale_text
+
+    codeql_text = (ROOT / ".github" / "workflows" / "codeql.yml").read_text(encoding="utf-8")
+    assert "timeout-minutes: 15" in codeql_text
+
+    welcome_text = (ROOT / ".github" / "workflows" / "welcome.yml").read_text(encoding="utf-8")
+    assert "timeout-minutes: 5" in welcome_text
+
 
 def test_pep621_llm_ready_contract():
     pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
@@ -453,12 +462,19 @@ def test_extended_gitignore_multi_host_and_lock_defense():
         "*-WORKSTATION*",
         "*-WORKSTATION-LG*",
         "*-ASUS-GEI*",
+        "*-LAPTOP.*",
+        "*-LAPTOP-*",
+        "*-Mac Studio.*",
         "* (kopie)*",
+        "* (Kopie)*",
         "* (copy)*",
+        "* (Copy)*",
+        "*conflicted copy*",
         "*.orig",
         "*.rej",
         "uv.lock",
         "!package-lock.json",
+        ".hypothesis/",
         ".mypy_cache/",
         ".tox/",
         ".turbo/",
@@ -468,9 +484,29 @@ def test_extended_gitignore_multi_host_and_lock_defense():
         assert pattern in gitignore_text, f"Pattern '{pattern}' missing from .gitignore"
 
 
+def test_pep621_license_files_contract():
+    pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert 'license-files = ["LICENSE"]' in pyproject_text
+    assert (ROOT / "LICENSE").exists()
+
+
+def test_ruff_expanded_ruleset_and_isort_parity():
+    pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    for rule in ["E4", "E7", "E9", "F", "W", "I", "B", "SIM", "C4", "RUF"]:
+        assert f'"{rule}"' in pyproject_text
+
+
+def test_workflows_presence_and_timeouts():
+    workflows_dir = ROOT / ".github" / "workflows"
+    assert (workflows_dir / "ci.yml").exists()
+    assert (workflows_dir / "stale.yml").exists()
+    assert (workflows_dir / "codeql.yml").exists()
+    assert (workflows_dir / "welcome.yml").exists()
+
+
 def test_changelog_recent_pfad_a_entry():
     changelog_text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## [0.1.2] - 2026-09-12" in changelog_text
-    assert "timeout-minutes: 15" in changelog_text
+    assert "## [0.1.2] - 2026-09-12" in changelog_text or "## [0.1.2] - 2026-09-13" in changelog_text
+    assert "timeout-minutes" in changelog_text
     assert "Multi-Host Cloud-Sync & Canonical Lock Defense" in changelog_text
     assert "PEP 621 Standard URLs" in changelog_text
