@@ -1,7 +1,7 @@
 # swarm-ai - LLM Swarm Intelligence Toolkit
 
-## Last-checked: 2026-09-13
-Version: 0.1.2
+## Last-checked: 2026-09-16
+Version: 0.1.3
 
 Canonical repository: https://github.com/ellmos-ai/swarm_ai
 

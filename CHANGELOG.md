@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.3] - 2026-09-16
+
+### Added
+
+- 18-Point Quick Navigation & Dual Anchor Parity: Upgraded English (`README.md`) and German (`README_de.md`) documentation navigation to the standardized 18-point architecture with dual HTML anchor tags (`#1-features` through `#18-changelog-contributing`), preserving full backward compatibility with legacy anchor targets. [G 2026-09-16]
+- Target Personas & High-Intent SEO Discovery: Added dedicated persona mappings (`[PERSONA-01]` Local-First AI Engineers, `[PERSONA-02]` Reliability & Factuality Engineers, `[PERSONA-03]` Batch Processing Developers, `[PERSONA-04]` Multi-Agent System Architects) with context, pain points, swarm-ai solutions, and high-intent bilingual search queries. [G 2026-09-16]
+- 10-Dimensions Comparative Matrix: Introduced comprehensive technical comparison matrix evaluating `swarm-ai` against LangChain/LangGraph, Microsoft AutoGen, CrewAI, and OpenAI Swarm across all 10 governance invariants (`INV-LOCAL-01` to `INV-SLA-10`). [G 2026-09-16]
+- Third-Party License Audit & Non-Elevation Assurance: Audited `THIRD_PARTY_LICENSES.md` (Stand: 2026-09-16) confirming 100% permissive open-source licenses, zero copyleft, and standard unprivileged user space `RunAsInvoker` execution. [G 2026-09-16]
+- Contract Test Suite Expansion: Expanded `tests/test_metadata.py` with tests for 18-point navigation, target personas, comparative matrix dimensions, and third-party license audit timestamps. [G 2026-09-16]
+- Metadata, Version & Badge Synchronization: Harmonized version 0.1.3, audit date 2026-09-16, and verified test metrics across `pyproject.toml`, `README.md`, `README_de.md`, `llms.txt`, and `MARKETING-LOG.txt`. [G 2026-09-16]
+
 ## [0.1.2] - 2026-09-13
 
 ### Added

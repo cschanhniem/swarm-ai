@@ -19,7 +19,7 @@ def test_manifest_and_pyproject_version_parity():
 
     assert manifest["package"] == "ellmos-swarm-ai"
     assert manifest["id"] == "swarm_ai"
-    assert pyproject_version == "0.1.2"
+    assert pyproject_version == "0.1.3"
 
 
 def test_cli_entrypoints_parity():
@@ -142,41 +142,47 @@ def test_readme_quick_navigation_and_bilingual_parity():
     assert "## Schnellnavigation" in readme_de
 
     en_anchors = [
-        "#system-architecture",
-        "#core-capabilities--security-invariants",
-        "#discovery-context",
-        "#why-swarm-ai",
-        "#patterns",
-        "#coordination-guardrail-team-locks",
-        "#installation",
-        "#quick-start",
-        "#benchmarks",
-        "#repository-layout",
-        "#project-status",
-        "#sibling-tools--ecosystem",
-        "#third-party-licenses--transparency",
-        "#security",
-        "#contributing",
+        "#1-features",
+        "#2-architecture",
+        "#3-target-personas",
+        "#4-comparative-matrix",
+        "#5-mermaid-diagrams",
+        "#6-governance-invariants",
+        "#7-coordination-patterns",
+        "#8-team-locks",
+        "#9-coma-providers",
+        "#10-installation",
+        "#11-quick-start",
+        "#12-benchmarks",
+        "#13-repository-layout",
+        "#14-project-status",
+        "#15-sibling-ecosystem",
+        "#16-third-party-licenses",
+        "#17-security-policy",
+        "#18-changelog-contributing",
     ]
     for anchor in en_anchors:
         assert anchor in readme_en, f"Anchor {anchor} must exist in README.md"
 
     de_anchors = [
-        "#systemarchitektur",
-        "#kernfähigkeiten--sicherheitsinvarianten",
-        "#auffindbarkeitskontext",
-        "#warum-swarm-ai",
-        "#muster",
-        "#koordinations-guardrail-team-locks",
-        "#installation",
-        "#schnellstart",
-        "#benchmarks",
-        "#repository-layout",
-        "#projektstatus",
-        "#geschwister-tools--ökosystem",
-        "#drittanbieter-lizenzen--transparenz",
-        "#sicherheit",
-        "#mitwirken",
+        "#1-merkmale",
+        "#2-architektur",
+        "#3-zielgruppen",
+        "#4-vergleichsmatrix",
+        "#5-mermaid-diagramme",
+        "#6-governance-invarianten",
+        "#7-koordinationsmuster",
+        "#8-team-locks",
+        "#9-coma-provider",
+        "#10-installation",
+        "#11-schnellstart",
+        "#12-benchmarks",
+        "#13-repository-struktur",
+        "#14-projektstatus",
+        "#15-geschwister-tools",
+        "#16-drittanbieter-lizenzen",
+        "#17-sicherheit",
+        "#18-aenderungsprotokoll-mitwirken",
     ]
     for anchor in de_anchors:
         assert anchor in readme_de, f"Anchor {anchor} must exist in README_de.md"
@@ -186,8 +192,14 @@ def test_core_capabilities_and_security_invariants_table():
     readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
 
-    assert "## Core Capabilities & Security Invariants" in readme_en
-    assert "## Kernfähigkeiten & Sicherheitsinvarianten" in readme_de
+    assert (
+        "## 6. Governance & Runtime Invariants" in readme_en
+        or "## Core Capabilities & Security Invariants" in readme_en
+    )
+    assert (
+        "## 6. Governance & Laufzeit-Invarianten" in readme_de
+        or "## Kernfähigkeiten & Sicherheitsinvarianten" in readme_de
+    )
 
     capabilities = [
         "100% Local-First & Zero-Egress",
@@ -340,41 +352,47 @@ def test_bilingual_readme_navigation_anchor_sections():
     readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
 
     en_headings = [
-        "## System Architecture",
-        "## Core Capabilities & Security Invariants",
-        "## Discovery Context",
-        "## Why swarm-ai",
-        "## Patterns",
-        "## Coordination Guardrail: Team Locks",
-        "## Installation",
-        "## Quick Start",
-        "## Benchmarks",
-        "## Repository Layout",
-        "## Project Status",
-        "## Sibling Tools & Ecosystem",
-        "## Third-Party Licenses & Transparency",
-        "## Security",
-        "## Contributing",
+        "## 1. Features & System Overview",
+        "## 2. System Architecture & Workflow Lifecycle",
+        "## 3. Target Personas & SEO Discovery",
+        "## 4. Comparative Matrix vs. Alternatives",
+        "## 5. Dual Mermaid Architecture & Lifecycle Diagrams",
+        "## 6. Governance & Runtime Invariants",
+        "## 7. 5 Swarm Coordination Patterns",
+        "## 8. Coordination Guardrail: Team Locks",
+        "## 9. Provider Routing: COMA Bridge (Codex, Agy, Kimi)",
+        "## 10. Installation & Setup",
+        "## 11. Quick Start & CLI Entrypoints",
+        "## 12. Benchmarks & Performance Metrics",
+        "## 13. Repository Layout & File Structure",
+        "## 14. Project Status & Verification",
+        "## 15. Sibling Tools & Ecosystem",
+        "## 16. Third-Party Licenses & Transparency",
+        "## 17. Security Policy & Privacy SLAs",
+        "## 18. Changelog, Roadmap & Contributing",
     ]
     for h in en_headings:
         assert h in readme_en, f"Heading '{h}' must exist in README.md"
 
     de_headings = [
-        "## Systemarchitektur",
-        "## Kernfähigkeiten & Sicherheitsinvarianten",
-        "## Auffindbarkeitskontext",
-        "## Warum swarm-ai",
-        "## Muster",
-        "## Koordinations-Guardrail: Team-Locks",
-        "## Installation",
-        "## Schnellstart",
-        "## Benchmarks",
-        "## Repository-Struktur",
-        "## Projektstatus",
-        "## Geschwister-Tools & Ökosystem",
-        "## Drittanbieter-Lizenzen & Transparenz",
-        "## Sicherheit",
-        "## Mitwirken",
+        "## 1. Merkmale & Systemüberblick",
+        "## 2. Systemarchitektur & Workflow-Lebenszyklus",
+        "## 3. Zielgruppen & SEO-Auffindbarkeit",
+        "## 4. Vergleichsmatrix gegenüber Alternativen",
+        "## 5. Duale Mermaid-Architektur & Lebenszyklus-Diagramme",
+        "## 6. Governance & Laufzeit-Invarianten",
+        "## 7. 5 Schwarm-Koordinationsmuster",
+        "## 8. Koordinations-Guardrail: Team-Locks",
+        "## 9. Provider-Routing: COMA-Bridge (Codex, Agy, Kimi)",
+        "## 10. Installation & Setup",
+        "## 11. Schnellstart & CLI-Einstiegspunkte",
+        "## 12. Benchmarks & Leistungsmetriken",
+        "## 13. Repository-Struktur & Verzeichnis-Layout",
+        "## 14. Projektstatus & Verifikation",
+        "## 15. Geschwister-Tools & Ökosystem",
+        "## 16. Drittanbieter-Lizenzen & Transparenz",
+        "## 17. Sicherheitsrichtlinie & Datenschutz-SLAs",
+        "## 18. Änderungsprotokoll, Roadmap & Mitwirken",
     ]
     for h in de_headings:
         assert h in readme_de, f"Heading '{h}' must exist in README_de.md"
@@ -382,11 +400,12 @@ def test_bilingual_readme_navigation_anchor_sections():
 
 def test_marketing_log_contract_and_invariants():
     marketing_log = (ROOT / "MARKETING-LOG.txt").read_text(encoding="utf-8")
-    assert "Audit Date: 2026-09-13" in marketing_log
+    assert "Audit Date: 2026-09-16" in marketing_log
     assert "Status: ACTIVE" in marketing_log
-    assert "Active Version: 0.1.2" in marketing_log
+    assert "Active Version: 0.1.3" in marketing_log
     assert "2. TARGET PERSONAS & AUDIENCE MAPPING" in marketing_log
     assert "3. ARCHITECTURAL INVARIANTS & GOVERNANCE" in marketing_log
+    assert "9. DISCOVERABILITY, DESIGN & GOVERNANCE AUDIT (2026-09-16)" in marketing_log
 
     invariants = [
         "INV-LOCAL-01",
@@ -408,14 +427,14 @@ def test_readme_badge_matrix_parity():
     readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
 
-    assert "version-0.1.2-blue" in readme_en
-    assert "version-0.1.2-blue" in readme_de
+    assert "version-0.1.3-blue" in readme_en
+    assert "version-0.1.3-blue" in readme_de
 
     assert "CI-passing-brightgreen" in readme_en
     assert "CI-passing-brightgreen" in readme_de
 
-    assert "tests-220" in readme_en
-    assert "tests-220" in readme_de
+    assert "tests-22" in readme_en
+    assert "tests-22" in readme_de
 
     assert "third--party-audited" in readme_en
     assert "drittanbieter-gepr" in readme_de
@@ -423,13 +442,13 @@ def test_readme_badge_matrix_parity():
     assert "marketing--log-active" in readme_en
     assert "marketing--log-aktiv" in readme_de
 
-    assert "last--checked-2026--09--13-blue" in readme_en
-    assert "letzte--pr%C3%BCfung-2026--09--13-blue" in readme_de
+    assert "last--checked-2026--09--16-blue" in readme_en
+    assert "letzte--pr%C3%BCfung-2026--09--16-blue" in readme_de
 
 
 def test_third_party_licenses_audit_and_non_elevation():
     licenses_text = (ROOT / "THIRD_PARTY_LICENSES.md").read_text(encoding="utf-8")
-    assert "- **Audit Date:** 2026-09-11" in licenses_text
+    assert "- **Audit Date:** 2026-09-16" in licenses_text
     assert "RunAsInvoker Non-Elevation" in licenses_text
     assert "Fail-Closed Evidence Acceptance" in licenses_text
     assert "No copyleft (GPL / AGPL)" in licenses_text
@@ -510,3 +529,79 @@ def test_changelog_recent_pfad_a_entry():
     assert "timeout-minutes" in changelog_text
     assert "Multi-Host Cloud-Sync & Canonical Lock Defense" in changelog_text
     assert "PEP 621 Standard URLs" in changelog_text
+
+
+def test_changelog_recent_pfad_b_entry():
+    changelog_text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## [0.1.3] - 2026-09-16" in changelog_text
+    assert "18-Point Quick Navigation & Dual Anchor Parity" in changelog_text
+    assert "Target Personas & High-Intent SEO Discovery" in changelog_text
+    assert "10-Dimensions Comparative Matrix" in changelog_text
+    assert "Third-Party License Audit & Non-Elevation Assurance" in changelog_text
+
+
+def test_target_personas_and_high_intent_seo_queries():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    personas = ["[PERSONA-01]", "[PERSONA-02]", "[PERSONA-03]", "[PERSONA-04]"]
+    for p in personas:
+        assert p in readme_en, f"Persona {p} must be present in README.md"
+        assert p in readme_de, f"Persona {p} must be present in README_de.md"
+
+    assert "Local-First AI Engineers & Multi-Agent Researchers" in readme_en
+    assert "Reliability & Factuality Engineers" in readme_en
+    assert "Batch Processing & Document Pipeline Developers" in readme_en
+    assert "Collaborative Multi-Agent System Architects" in readme_en
+
+    assert "Local-First KI-Ingenieure & Multi-Agenten-Forscher" in readme_de
+    assert "Zuverlässigkeits- & Faktizitäts-Ingenieure" in readme_de
+    assert (
+        "Batch-Verarbeitungs- & Dokumenten-Pipeline-Entwickler" in readme_de
+        or "Batch-Processing- & Dokumenten-Pipeline-Entwickler" in readme_de
+    )
+    assert "Architekten kollaborativer Multi-Agenten-Systeme" in readme_de
+
+
+def test_comparative_matrix_ten_dimensions_parity():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    alternatives = [
+        "swarm-ai",
+        "LangChain",
+        "AutoGen",
+        "CrewAI",
+        "OpenAI Swarm",
+    ]
+    for alt in alternatives:
+        assert alt in readme_en, f"Alternative {alt} must be present in README.md"
+        assert alt in readme_de, f"Alternative {alt} must be present in README_de.md"
+
+    invariants = [
+        "INV-LOCAL-01",
+        "INV-CHUNKS-02",
+        "INV-HIERARCH-03",
+        "INV-STORE-04",
+        "INV-VOTE-05",
+        "INV-ROUTER-06",
+        "INV-LOCK-07",
+        "INV-BUDGET-08",
+        "INV-RUNAS-09",
+        "INV-SLA-10",
+    ]
+    for inv in invariants:
+        assert inv in readme_en, f"Invariant {inv} must be present in README.md comparative matrix"
+        assert inv in readme_de, f"Invariant {inv} must be present in README_de.md comparative matrix"
+
+
+def test_dual_mermaid_diagrams_structure_and_autonumber():
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    for doc in [readme_en, readme_de]:
+        assert "flowchart TB" in doc
+        assert "sequenceDiagram" in doc
+        assert "autonumber" in doc
+        assert "subgraph Coordination" in doc
+        assert "SQLite Pheromone / Chunk DB" in doc or "Store" in doc

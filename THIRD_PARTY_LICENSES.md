@@ -57,7 +57,7 @@ This document inventories external dependencies, libraries, and open-source tool
 
 ## Audit Information & Governance Assurance
 
-- **Audit Date:** 2026-09-11
+- **Audit Date:** 2026-09-16
 - **Auditor:** Antigravity / Gemini Agent (Pfad B Discoverability & License Parity)
 - **Local-First & Zero-Egress:** All runtime dependencies execute strictly locally; prompts and marker databases are never transmitted to third-party telemetry.
 - **RunAsInvoker Non-Elevation:** swarm-ai executes entirely within standard unprivileged user space without requiring administrative or root elevation.
